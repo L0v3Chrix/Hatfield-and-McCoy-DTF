@@ -378,7 +378,7 @@
     </section>
 
     <!-- FEEDBACK FORM -->
-    <!-- TODO: Replace mailto approach with actual Tally.so embed URL before sending to client if preferred -->
+
     <section id="feedback" style="max-width: 720px; margin: 0 auto; padding: 60px 24px 40px;">
         <div style="background: var(--card-bg); border: 2px solid var(--magenta); border-radius: 16px; padding: 48px 40px; box-shadow: 0 0 40px rgba(233, 30, 140, 0.1);">
             <h2 style="font-family: 'Anton', sans-serif; font-size: clamp(1.8rem, 4vw, 2.4rem); letter-spacing: 2px; text-transform: uppercase; text-align: center; margin-bottom: 8px; background: linear-gradient(135deg, var(--magenta), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SHARE YOUR FEEDBACK</h2>
@@ -490,25 +490,61 @@
         function submitFeedback(e) {
             e.preventDefault();
 
+            var btn = document.querySelector('[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+
             var name = document.getElementById('fbName').value;
             var concept = document.querySelector('input[name="concept"]:checked');
             var changes = document.getElementById('fbChanges').value;
             var domain = document.querySelector('input[name="domain"]:checked');
             var questions = document.getElementById('fbQuestions').value;
 
-            var body = 'HATFIELD & McCOY DTF — DESIGN FEEDBACK\n';
-            body += '========================================\n\n';
-            body += 'Name: ' + name + '\n\n';
-            body += 'Design Concept Pick: ' + (concept ? concept.value : 'Not selected') + '\n\n';
-            body += 'Changes/Additions: ' + (changes || 'None') + '\n\n';
-            body += 'Has Domain: ' + (domain ? domain.value : 'Not selected') + '\n\n';
-            body += 'Questions: ' + (questions || 'None') + '\n';
+            var discordWebhook = 'https://discord.com/api/webhooks/1486747013272961236/keHmx6dWgwF1izpACcICldb23BNiDJlgQHS0LRU4X_8lop936LCIWFyLkDEdlG7h_JvF';
 
-            var mailtoLink = 'mailto:harold@rmmarketing.ca'
-                + '?subject=' + encodeURIComponent('Hatfield & McCoy DTF — Design Feedback from ' + name)
-                + '&body=' + encodeURIComponent(body);
+            var embed = {
+                title: '🎨 New Design Feedback — Hatfield & McCoy DTF',
+                color: 0xF97316,
+                fields: [
+                    { name: '👤 Name', value: name || '—', inline: true },
+                    { name: '🖼️ Concept Pick', value: (concept ? concept.value : 'Not selected'), inline: false },
+                    { name: '✏️ Changes / Additions', value: (changes || 'None'), inline: false },
+                    { name: '🌐 Has Domain?', value: (domain ? domain.value : 'Not selected'), inline: true },
+                    { name: '❓ Questions', value: (questions || 'None'), inline: false }
+                ],
+                footer: { text: 'Submitted via client-concept-guide' },
+                timestamp: new Date().toISOString()
+            };
 
-            window.location.href = mailtoLink;
+            var payload = {
+                username: 'Hatfield & McCoy DTF',
+                content: '📬 **Jesse just submitted his design feedback!** <@1083410732382699561>',
+                embeds: [embed]
+            };
+
+            fetch(discordWebhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(function(res) {
+                if (res.ok || res.status === 204) {
+                    var form = document.getElementById('feedbackForm');
+                    form.innerHTML = '<div style="text-align:center;padding:40px 0;">'
+                        + '<div style="font-size:48px;margin-bottom:16px;">✅</div>'
+                        + '<h3 style="margin-bottom:8px;">Feedback Received!</h3>'
+                        + '<p style="opacity:0.7;">Thanks, ' + name + '. We\'ll review your pick and be in touch within 24 hours.</p>'
+                        + '</div>';
+                } else {
+                    throw new Error('Discord returned ' + res.status);
+                }
+            })
+            .catch(function(err) {
+                btn.disabled = false;
+                btn.textContent = 'SEND MY FEEDBACK →';
+                alert('Something went wrong. Please try again or email harold@rmmarketing.ca directly.');
+                console.error(err);
+            });
         }
     </script>
 
