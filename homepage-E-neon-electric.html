@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hatfield & McCoy DTF | Direct to Film Transfers — No Minimums, Virginia</title>
+    <meta name="description" content="Hatfield & McCoy DTF — Custom direct-to-film transfers. 22&quot; and 46&quot; wide gang sheets, glitter, glow in the dark. No minimums. Virginia-based print shop.">
+    <link rel="icon" href="assets/images/logo-favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           HATFIELD & McCOY DTF — CONCEPT E
+           "Full Send Neon" — Maximum Neon Sign Energy
+           ============================================ */
+
+        /* --- RESET & BASE --- */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --magenta: #E91E8C;
+            --cyan: #00E5FF;
+            --neon-green: #39FF14;
+            --gold: #FFD700;
+            --bg-dark: #1A1A1A;
+            --bg-darker: #111111;
+            --bg-deepest: #0d0d0d;
+            --white: #FFFFFF;
+            --gray-light: #cccccc;
+            --gray-mid: #888888;
+            --font-heading: 'Anton', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--white);
+            border-top: 3px solid var(--magenta);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- NOISE/GRAIN TEXTURE OVERLAY --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- NEON KEYFRAME ANIMATIONS --- */
+
+        /* Authentic neon tube flicker — magenta */
+        @keyframes neonFlickerMagenta {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow:
+                    0 0 7px var(--magenta),
+                    0 0 10px var(--magenta),
+                    0 0 21px var(--magenta),
+                    0 0 42px var(--magenta),
+                    0 0 82px var(--magenta),
+                    0 0 92px var(--magenta);
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                opacity: 0.85;
+            }
+        }
+
+        /* Authentic neon tube flicker — cyan (offset) */
+        @keyframes neonFlickerCyan {
+            0%, 12%, 14%, 33%, 35%, 62%, 64%, 100% {
+                text-shadow:
+                    0 0 7px var(--cyan),
+                    0 0 10px var(--cyan),
+                    0 0 21px var(--cyan),
+                    0 0 42px var(--cyan),
+                    0 0 82px var(--cyan),
+                    0 0 92px var(--cyan);
+                opacity: 1;
+            }
+            13%, 34%, 63% {
+                text-shadow: none;
+                opacity: 0.85;
+            }
+        }
+
+        /* Green glow pulse */
+        @keyframes neonGlowGreen {
+            0%, 100% {
+                text-shadow:
+                    0 0 7px var(--neon-green),
+                    0 0 15px var(--neon-green),
+                    0 0 30px var(--neon-green),
+                    0 0 50px rgba(57, 255, 20, 0.4);
+            }
+            50% {
+                text-shadow:
+                    0 0 4px var(--neon-green),
+                    0 0 8px var(--neon-green),
+                    0 0 18px var(--neon-green),
+                    0 0 30px rgba(57, 255, 20, 0.2);
+            }
+        }
+
+        /* Gold glow pulse */
+        @keyframes neonGlowGold {
+            0%, 100% {
+                text-shadow:
+                    0 0 7px var(--gold),
+                    0 0 15px var(--gold),
+                    0 0 30px var(--gold),
+                    0 0 50px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                text-shadow:
+                    0 0 4px var(--gold),
+                    0 0 8px var(--gold),
+                    0 0 18px var(--gold),
+                    0 0 30px rgba(255, 215, 0, 0.2);
+            }
+        }
+
+        /* Pulsing box-shadow glow — magenta */
+        @keyframes pulseGlowMagenta {
+            0%, 100% {
+                box-shadow:
+                    0 0 10px var(--magenta),
+                    0 0 25px rgba(233, 30, 140, 0.5),
+                    0 0 50px rgba(233, 30, 140, 0.2);
+            }
+            50% {
+                box-shadow:
+                    0 0 5px var(--magenta),
+                    0 0 12px rgba(233, 30, 140, 0.3),
+                    0 0 25px rgba(233, 30, 140, 0.1);
+            }
+        }
+
+        /* Pulsing box-shadow glow — cyan */
+        @keyframes pulseGlowCyan {
+            0%, 100% {
+                box-shadow:
+                    0 0 10px var(--cyan),
+                    0 0 25px rgba(0, 229, 255, 0.5),
+                    0 0 50px rgba(0, 229, 255, 0.2);
+            }
+            50% {
+                box-shadow:
+                    0 0 5px var(--cyan),
+                    0 0 12px rgba(0, 229, 255, 0.3),
+                    0 0 25px rgba(0, 229, 255, 0.1);
+            }
+        }
+
+        /* Sparkle animation for glitter section */
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        @keyframes sparkleFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-40px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Process circle pulse */
+        @keyframes circlePulse {
+            0%, 100% {
+                box-shadow:
+                    0 0 10px var(--magenta),
+                    0 0 30px rgba(233, 30, 140, 0.4),
+                    0 0 60px rgba(233, 30, 140, 0.15);
+            }
+            50% {
+                box-shadow:
+                    0 0 5px var(--magenta),
+                    0 0 15px rgba(233, 30, 140, 0.2),
+                    0 0 30px rgba(233, 30, 140, 0.08);
+            }
+        }
+
+        /* Neon line glow */
+        @keyframes lineGlow {
+            0%, 100% {
+                box-shadow:
+                    0 0 4px var(--magenta),
+                    0 0 10px rgba(233, 30, 140, 0.6),
+                    0 0 20px rgba(233, 30, 140, 0.3);
+            }
+            50% {
+                box-shadow:
+                    0 0 2px var(--magenta),
+                    0 0 5px rgba(233, 30, 140, 0.3),
+                    0 0 10px rgba(233, 30, 140, 0.15);
+            }
+        }
+
+        /* Star rating glow */
+        @keyframes starGlow {
+            0%, 100% {
+                text-shadow: 0 0 8px var(--gold), 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 4px var(--gold), 0 0 10px rgba(255, 215, 0, 0.25);
+            }
+        }
+
+        /* Fade in up for scroll reveal */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ============================================
+           STICKY NAVIGATION
+           ============================================ */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--magenta);
+            box-shadow: 0 2px 20px rgba(233, 30, 140, 0.3), 0 2px 40px rgba(233, 30, 140, 0.1);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo img {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 8px rgba(233, 30, 140, 0.5));
+            transition: filter 0.3s ease;
+        }
+
+        .nav-logo img:hover {
+            filter: drop-shadow(0 0 15px rgba(233, 30, 140, 0.8));
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-logo-text .magenta { color: var(--magenta); }
+        .nav-logo-text .cyan { color: var(--cyan); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-light);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--magenta);
+            box-shadow: 0 0 8px var(--magenta);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            padding: 8px 20px;
+            background: var(--magenta);
+            color: var(--white) !important;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(233, 30, 140, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: #ff3daa;
+            box-shadow: 0 0 20px rgba(233, 30, 140, 0.7), 0 0 40px rgba(233, 30, 140, 0.3);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Mobile hamburger */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .nav-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--magenta);
+            box-shadow: 0 0 6px rgba(233, 30, 140, 0.5);
+            transition: all 0.3s ease;
+        }
+
+
+        /* ============================================
+           HERO SECTION — NEON SIGN MADNESS
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background:
+                linear-gradient(135deg, #0d0d0d 0%, #1a0a1a 50%, #0a1a1a 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Dark radial vignette over hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 30%,
+                rgba(13, 13, 13, 0.7) 70%,
+                rgba(13, 13, 13, 0.95) 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        /* NEON SIGN TITLE */
+        .neon-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .neon-title .line-hatfield {
+            font-family: var(--font-heading);
+            font-size: clamp(4rem, 12vw, 10rem);
+            text-transform: uppercase;
+            color: var(--magenta);
+            animation: neonFlickerMagenta 4s steps(1) infinite;
+            line-height: 0.95;
+            display: block;
+        }
+
+        .neon-title .line-amp {
+            font-family: var(--font-body);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--white);
+            opacity: 0.7;
+            display: block;
+            margin: 0.3rem 0;
+            letter-spacing: 0.3em;
+        }
+
+        .neon-title .line-mccoy {
+            font-family: var(--font-heading);
+            font-size: clamp(4rem, 12vw, 10rem);
+            text-transform: uppercase;
+            color: var(--cyan);
+            animation: neonFlickerCyan 5s steps(1) infinite;
+            animation-delay: 0.5s;
+            line-height: 0.95;
+            display: block;
+        }
+
+        /* Logo below the neon title */
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            filter: drop-shadow(0 0 20px var(--magenta)) drop-shadow(0 0 40px rgba(233, 30, 140, 0.3));
+            transition: filter 0.3s ease;
+        }
+
+        .hero-logo:hover {
+            filter: drop-shadow(0 0 30px var(--magenta)) drop-shadow(0 0 60px rgba(233, 30, 140, 0.5));
+        }
+
+        /* "DIRECT TO FILM" subtitle */
+        .hero-subtitle {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            color: var(--neon-green);
+            animation: neonGlowGreen 3s ease-in-out infinite;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.15em;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            color: var(--gray-light);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-tagline strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* Neon CTA Buttons */
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-neon {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 14px 36px;
+            border: 2px solid;
+            background: transparent;
+            cursor: pointer;
+            color: var(--white);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon-magenta {
+            border-color: var(--magenta);
+            animation: pulseGlowMagenta 3s ease-in-out infinite;
+        }
+
+        .btn-neon-magenta:hover {
+            background: var(--magenta);
+            color: var(--white);
+            box-shadow:
+                0 0 20px var(--magenta),
+                0 0 40px rgba(233, 30, 140, 0.5),
+                0 0 80px rgba(233, 30, 140, 0.2);
+        }
+
+        .btn-neon-cyan {
+            border-color: var(--cyan);
+            animation: pulseGlowCyan 3s ease-in-out infinite;
+        }
+
+        .btn-neon-cyan:hover {
+            background: var(--cyan);
+            color: var(--bg-dark);
+            box-shadow:
+                0 0 20px var(--cyan),
+                0 0 40px rgba(0, 229, 255, 0.5),
+                0 0 80px rgba(0, 229, 255, 0.2);
+        }
+
+        /* Product hero image float */
+        .hero-product {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            width: clamp(120px, 18vw, 260px);
+            opacity: 0.85;
+            filter: drop-shadow(0 0 30px rgba(233, 30, 140, 0.3));
+            z-index: 2;
+            animation: floatProduct 6s ease-in-out infinite;
+        }
+
+        @keyframes floatProduct {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+
+        /* ============================================
+           SECTION DEFAULTS
+           ============================================ */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-heading p {
+            color: var(--gray-mid);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+
+        /* ============================================
+           NEON SIGN SERVICE CARDS
+           ============================================ */
+        .services {
+            background: var(--bg-deepest);
+        }
+
+        .services .section-heading h2 {
+            color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            position: relative;
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Brick wall texture */
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(255,255,255,0.03) 30px,
+                    rgba(255,255,255,0.03) 32px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 60px,
+                    rgba(255,255,255,0.02) 60px,
+                    rgba(255,255,255,0.02) 62px
+                ),
+                linear-gradient(180deg, #1a1a1a, #141414);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Color variants for each service card neon accent */
+        .service-card--magenta::before {
+            background: var(--magenta);
+            box-shadow: 0 0 15px var(--magenta), 0 0 30px rgba(233, 30, 140, 0.3);
+        }
+        .service-card--magenta:hover {
+            box-shadow: 0 0 20px rgba(233, 30, 140, 0.3), 0 0 40px rgba(233, 30, 140, 0.1);
+        }
+        .service-card--magenta .service-card-title {
+            color: var(--magenta);
+            text-shadow: 0 0 10px var(--magenta), 0 0 20px rgba(233, 30, 140, 0.4);
+        }
+
+        .service-card--cyan::before {
+            background: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan), 0 0 30px rgba(0, 229, 255, 0.3);
+        }
+        .service-card--cyan:hover {
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), 0 0 40px rgba(0, 229, 255, 0.1);
+        }
+        .service-card--cyan .service-card-title {
+            color: var(--cyan);
+            text-shadow: 0 0 10px var(--cyan), 0 0 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .service-card--gold::before {
+            background: var(--gold);
+            box-shadow: 0 0 15px var(--gold), 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+        .service-card--gold:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.1);
+        }
+        .service-card--gold .service-card-title {
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold), 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .service-card--green::before {
+            background: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green), 0 0 30px rgba(57, 255, 20, 0.3);
+        }
+        .service-card--green:hover {
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.1);
+        }
+        .service-card--green .service-card-title {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green), 0 0 20px rgba(57, 255, 20, 0.4);
+        }
+
+        .service-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .service-card-price {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .service-card-price span {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--gray-mid);
+            font-weight: 400;
+        }
+
+        .service-card-desc {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card-link {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card--magenta .service-card-link { color: var(--magenta); }
+        .service-card--cyan .service-card-link { color: var(--cyan); }
+        .service-card--gold .service-card-link { color: var(--gold); }
+        .service-card--green .service-card-link { color: var(--neon-green); }
+
+        .service-card-link:hover {
+            gap: 12px;
+        }
+
+
+        /* ============================================
+           ORDER PROCESS — GLOWING CONNECTED CIRCLES
+           ============================================ */
+        .process {
+            background:
+                linear-gradient(180deg, var(--bg-deepest) 0%, var(--bg-dark) 50%, var(--bg-deepest) 100%);
+        }
+
+        .process .section-heading h2 {
+            color: var(--magenta);
+            text-shadow: 0 0 10px rgba(233, 30, 140, 0.3);
+        }
+
+        .process-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 0 0 auto;
+            width: 160px;
+        }
+
+        .process-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid var(--magenta);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--magenta);
+            background: rgba(233, 30, 140, 0.08);
+            animation: circlePulse 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        .process-step:nth-child(odd) .process-circle {
+            animation-delay: 0s;
+        }
+        .process-step:nth-child(even) .process-circle {
+            animation-delay: 1.5s;
+        }
+
+        .process-label {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .process-desc {
+            font-size: 0.8rem;
+            color: var(--gray-mid);
+        }
+
+        .process-line {
+            width: 80px;
+            height: 2px;
+            background: var(--magenta);
+            animation: lineGlow 3s ease-in-out infinite;
+            flex-shrink: 0;
+            position: relative;
+            top: -20px;
+        }
+
+
+        /* ============================================
+           PRICING TABLE
+           ============================================ */
+        .pricing {
+            background: var(--bg-dark);
+        }
+
+        .pricing .section-heading h2 {
+            color: var(--cyan);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .pricing-tables {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-table {
+            background: linear-gradient(180deg, #1e1e1e, #151515);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .pricing-table-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .pricing-table-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-table-header p {
+            font-size: 0.8rem;
+            color: var(--gray-mid);
+        }
+
+        .pricing-table--46 .pricing-table-header h3 {
+            color: var(--magenta);
+            text-shadow: 0 0 8px rgba(233, 30, 140, 0.3);
+        }
+        .pricing-table--22 .pricing-table-header h3 {
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+        }
+        .pricing-table--glitter .pricing-table-header h3 {
+            color: var(--gold);
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+        }
+        .pricing-table--glow .pricing-table-header h3 {
+            color: var(--neon-green);
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+        }
+
+        .pricing-rows {
+            padding: 0.5rem 0;
+        }
+
+        .pricing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 2rem;
+            transition: background 0.2s ease;
+        }
+
+        .pricing-row:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .pricing-row-size {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            font-weight: 400;
+        }
+
+        .pricing-row-price {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            color: var(--white);
+        }
+
+        .pricing-table-footer {
+            padding: 1rem 2rem 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+
+        .pricing-table-footer .badge {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            padding: 5px 14px;
+            border-radius: 2px;
+            background: rgba(233, 30, 140, 0.12);
+            color: var(--magenta);
+            border: 1px solid rgba(233, 30, 140, 0.25);
+        }
+
+        .pricing-table--22 .pricing-table-footer .badge {
+            background: rgba(0, 229, 255, 0.12);
+            color: var(--cyan);
+            border-color: rgba(0, 229, 255, 0.25);
+        }
+
+        .pricing-table--glitter .pricing-table-footer .badge {
+            background: rgba(255, 215, 0, 0.12);
+            color: var(--gold);
+            border-color: rgba(255, 215, 0, 0.25);
+        }
+
+        .pricing-table--glow .pricing-table-footer .badge {
+            background: rgba(57, 255, 20, 0.12);
+            color: var(--neon-green);
+            border-color: rgba(57, 255, 20, 0.25);
+        }
+
+
+        /* ============================================
+           GLITTER + GLOW SPECIALTY SECTION
+           ============================================ */
+        .specialty {
+            background: linear-gradient(180deg, var(--bg-deepest), #120a14, var(--bg-deepest));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .specialty-sparkle-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sparkle-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: sparkle 2s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .specialty .section-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .specialty-heading h2 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .specialty-heading .text-glitter {
+            background: linear-gradient(135deg, var(--gold), #C0C0C0, var(--gold), #C0C0C0);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .specialty-heading .text-glow {
+            color: var(--neon-green);
+            animation: neonGlowGreen 3s ease-in-out infinite;
+        }
+
+        .specialty-heading .plus {
+            color: var(--white);
+            opacity: 0.5;
+            -webkit-text-fill-color: initial;
+        }
+
+        .specialty-sub {
+            text-align: center;
+            color: var(--gray-mid);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .specialty-card {
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(26, 26, 26, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .specialty-card--glitter {
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+        .specialty-card--glitter:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 215, 0, 0.05);
+        }
+
+        .specialty-card--glow-dark {
+            border-color: rgba(57, 255, 20, 0.2);
+        }
+        .specialty-card--glow-dark:hover {
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.15), 0 0 40px rgba(57, 255, 20, 0.05);
+        }
+
+        .specialty-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .specialty-card--glitter h3 {
+            color: var(--gold);
+            animation: neonGlowGold 3s ease-in-out infinite;
+        }
+
+        .specialty-card--glow-dark h3 {
+            color: var(--neon-green);
+            animation: neonGlowGreen 3s ease-in-out infinite;
+        }
+
+        .specialty-card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 3px 10px;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .specialty-card--glitter .tag {
+            background: rgba(255, 215, 0, 0.12);
+            color: var(--gold);
+        }
+
+        .specialty-card--glow-dark .tag {
+            background: rgba(57, 255, 20, 0.12);
+            color: var(--neon-green);
+        }
+
+        .specialty-card p {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .specialty-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .specialty-card ul li {
+            font-size: 0.85rem;
+            color: var(--gray-light);
+            padding: 0.25rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .specialty-card--glitter ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .specialty-card--glow-dark ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 6px var(--neon-green);
+        }
+
+
+        /* ============================================
+           SOCIAL PROOF / REVIEWS
+           ============================================ */
+        .reviews {
+            background: var(--bg-dark);
+        }
+
+        .reviews .section-heading h2 {
+            color: var(--white);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: linear-gradient(180deg, #1e1e1e, #161616);
+            border: 1px solid rgba(233, 30, 140, 0.15);
+            border-radius: 4px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .review-card:hover {
+            border-color: rgba(233, 30, 140, 0.4);
+            box-shadow: 0 0 20px rgba(233, 30, 140, 0.1);
+        }
+
+        .review-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .review-star {
+            font-size: 1.1rem;
+            color: var(--gold);
+            animation: starGlow 3s ease-in-out infinite;
+        }
+
+        .review-star:nth-child(2) { animation-delay: 0.3s; }
+        .review-star:nth-child(3) { animation-delay: 0.6s; }
+        .review-star:nth-child(4) { animation-delay: 0.9s; }
+        .review-star:nth-child(5) { animation-delay: 1.2s; }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--magenta);
+            letter-spacing: 0.05em;
+        }
+
+        .review-location {
+            font-size: 0.75rem;
+            color: var(--gray-mid);
+        }
+
+
+        /* ============================================
+           CTA STRIP
+           ============================================ */
+        .cta-strip {
+            background: linear-gradient(90deg, var(--magenta), #ff3daa);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-strip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 40px,
+                rgba(255,255,255,0.03) 40px,
+                rgba(255,255,255,0.03) 42px
+            );
+            pointer-events: none;
+        }
+
+        .cta-strip h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-strip-btn {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            padding: 16px 48px;
+            background: var(--white);
+            color: var(--magenta);
+            border: 3px solid var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-strip-btn:hover {
+            background: transparent;
+            color: var(--white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--bg-darker);
+            border-top: 2px solid var(--magenta);
+            box-shadow: 0 -2px 20px rgba(233, 30, 140, 0.2);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 0 12px var(--magenta));
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--gray-mid);
+            line-height: 1.5;
+            max-width: 280px;
+        }
+
+        .footer-nav h4,
+        .footer-contact h4 {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--magenta);
+            text-shadow: 0 0 6px rgba(233, 30, 140, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+        }
+
+        .footer-nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-nav ul li a {
+            font-size: 0.85rem;
+            color: var(--gray-light);
+        }
+
+        .footer-nav ul li a:hover {
+            color: var(--magenta);
+        }
+
+        .footer-contact p {
+            font-size: 0.85rem;
+            color: var(--gray-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: var(--gray-mid);
+        }
+
+        .footer-bottom .neon-badge {
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            color: var(--neon-green);
+            text-shadow: 0 0 6px rgba(57, 255, 20, 0.3);
+        }
+
+
+        /* ============================================
+           MOBILE RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(13, 13, 13, 0.98);
+                flex-direction: column;
+                padding: 1.5rem 2rem 2rem;
+                gap: 1.2rem;
+                border-bottom: 2px solid var(--magenta);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-product {
+                display: none;
+            }
+
+            .process-track {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .process-line {
+                width: 2px;
+                height: 50px;
+                top: 0;
+            }
+
+            .process-step {
+                width: auto;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 3.5rem 1.25rem;
+            }
+
+            .hero {
+                padding: 5rem 1.25rem 3rem;
+            }
+
+            .hero-logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            .btn-neon {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+
+            .pricing-tables {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         STICKY NAVIGATION
+         ============================================ -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/images/logo-transparent.png" alt="Hatfield &amp; McCoy DTF Logo" width="45" height="45">
+                <span class="nav-logo-text">
+                    <span class="magenta">Hatfield</span> &amp; <span class="cyan">McCoy</span>
+                </span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#specialty">Specialty</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#" class="nav-cta">Shop Now</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- ============================================
+         HERO — NEON SIGN SPECTACLE
+         ============================================ -->
+    <section class="hero" id="hero">
+        <img
+            src="assets/images/hero-bg.png"
+            alt=""
+            class="hero-bg-image"
+            onerror="this.style.display='none'"
+        >
+
+        <div class="hero-content">
+            <div class="neon-title">
+                <span class="line-hatfield">Hatfield</span>
+                <span class="line-amp">&amp;</span>
+                <span class="line-mccoy">McCoy</span>
+            </div>
+
+            <img
+                src="assets/images/logo-glow.png"
+                alt="Hatfield &amp; McCoy DTF Logo"
+                class="hero-logo"
+                width="150"
+                height="150"
+            >
+
+            <h1 class="hero-subtitle">Direct to Film</h1>
+            <p class="hero-tagline">
+                Custom DTF transfers. <strong>No minimums.</strong> Virginia-based print shop.<br>
+                Gang sheets, glitter, glow in the dark &mdash; we print what others won&rsquo;t.
+            </p>
+
+            <div class="hero-ctas">
+                <a href="#pricing" class="btn-neon btn-neon-magenta">Shop Now</a>
+                <a href="#pricing" class="btn-neon btn-neon-cyan">View Pricing</a>
+            </div>
+        </div>
+
+        <img
+            src="assets/images/product-dtf-hero.png"
+            alt="DTF Transfer product shot"
+            class="hero-product"
+            onerror="this.style.display='none'"
+        >
+    </section>
+
+
+    <!-- ============================================
+         SERVICES — NEON SIGN CARDS
+         ============================================ -->
+    <section class="services" id="services">
+        <div class="section-inner">
+            <div class="section-heading reveal">
+                <h2>What We Print</h2>
+                <p>Four ways to get your designs onto fabric. Every transfer cut, printed, and shipped from Virginia.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- 46" Wide DTF -->
+                <div class="service-card service-card--magenta reveal">
+                    <h3 class="service-card-title">46" Wide DTF</h3>
+                    <div class="service-card-price">Starting at $12 <span>/ 46"x12"</span></div>
+                    <p class="service-card-desc">
+                        Our widest format. Gang sheets and full transfers up to 46"x240". Pack multiple designs on a single sheet and save. Ideal for bulk orders and mixed designs.
+                    </p>
+                    <a href="#pricing" class="service-card-link">Shop &rarr;</a>
+                </div>
+
+                <!-- 22" Wide DTF -->
+                <div class="service-card service-card--cyan reveal">
+                    <h3 class="service-card-title">22" Wide DTF</h3>
+                    <div class="service-card-price">Starting at $12 <span>/ 22"x24"</span></div>
+                    <p class="service-card-desc">
+                        Our most popular format. Standard DTF transfers up to 22"x300". Perfect for individual designs, small runs, and testing new artwork before scaling up.
+                    </p>
+                    <a href="#pricing" class="service-card-link">Shop &rarr;</a>
+                </div>
+
+                <!-- Glitter DTF -->
+                <div class="service-card service-card--gold reveal">
+                    <h3 class="service-card-title">Glitter DTF</h3>
+                    <div class="service-card-price">Starting at $12 <span>/ 22"x24"</span></div>
+                    <p class="service-card-desc">
+                        Silver, Gold, or Multi-color glitter transfers that catch light and turn heads. Same sizing as 22" standard. When regular prints aren&rsquo;t extra enough.
+                    </p>
+                    <a href="#pricing" class="service-card-link">Shop &rarr;</a>
+                </div>
+
+                <!-- Glow in the Dark DTF -->
+                <div class="service-card service-card--green reveal">
+                    <h3 class="service-card-title">Glow in the Dark</h3>
+                    <div class="service-card-price">Starting at $18 <span>/ 22"x24"</span></div>
+                    <p class="service-card-desc">
+                        Premium glow-in-the-dark DTF transfers that charge in light and shine in darkness. 22" wide format. For designs that literally never stop working.
+                    </p>
+                    <a href="#pricing" class="service-card-link">Shop &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         HOW IT WORKS — GLOWING PROCESS TRACK
+         ============================================ -->
+    <section class="process" id="process">
+        <div class="section-inner">
+            <div class="section-heading reveal">
+                <h2>How It Works</h2>
+                <p>From upload to wearing it &mdash; four simple steps.</p>
+            </div>
+
+            <div class="process-track reveal">
+                <div class="process-step">
+                    <div class="process-circle">1</div>
+                    <div class="process-label">Upload</div>
+                    <div class="process-desc">Send us your design file</div>
+                </div>
+
+                <div class="process-line"></div>
+
+                <div class="process-step">
+                    <div class="process-circle">2</div>
+                    <div class="process-label">We Print</div>
+                    <div class="process-desc">Printed &amp; shipped from VA</div>
+                </div>
+
+                <div class="process-line"></div>
+
+                <div class="process-step">
+                    <div class="process-circle">3</div>
+                    <div class="process-label">Apply Heat</div>
+                    <div class="process-desc">Heat press your transfer</div>
+                </div>
+
+                <div class="process-line"></div>
+
+                <div class="process-step">
+                    <div class="process-circle">4</div>
+                    <div class="process-label">Wear It</div>
+                    <div class="process-desc">Rock your custom gear</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         PRICING TABLES
+         ============================================ -->
+    <section class="pricing" id="pricing">
+        <div class="section-inner">
+            <div class="section-heading reveal">
+                <h2>Transparent Pricing</h2>
+                <p>No minimums. No hidden fees. No surprises. Pick your size, upload your art, done.</p>
+            </div>
+
+            <div class="pricing-tables">
+
+                <!-- 46" Wide DTF -->
+                <div class="pricing-table pricing-table--46 reveal">
+                    <div class="pricing-table-header">
+                        <h3>46" Wide DTF</h3>
+                        <p>Gang sheets &amp; full transfers &bull; Widest format available</p>
+                    </div>
+                    <div class="pricing-rows">
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 12"</span>
+                            <span class="pricing-row-price">$12</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 24"</span>
+                            <span class="pricing-row-price">$24</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 36"</span>
+                            <span class="pricing-row-price">$36</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 48"</span>
+                            <span class="pricing-row-price">$48</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 60"</span>
+                            <span class="pricing-row-price">$60</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 72"</span>
+                            <span class="pricing-row-price">$72</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 80"</span>
+                            <span class="pricing-row-price">$80</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">46" x 240"</span>
+                            <span class="pricing-row-price">$240</span>
+                        </div>
+                    </div>
+                    <div class="pricing-table-footer">
+                        <span class="badge">No Minimums</span>
+                    </div>
+                </div>
+
+                <!-- 22" Wide DTF -->
+                <div class="pricing-table pricing-table--22 reveal">
+                    <div class="pricing-table-header">
+                        <h3>22" Wide DTF</h3>
+                        <p>Standard transfers &bull; Most popular format</p>
+                    </div>
+                    <div class="pricing-rows">
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 24"</span>
+                            <span class="pricing-row-price">$12</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 36"</span>
+                            <span class="pricing-row-price">$18</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 48"</span>
+                            <span class="pricing-row-price">$24</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 60"</span>
+                            <span class="pricing-row-price">$30</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 120"</span>
+                            <span class="pricing-row-price">$60</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 180"</span>
+                            <span class="pricing-row-price">$90</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 240"</span>
+                            <span class="pricing-row-price">$120</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 300"</span>
+                            <span class="pricing-row-price">$150</span>
+                        </div>
+                    </div>
+                    <div class="pricing-table-footer">
+                        <span class="badge">No Minimums</span>
+                    </div>
+                </div>
+
+                <!-- Glitter DTF -->
+                <div class="pricing-table pricing-table--glitter reveal">
+                    <div class="pricing-table-header">
+                        <h3>Glitter DTF 22"</h3>
+                        <p>Silver, Gold, or Multi &bull; Specialty finish</p>
+                    </div>
+                    <div class="pricing-rows">
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 24"</span>
+                            <span class="pricing-row-price">$12</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 36"</span>
+                            <span class="pricing-row-price">$18</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 48"</span>
+                            <span class="pricing-row-price">$24</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 60"</span>
+                            <span class="pricing-row-price">$30</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 120"</span>
+                            <span class="pricing-row-price">$60</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 240"</span>
+                            <span class="pricing-row-price">$120</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 300"</span>
+                            <span class="pricing-row-price">$150</span>
+                        </div>
+                    </div>
+                    <div class="pricing-table-footer">
+                        <span class="badge">No Minimums</span>
+                    </div>
+                </div>
+
+                <!-- Glow in the Dark DTF -->
+                <div class="pricing-table pricing-table--glow reveal">
+                    <div class="pricing-table-header">
+                        <h3>Glow in the Dark 22"</h3>
+                        <p>Premium glow transfers &bull; Charges in light, shines in dark</p>
+                    </div>
+                    <div class="pricing-rows">
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 24"</span>
+                            <span class="pricing-row-price">$18</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 36"</span>
+                            <span class="pricing-row-price">$27</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 48"</span>
+                            <span class="pricing-row-price">$36</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 60"</span>
+                            <span class="pricing-row-price">$45</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 120"</span>
+                            <span class="pricing-row-price">$90</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 240"</span>
+                            <span class="pricing-row-price">$135</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-row-size">22" x 300"</span>
+                            <span class="pricing-row-price">$153</span>
+                        </div>
+                    </div>
+                    <div class="pricing-table-footer">
+                        <span class="badge">Premium &bull; No Minimums</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         GLITTER + GLOW SPECIALTY SECTION
+         ============================================ -->
+    <section class="specialty" id="specialty">
+        <div class="specialty-sparkle-field" id="sparkleField"></div>
+        <div class="section-inner">
+            <div class="specialty-heading reveal">
+                <h2>
+                    <span class="text-glitter">Glitter</span>
+                    <span class="plus"> + </span>
+                    <span class="text-glow">Glow</span>
+                </h2>
+                <h2 style="font-size:clamp(1.2rem,3vw,2rem); color: var(--gray-light); margin-top:0.25rem;">Specialty Prints</h2>
+            </div>
+            <p class="specialty-sub reveal">When standard DTF isn&rsquo;t enough. Specialty finishes that make your designs impossible to ignore.</p>
+
+            <div class="specialty-grid">
+                <!-- Glitter Card -->
+                <div class="specialty-card specialty-card--glitter reveal">
+                    <h3>Glitter DTF Transfers</h3>
+                    <span class="tag">Silver &bull; Gold &bull; Multi-Color</span>
+                    <p>
+                        Real metallic glitter embedded in every transfer. Not a filter. Not a simulation. These catch light from every angle and turn heads across any room. Available in silver, gold, and multi-color finishes on the 22" wide format.
+                    </p>
+                    <ul>
+                        <li>Same pricing as standard 22" DTF</li>
+                        <li>22" wide, up to 300" long</li>
+                        <li>Three finish options: Silver, Gold, Multi</li>
+                        <li>Heat press application &mdash; same as standard</li>
+                        <li>Durable wash-after-wash performance</li>
+                    </ul>
+                </div>
+
+                <!-- Glow in the Dark Card -->
+                <div class="specialty-card specialty-card--glow-dark reveal">
+                    <h3>Glow in the Dark DTF</h3>
+                    <span class="tag">Premium &bull; Photoluminescent</span>
+                    <p>
+                        Photoluminescent transfers that absorb light and glow for hours. Perfect for events, nightlife apparel, safety gear, kids&rsquo; clothing, and anyone who wants their designs working overtime &mdash; even when the lights go out.
+                    </p>
+                    <ul>
+                        <li>Premium pricing (~1.5x standard)</li>
+                        <li>22" wide, up to 300" long</li>
+                        <li>Charges under any light source</li>
+                        <li>Hours of visible glow in darkness</li>
+                        <li>Same easy heat press application</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SOCIAL PROOF / REVIEWS
+         ============================================ -->
+    <section class="reviews" id="reviews">
+        <div class="section-inner">
+            <div class="section-heading reveal">
+                <h2>What the People Say</h2>
+                <p>Real customers. Real transfers. Real impressed.</p>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card reveal">
+                    <div class="review-stars">
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                    </div>
+                    <p class="review-text">
+                        &ldquo;Colors are insane. I&rsquo;ve used three other DTF suppliers and none of them come close to the vibrancy I get from Hatfield &amp; McCoy. Gang sheets save me a fortune too.&rdquo;
+                    </p>
+                    <div class="review-author">Marcus T.</div>
+                    <div class="review-location">Richmond, VA</div>
+                </div>
+
+                <div class="review-card reveal">
+                    <div class="review-stars">
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                    </div>
+                    <p class="review-text">
+                        &ldquo;Ordered the glitter transfers for my daughter&rsquo;s cheer squad. Absolute showstoppers. Everyone at the competition was asking where they got their shirts.&rdquo;
+                    </p>
+                    <div class="review-author">Jennifer K.</div>
+                    <div class="review-location">Roanoke, VA</div>
+                </div>
+
+                <div class="review-card reveal">
+                    <div class="review-stars">
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                    </div>
+                    <p class="review-text">
+                        &ldquo;Fast turnaround and the no-minimum policy is a game changer for my small business. I can test new designs without committing to huge orders. Quality is top notch.&rdquo;
+                    </p>
+                    <div class="review-author">Derek W.</div>
+                    <div class="review-location">Lynchburg, VA</div>
+                </div>
+
+                <div class="review-card reveal">
+                    <div class="review-stars">
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                        <span class="review-star">&#9733;</span>
+                    </div>
+                    <p class="review-text">
+                        &ldquo;The glow in the dark transfers blew my mind. Used them for a Halloween pop-up and sold out in two hours. Already placed my next order. These folks know what they&rsquo;re doing.&rdquo;
+                    </p>
+                    <div class="review-author">Alexis R.</div>
+                    <div class="review-location">Virginia Beach, VA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         CTA STRIP
+         ============================================ -->
+    <section class="cta-strip">
+        <h2>Ready to Print? Let's Go.</h2>
+        <a href="#" class="cta-strip-btn">Start Your Order</a>
+    </section>
+
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/images/logo-transparent.png" alt="Hatfield &amp; McCoy DTF" class="footer-logo" width="60" height="60">
+                <p>Custom direct-to-film transfers printed and shipped from Virginia. No minimums. No excuses. Just fire prints.</p>
+            </div>
+
+            <div class="footer-nav">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#process">How It Works</a></li>
+                    <li><a href="#specialty">Specialty Prints</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <p>Virginia-Based Print Shop</p>
+                <p>No Minimums &bull; Fast Turnaround</p>
+                <p style="margin-top: 0.75rem;">
+                    <a href="mailto:info@hatfieldandmccoydtf.com" style="color: var(--magenta);">info@hatfieldandmccoydtf.com</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Hatfield &amp; McCoy DTF. All rights reserved.</p>
+            <span class="neon-badge">Virginia Made &bull; Neon Powered</span>
+        </div>
+    </footer>
+
+
+    <!-- ============================================
+         JAVASCRIPT — INTERACTIONS & SPARKLES
+         ============================================ -->
+    <script>
+        /* ------------------------------------------
+           Mobile Nav Toggle
+           ------------------------------------------ */
+        (function() {
+            const toggle = document.getElementById('navToggle');
+            const links = document.getElementById('navLinks');
+
+            if (toggle && links) {
+                toggle.addEventListener('click', function() {
+                    links.classList.toggle('active');
+                    // Animate hamburger bars
+                    const bars = toggle.querySelectorAll('span');
+                    if (links.classList.contains('active')) {
+                        bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        bars[1].style.opacity = '0';
+                        bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                    } else {
+                        bars[0].style.transform = 'none';
+                        bars[1].style.opacity = '1';
+                        bars[2].style.transform = 'none';
+                    }
+                });
+
+                // Close nav when clicking a link
+                links.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        links.classList.remove('active');
+                        const bars = toggle.querySelectorAll('span');
+                        bars[0].style.transform = 'none';
+                        bars[1].style.opacity = '1';
+                        bars[2].style.transform = 'none';
+                    });
+                });
+            }
+        })();
+
+
+        /* ------------------------------------------
+           Scroll Reveal Animation
+           ------------------------------------------ */
+        (function() {
+            var reveals = document.querySelectorAll('.reveal');
+
+            function checkReveal() {
+                var windowHeight = window.innerHeight;
+                reveals.forEach(function(el) {
+                    var top = el.getBoundingClientRect().top;
+                    var revealPoint = 120;
+                    if (top < windowHeight - revealPoint) {
+                        el.classList.add('visible');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', checkReveal);
+            window.addEventListener('load', checkReveal);
+            // Initial check
+            checkReveal();
+        })();
+
+
+        /* ------------------------------------------
+           Sparkle Particle Generator (Specialty Section)
+           ------------------------------------------ */
+        (function() {
+            var field = document.getElementById('sparkleField');
+            if (!field) return;
+
+            var particleCount = 30;
+            var colors = ['#FFD700', '#C0C0C0', '#FFC107', '#FFFFFF', '#39FF14'];
+
+            for (var i = 0; i < particleCount; i++) {
+                var sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-particle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.width = (Math.random() * 6 + 3) + 'px';
+                sparkle.style.height = sparkle.style.width;
+                sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.animationDuration = (Math.random() * 3 + 1.5) + 's';
+                sparkle.style.animationDelay = (Math.random() * 4) + 's';
+                field.appendChild(sparkle);
+            }
+        })();
+
+
+        /* ------------------------------------------
+           Smooth scroll for anchor links
+           ------------------------------------------ */
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    var target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        var navHeight = document.getElementById('nav').offsetHeight;
+                        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+
+
+        /* ------------------------------------------
+           Nav background opacity on scroll
+           ------------------------------------------ */
+        (function() {
+            var nav = document.getElementById('nav');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(13, 13, 13, 0.98)';
+                } else {
+                    nav.style.background = 'rgba(13, 13, 13, 0.95)';
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hatfield & McCoy DTF | Where the Mountains Meet the Press</title>
+  <meta name="description" content="DTF transfers with no minimums. Wide format 46-inch and 22-inch gang sheets, glitter, glow in the dark. Virginia-based, ships nationwide.">
+  <link rel="icon" type="image/png" href="assets/images/logo-favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --magenta: #E91E8C;
+      --cyan: #00E5FF;
+      --neon-green: #39FF14;
+      --bg-dark: #1A1A1A;
+      --bg-darker: #111111;
+      --bg-card: #222222;
+      --text-white: #FFFFFF;
+      --text-muted: #AAAAAA;
+      --glow-magenta: 0 0 20px #E91E8C, 0 0 40px rgba(233,30,140,0.3);
+      --glow-cyan: 0 0 20px #00E5FF, 0 0 40px rgba(0,229,255,0.3);
+      --glow-green: 0 0 20px #39FF14, 0 0 40px rgba(57,255,20,0.3);
+      --glow-white: 0 0 20px #FFFFFF, 0 0 40px rgba(255,255,255,0.2);
+      --transition: 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-white);
+      border-top: 3px solid var(--magenta);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ========================================
+       STICKY NAV
+       ======================================== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(17, 17, 17, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(233, 30, 140, 0.2);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
+    }
+
+    .nav-logo span {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, var(--magenta), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--magenta);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-white);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      font-family: 'Anton', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1.25rem;
+      background: var(--magenta);
+      color: var(--text-white);
+      border-radius: 4px;
+      text-transform: uppercase;
+      transition: var(--transition);
+    }
+
+    .nav-cta:hover {
+      box-shadow: var(--glow-magenta);
+      transform: translateY(-1px);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--text-white);
+      transition: var(--transition);
+    }
+
+    /* ========================================
+       HERO — SPLIT LAYOUT
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a0a1a 50%, #0a1a1a 100%);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: url('assets/images/hero-bg.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+    }
+
+    .hero-logo-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      padding: 2.5rem 0 1rem;
+    }
+
+    .hero-logo-bar img {
+      width: 120px;
+      height: 120px;
+      filter: drop-shadow(0 0 30px rgba(233, 30, 140, 0.5)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.2));
+      animation: logoPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(233, 30, 140, 0.5)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.2)); }
+      50% { filter: drop-shadow(0 0 40px rgba(233, 30, 140, 0.7)) drop-shadow(0 0 80px rgba(0, 229, 255, 0.4)); }
+    }
+
+    .hero-split {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 2rem;
+      align-items: center;
+    }
+
+    /* Mountain silhouette side */
+    .hero-mountains {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      min-height: 400px;
+      overflow: hidden;
+    }
+
+    .hero-mountains svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .mountain-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, transparent 40%, rgba(26, 26, 26, 0.3) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Hero product image floating */
+    .hero-product {
+      position: absolute;
+      z-index: 2;
+      bottom: 10%;
+      right: 5%;
+      width: 220px;
+      filter: drop-shadow(0 0 20px rgba(233, 30, 140, 0.4));
+      animation: floatProduct 6s ease-in-out infinite;
+    }
+
+    @keyframes floatProduct {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Copy side */
+    .hero-copy {
+      padding: 3rem 2rem 3rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-tagline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline .word-mountains {
+      color: var(--neon-green);
+      text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    }
+
+    .hero-tagline .word-press {
+      color: var(--magenta);
+      text-shadow: 0 0 20px rgba(233, 30, 140, 0.4);
+    }
+
+    .hero-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .hero-subtitle span {
+      color: var(--cyan);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Anton', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-magenta {
+      background: var(--magenta);
+      color: var(--text-white);
+    }
+
+    .btn-magenta:hover {
+      box-shadow: var(--glow-magenta);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-cyan {
+      background: transparent;
+      color: var(--cyan);
+      border: 2px solid var(--cyan);
+    }
+
+    .btn-outline-cyan:hover {
+      background: var(--cyan);
+      color: var(--bg-dark);
+      box-shadow: var(--glow-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* ========================================
+       MARQUEE BANNER
+       ======================================== */
+    .marquee-strip {
+      background: var(--magenta);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0.85rem 0;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marqueeScroll 25s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: 'Anton', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      padding: 0 2rem;
+    }
+
+    .marquee-track .sep {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========================================
+       SECTIONS — SHARED
+       ======================================== */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    /* ========================================
+       SERVICES — 2x2 GRID
+       ======================================== */
+    .services-bg {
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #111 50%, var(--bg-dark) 100%);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      position: relative;
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    /* Card color variants */
+    .service-card--magenta::before { background: var(--magenta); }
+    .service-card--magenta:hover {
+      border-color: var(--magenta);
+      box-shadow: var(--glow-magenta);
+    }
+    .service-card--magenta .service-card__icon { color: var(--magenta); }
+    .service-card--magenta .service-card__price { color: var(--magenta); }
+
+    .service-card--cyan::before { background: var(--cyan); }
+    .service-card--cyan:hover {
+      border-color: var(--cyan);
+      box-shadow: var(--glow-cyan);
+    }
+    .service-card--cyan .service-card__icon { color: var(--cyan); }
+    .service-card--cyan .service-card__price { color: var(--cyan); }
+
+    .service-card--green::before { background: var(--neon-green); }
+    .service-card--green:hover {
+      border-color: var(--neon-green);
+      box-shadow: var(--glow-green);
+    }
+    .service-card--green .service-card__icon { color: var(--neon-green); }
+    .service-card--green .service-card__price { color: var(--neon-green); }
+
+    .service-card--white::before { background: var(--text-white); }
+    .service-card--white:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: var(--glow-white);
+    }
+    .service-card--white .service-card__icon { color: var(--text-white); text-shadow: 0 0 12px rgba(255,255,255,0.5); }
+    .service-card--white .service-card__price { color: var(--text-white); }
+
+    .service-card__icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card__name {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card__desc {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .service-card__price {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+    }
+
+    .service-card__price small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+    }
+
+    .service-card__badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       PRICING QUICK-LOOK
+       ======================================== */
+    .pricing-bg {
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #0d0d0d 100%);
+    }
+
+    .pricing-tables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .pricing-block {
+      background: var(--bg-card);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .pricing-block__header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .pricing-block__header h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-block__header p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .pricing-block__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      transition: var(--transition);
+    }
+
+    .pricing-block__row:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .pricing-block__row .size {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .pricing-block__row .price {
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    .pricing-block--magenta .pricing-block__header { border-left: 3px solid var(--magenta); }
+    .pricing-block--magenta .pricing-block__row .price { color: var(--magenta); }
+
+    .pricing-block--cyan .pricing-block__header { border-left: 3px solid var(--cyan); }
+    .pricing-block--cyan .pricing-block__row .price { color: var(--cyan); }
+
+    /* ========================================
+       COMPARISON — "THE DIFFERENCE"
+       ======================================== */
+    .comparison-bg {
+      background: linear-gradient(180deg, #0d0d0d 0%, var(--bg-dark) 50%, #0d0d0d 100%);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 0;
+      max-width: 800px;
+    }
+
+    .comparison-grid__header {
+      font-family: 'Anton', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 1.25rem;
+      border-bottom: 2px solid var(--magenta);
+    }
+
+    .comparison-grid__header--hm {
+      color: var(--magenta);
+      text-align: center;
+    }
+
+    .comparison-grid__header--them {
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .comparison-grid__feature {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+    }
+
+    .comparison-grid__check {
+      text-align: center;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .check-yes {
+      color: var(--neon-green);
+      text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+      font-weight: 700;
+    }
+
+    .check-no {
+      color: #FF4444;
+      font-weight: 700;
+    }
+
+    /* ========================================
+       FAQ ACCORDION
+       ======================================== */
+    .faq-bg {
+      background: var(--bg-dark);
+    }
+
+    .faq-list {
+      max-width: 800px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .faq-item:hover {
+      border-color: rgba(233, 30, 140, 0.15);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      gap: 1rem;
+    }
+
+    .faq-question h4 {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      font-weight: 400;
+    }
+
+    .faq-arrow {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform var(--transition);
+      color: var(--magenta);
+    }
+
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 1.5rem 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+
+    /* ========================================
+       CTA BANNER
+       ======================================== */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(233, 30, 140, 0.15) 0%, rgba(0, 229, 255, 0.08) 100%);
+      border-top: 1px solid rgba(233, 30, 140, 0.2);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-banner h2 span {
+      color: var(--cyan);
+    }
+
+    .cta-banner p {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      background: var(--bg-darker);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-brand img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+
+    .footer-brand-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .footer-brand-location {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1.5rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: right;
+    }
+
+    .footer-nav a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .footer-nav a:hover {
+      color: var(--magenta);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .footer-socials a:hover {
+      border-color: var(--magenta);
+      color: var(--magenta);
+      box-shadow: 0 0 12px rgba(233, 30, 140, 0.3);
+    }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ========================================
+       MOBILE RESPONSIVE
+       ======================================== */
+    @media (max-width: 900px) {
+      .hero-split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-mountains {
+        min-height: 250px;
+        order: -1;
+      }
+
+      .hero-copy {
+        padding: 2rem 1rem;
+        text-align: center;
+        align-items: center;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .hero-product {
+        width: 150px;
+        bottom: 5%;
+        right: 10%;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-tables {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+        font-size: 0.85rem;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-right {
+        align-items: center;
+      }
+
+      .footer-nav {
+        text-align: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(17, 17, 17, 0.97);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        border-bottom: 1px solid rgba(233, 30, 140, 0.2);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .hero-tagline {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.8rem;
+      }
+
+      .btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.5rem;
+      }
+
+      .section {
+        padding: 3rem 1.25rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .comparison-grid__feature,
+      .comparison-grid__check,
+      .comparison-grid__header {
+        padding: 0.75rem 0.75rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* ========================================
+       SCROLL FADE-IN ANIMATION
+       ======================================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== STICKY NAV ====== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="assets/images/logo-transparent.png" alt="Hatfield & McCoy DTF" onerror="this.style.display='none'">
+        <span>Hatfield & McCoy DTF</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#difference">Why Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#" class="nav-cta">Order Now</a></li>
+      </ul>
+      <div class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="hero-bg" style="background-image: url('assets/images/hero-bg.png')"
+         onerror="this.style.backgroundImage='none'"></div>
+
+    <div class="hero-logo-bar">
+      <img src="assets/images/logo-glow.png" alt="Hatfield & McCoy DTF Logo"
+           onerror="this.src='assets/images/logo-transparent.png'">
+    </div>
+
+    <div class="hero-split">
+      <!-- Mountain Silhouettes -->
+      <div class="hero-mountains">
+        <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sky glow -->
+          <defs>
+            <radialGradient id="skyGlow" cx="50%" cy="60%" r="50%">
+              <stop offset="0%" stop-color="rgba(233, 30, 140, 0.08)" />
+              <stop offset="100%" stop-color="transparent" />
+            </radialGradient>
+            <linearGradient id="mountainFar" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1a2a1a" />
+              <stop offset="100%" stop-color="#0d1a0d" />
+            </linearGradient>
+            <linearGradient id="mountainMid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#142214" />
+              <stop offset="100%" stop-color="#0a140a" />
+            </linearGradient>
+            <linearGradient id="mountainNear" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0f1a0f" />
+              <stop offset="100%" stop-color="#0a0a0a" />
+            </linearGradient>
+            <linearGradient id="mountainFront" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0d0d0d" />
+              <stop offset="100%" stop-color="#1A1A1A" />
+            </linearGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#skyGlow)" />
+          <!-- Layer 4 — farthest, lightest -->
+          <path d="M0 380 L80 300 L160 340 L240 260 L320 310 L400 240 L480 290 L560 250 L640 300 L720 270 L800 320 L800 500 L0 500 Z"
+                fill="url(#mountainFar)" opacity="0.6" />
+          <!-- Layer 3 -->
+          <path d="M0 400 L60 340 L140 370 L200 300 L280 350 L360 280 L440 330 L520 290 L600 340 L680 310 L760 350 L800 370 L800 500 L0 500 Z"
+                fill="url(#mountainMid)" opacity="0.75" />
+          <!-- Layer 2 -->
+          <path d="M0 430 L100 370 L180 400 L260 350 L340 390 L420 340 L500 380 L580 350 L660 390 L740 370 L800 410 L800 500 L0 500 Z"
+                fill="url(#mountainNear)" opacity="0.9" />
+          <!-- Layer 1 — foreground, darkest -->
+          <path d="M0 460 L120 410 L200 440 L300 400 L400 430 L480 400 L560 440 L660 410 L740 440 L800 420 L800 500 L0 500 Z"
+                fill="url(#mountainFront)" />
+          <!-- Subtle neon line on ridge -->
+          <path d="M0 460 L120 410 L200 440 L300 400 L400 430 L480 400 L560 440 L660 410 L740 440 L800 420"
+                fill="none" stroke="rgba(57, 255, 20, 0.12)" stroke-width="1.5" />
+          <path d="M0 430 L100 370 L180 400 L260 350 L340 390 L420 340 L500 380 L580 350 L660 390 L740 370 L800 410"
+                fill="none" stroke="rgba(233, 30, 140, 0.08)" stroke-width="1" />
+        </svg>
+        <img src="assets/images/product-dtf-hero.png"
+             alt="DTF Transfer Sheet"
+             class="hero-product"
+             onerror="this.style.display='none'">
+        <div class="mountain-overlay"></div>
+      </div>
+
+      <!-- Copy -->
+      <div class="hero-copy">
+        <h1 class="hero-tagline">
+          Where the <span class="word-mountains">Mountains</span> Meet the <span class="word-press">Press</span>
+        </h1>
+        <p class="hero-subtitle">
+          DTF Transfers <span>&middot;</span> Glitter <span>&middot;</span> Glow <span>&middot;</span> Virginia
+        </p>
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-magenta">Shop Transfers</a>
+          <a href="#pricing" class="btn btn-outline-cyan">See Pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MARQUEE BANNER ====== -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>No Minimums</span><span class="sep">&middot;</span>
+      <span>No Pretreatment</span><span class="sep">&middot;</span>
+      <span>No Excuses</span><span class="sep">&middot;</span>
+      <span>Ships Nationwide</span><span class="sep">&middot;</span>
+      <span>Virginia Based</span><span class="sep">&middot;</span>
+      <span>No Minimums</span><span class="sep">&middot;</span>
+      <span>No Pretreatment</span><span class="sep">&middot;</span>
+      <span>No Excuses</span><span class="sep">&middot;</span>
+      <span>Ships Nationwide</span><span class="sep">&middot;</span>
+      <span>Virginia Based</span><span class="sep">&middot;</span>
+      <span>No Minimums</span><span class="sep">&middot;</span>
+      <span>No Pretreatment</span><span class="sep">&middot;</span>
+      <span>No Excuses</span><span class="sep">&middot;</span>
+      <span>Ships Nationwide</span><span class="sep">&middot;</span>
+      <span>Virginia Based</span><span class="sep">&middot;</span>
+      <span>No Minimums</span><span class="sep">&middot;</span>
+      <span>No Pretreatment</span><span class="sep">&middot;</span>
+      <span>No Excuses</span><span class="sep">&middot;</span>
+      <span>Ships Nationwide</span><span class="sep">&middot;</span>
+      <span>Virginia Based</span><span class="sep">&middot;</span>
+    </div>
+  </div>
+
+  <!-- ====== SERVICES ====== -->
+  <div class="services-bg" id="services">
+    <div class="section">
+      <p class="section-label fade-up">What We Print</p>
+      <h2 class="section-title fade-up">Built for the Bold</h2>
+      <p class="section-subtitle fade-up">Four ways to press your vision into reality. No minimums, no pretreatment, no compromises. Just peel, press, and wear.</p>
+
+      <div class="services-grid">
+        <!-- Card 1: DTF 46" -->
+        <div class="service-card service-card--magenta fade-up">
+          <span class="service-card__badge">Widest Format</span>
+          <div class="service-card__icon">&#9641;</div>
+          <h3 class="service-card__name">DTF 46" Wide</h3>
+          <p class="service-card__desc">Our widest format gang sheets. Maximize your print real estate with 46 inches of transfer space. Perfect for bulk orders, gang layouts, and oversized designs that demand room to breathe.</p>
+          <p class="service-card__price">From $12 <small>46"x12" sheet</small></p>
+        </div>
+
+        <!-- Card 2: DTF 22" -->
+        <div class="service-card service-card--cyan fade-up">
+          <span class="service-card__badge">Most Popular</span>
+          <div class="service-card__icon">&#9642;</div>
+          <h3 class="service-card__name">DTF 22" Wide</h3>
+          <p class="service-card__desc">The workhorse of DTF. Standard 22-inch transfers for everyday production. Ideal for single designs, small batch runs, or filling custom orders fast without breaking the bank.</p>
+          <p class="service-card__price">From $12 <small>22"x24" sheet</small></p>
+        </div>
+
+        <!-- Card 3: Glitter DTF -->
+        <div class="service-card service-card--green fade-up">
+          <span class="service-card__badge">Specialty</span>
+          <div class="service-card__icon">&#10022;</div>
+          <h3 class="service-card__name">Glitter DTF 22"</h3>
+          <p class="service-card__desc">Silver, Gold, or Multi-color glitter finishes that catch light and turn heads. Same reliable DTF adhesion with a premium sparkle finish that elevates any garment from ordinary to unforgettable.</p>
+          <p class="service-card__price">From $12 <small>22"x24" sheet</small></p>
+        </div>
+
+        <!-- Card 4: Glow in the Dark -->
+        <div class="service-card service-card--white fade-up">
+          <span class="service-card__badge">Premium</span>
+          <div class="service-card__icon">&#9788;</div>
+          <h3 class="service-card__name">Glow in the Dark DTF</h3>
+          <p class="service-card__desc">Designs that keep working after the lights go out. Premium glow-in-the-dark transfers for event merch, safety wear, kids apparel, or anyone who refuses to fade into the background.</p>
+          <p class="service-card__price">From $18 <small>22"x24" sheet</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== PRICING ====== -->
+  <div class="pricing-bg" id="pricing">
+    <div class="section">
+      <p class="section-label fade-up">Transparent Pricing</p>
+      <h2 class="section-title fade-up">Straight Shooter Pricing</h2>
+      <p class="section-subtitle fade-up">No hidden fees. No surprise upcharges. Just honest pricing by the sheet, from one-offs to production runs.</p>
+
+      <div class="pricing-tables fade-up">
+        <!-- 46" Wide -->
+        <div class="pricing-block pricing-block--magenta">
+          <div class="pricing-block__header">
+            <h3>DTF 46" Wide</h3>
+            <p>Gang sheets &amp; full transfers</p>
+          </div>
+          <div class="pricing-block__row"><span class="size">46" x 12"</span><span class="price">$12</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 24"</span><span class="price">$24</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 36"</span><span class="price">$36</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 48"</span><span class="price">$48</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 60"</span><span class="price">$60</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 72"</span><span class="price">$72</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 80"</span><span class="price">$80</span></div>
+          <div class="pricing-block__row"><span class="size">46" x 240"</span><span class="price">$240</span></div>
+        </div>
+
+        <!-- 22" Wide -->
+        <div class="pricing-block pricing-block--cyan">
+          <div class="pricing-block__header">
+            <h3>DTF 22" Wide</h3>
+            <p>Standard transfers</p>
+          </div>
+          <div class="pricing-block__row"><span class="size">22" x 24"</span><span class="price">$12</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 36"</span><span class="price">$18</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 48"</span><span class="price">$24</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 60"</span><span class="price">$30</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 120"</span><span class="price">$60</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 180"</span><span class="price">$90</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 240"</span><span class="price">$120</span></div>
+          <div class="pricing-block__row"><span class="size">22" x 300"</span><span class="price">$150</span></div>
+        </div>
+      </div>
+
+      <p style="text-align:center; margin-top:2rem; font-size:0.8rem; color:var(--text-muted); font-family:'Inter',sans-serif;" class="fade-up">
+        Glitter DTF (Silver, Gold, Multi) priced same as 22" standard &middot; Glow in the Dark at ~1.5x standard pricing &middot; All sizes no minimums
+      </p>
+    </div>
+  </div>
+
+  <!-- ====== THE DIFFERENCE ====== -->
+  <div class="comparison-bg" id="difference">
+    <div class="section">
+      <p class="section-label fade-up">The Real Deal</p>
+      <h2 class="section-title fade-up">The Hatfield-McCoy Difference</h2>
+      <p class="section-subtitle fade-up">We do things different in the mountains. Here's how we stack up against the rest of the pack.</p>
+
+      <div class="comparison-grid fade-up">
+        <!-- Header row -->
+        <div class="comparison-grid__header">Feature</div>
+        <div class="comparison-grid__header comparison-grid__header--hm">H&M DTF</div>
+        <div class="comparison-grid__header comparison-grid__header--them">Generic</div>
+
+        <!-- Wide Format -->
+        <div class="comparison-grid__feature">Wide Format (46" Sheets)</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+
+        <!-- No Minimums -->
+        <div class="comparison-grid__feature">No Minimum Orders</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+
+        <!-- Specialty Prints -->
+        <div class="comparison-grid__feature">Specialty Prints (Glitter + Glow)</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+
+        <!-- Quick Turnaround -->
+        <div class="comparison-grid__feature">Quick Turnaround</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+
+        <!-- Virginia Based -->
+        <div class="comparison-grid__feature">Virginia-Based Production</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+
+        <!-- No Pretreatment -->
+        <div class="comparison-grid__feature">No Pretreatment Required</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+
+        <!-- Transparent Pricing -->
+        <div class="comparison-grid__feature">Transparent Sheet Pricing</div>
+        <div class="comparison-grid__check"><span class="check-yes">&#10003;</span></div>
+        <div class="comparison-grid__check"><span class="check-no">&#10007;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== FAQ ====== -->
+  <div class="faq-bg" id="faq">
+    <div class="section">
+      <p class="section-label fade-up">Got Questions?</p>
+      <h2 class="section-title fade-up">Frequently Asked Questions</h2>
+      <p class="section-subtitle fade-up">Everything you need to know about DTF transfers, how to apply them, and what makes ours different.</p>
+
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>What is DTF printing?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              DTF stands for Direct-to-Film. We print your design onto a special PET film, apply adhesive powder, and cure it. You get a ready-to-press transfer that works on cotton, polyester, blends, nylon, leather, and more. No weeding. No pretreatment. Just peel, press at 300-325&deg;F for 10-15 seconds, and you're done. It's the most versatile transfer method on the market.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>What's the turnaround time?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Standard orders ship within 1-3 business days from our Virginia production facility. Rush options are available for tight deadlines. We ship nationwide via USPS and UPS, with tracking provided on every order. Need it yesterday? Reach out and we'll see what we can do — we're mountain folk, we hustle.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>How do I apply DTF transfers?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              It's dead simple. Position the transfer on your garment, press at 300-325&deg;F with medium pressure for 10-15 seconds. Let it cool until warm, then peel. For best results, do a quick 5-second re-press after peeling. Works with a heat press or even a household iron in a pinch (press recommended for consistent results). No pretreatment, no special garments required.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>What's a gang sheet?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              A gang sheet is a single transfer sheet with multiple designs arranged together to maximize space. You can mix different designs, sizes, and quantities on one sheet. You arrange your designs within the sheet dimensions (46" or 22" wide), and we print the whole thing as one sheet. It's the most cost-effective way to order — fill every inch and pay per sheet, not per design.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>Do I need a minimum order?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Absolutely not. Order one sheet or one hundred — same quality, same service, same pricing. We believe in making professional DTF transfers accessible to everyone, from side-hustle crafters pressing in their garage to full production shops running hundreds of shirts a day. One sheet, one thousand sheets — we don't care, we'll print it.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>What fabrics work with DTF?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Almost everything. DTF transfers adhere to cotton, polyester, cotton-poly blends, nylon, denim, leather, canvas, and more. Light fabrics, dark fabrics, doesn't matter — the white ink base layer means your colors pop on anything. It's the most fabric-versatile transfer method available, which is exactly why it's taken the custom apparel industry by storm.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h4>How durable are the transfers?</h4>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              DTF transfers are built to last. With proper application, expect 50+ washes without cracking, peeling, or fading. Wash inside-out in cold water and tumble dry low for maximum longevity. Our transfers use premium inks and adhesive powder that bonds into the fabric fibers, creating a soft, flexible print that moves with the garment. These aren't your grandma's iron-ons.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== CTA BANNER ====== -->
+  <div class="cta-banner">
+    <h2 class="fade-up">Ready to <span>Press</span>?</h2>
+    <p class="fade-up">No minimums. No pretreatment. No excuses. Just upload your design and let the mountains do the work.</p>
+    <a href="#" class="btn btn-magenta fade-up">Start Your Order</a>
+  </div>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/images/logo-transparent.png" alt="H&M DTF" onerror="this.style.display='none'">
+        <span class="footer-brand-name">Hatfield & McCoy DTF</span>
+        <span class="footer-brand-tagline">"Bridging Appalachia & Innovation"</span>
+        <span class="footer-brand-location">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Virginia, USA
+        </span>
+      </div>
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#difference">Why Us</a>
+          <a href="#faq">FAQ</a>
+          <a href="#">Contact</a>
+        </nav>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hatfield & McCoy DTF. All rights reserved.</p>
+      <p>Built with grit in the Appalachian mountains.</p>
+    </div>
+  </footer>
+
+  <!-- ====== JAVASCRIPT ====== -->
+  <script>
+    // ---- Mobile Nav Toggle ----
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', function () {
+      navLinks.classList.toggle('open');
+      const spans = hamburger.querySelectorAll('span');
+      if (navLinks.classList.contains('open')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
+
+    // Close nav on link click (mobile)
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        const spans = hamburger.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      });
+    });
+
+    // ---- FAQ Accordion ----
+    document.querySelectorAll('.faq-question').forEach(function (question) {
+      question.addEventListener('click', function () {
+        const item = this.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        // Close all other items
+        document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+          if (openItem !== item) {
+            openItem.classList.remove('open');
+          }
+        });
+
+        // Toggle clicked item
+        if (isOpen) {
+          item.classList.remove('open');
+        } else {
+          item.classList.add('open');
+        }
+      });
+    });
+
+    // ---- Scroll Fade-In ----
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    function checkFade() {
+      const triggerBottom = window.innerHeight * 0.88;
+      fadeElements.forEach(function (el) {
+        const box = el.getBoundingClientRect();
+        if (box.top < triggerBottom) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    // Run on load and scroll
+    checkFade();
+    window.addEventListener('scroll', checkFade, { passive: true });
+
+    // ---- Smooth scroll for anchor links ----
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const navHeight = document.querySelector('.nav').offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ---- Hero background fallback ----
+    var heroBg = document.querySelector('.hero-bg');
+    if (heroBg) {
+      var testImg = new Image();
+      testImg.onerror = function () {
+        heroBg.style.backgroundImage = 'none';
+      };
+      testImg.src = 'assets/images/hero-bg.png';
+    }
+  </script>
+
+</body>
+</html>
