@@ -31,10 +31,27 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* BREADCRUMB */
+        .breadcrumb {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 16px 24px 0;
+            font-size: 0.78rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+        }
+        .breadcrumb a {
+            color: var(--cyan);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .breadcrumb a:hover { color: var(--magenta); }
+        .breadcrumb .sep { margin: 0 8px; opacity: 0.4; }
+
         /* HEADER */
         .header {
             text-align: center;
-            padding: 60px 24px 40px;
+            padding: 40px 24px 40px;
             background: linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
             border-bottom: 1px solid rgba(233, 30, 140, 0.2);
         }
@@ -256,6 +273,12 @@
     </style>
 </head>
 <body>
+
+    <nav class="breadcrumb">
+        <a href="index.html">&#x1F3E0; Project Home</a>
+        <span class="sep">&rsaquo;</span>
+        Design Concepts
+    </nav>
 
     <header class="header">
         <img src="assets/images/logo-transparent.png" alt="Hatfield &amp; McCoy DTF">
@@ -481,7 +504,7 @@
             body += 'Has Domain: ' + (domain ? domain.value : 'Not selected') + '\n\n';
             body += 'Questions: ' + (questions || 'None') + '\n';
 
-            var mailtoLink = 'mailto:chrix@ghlmastery.com'
+            var mailtoLink = 'mailto:harold@rmmarketing.ca'
                 + '?subject=' + encodeURIComponent('Hatfield & McCoy DTF — Design Feedback from ' + name)
                 + '&body=' + encodeURIComponent(body);
 
