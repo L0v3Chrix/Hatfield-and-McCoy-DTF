@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hatfield & McCoy DTF | Direct to Film Transfers — No Minimums, Virginia</title>
     <meta name="description" content="Hatfield & McCoy DTF — Custom direct-to-film transfers. 22&quot; and 46&quot; wide gang sheets, glitter, glow in the dark. No minimums. Virginia-based print shop.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hatfield & McCoy DTF | Concept E — Full Send Neon">
+    <meta property="og:description" content="Hatfield & McCoy DTF — Custom direct-to-film transfers. 22&quot; and 46&quot; wide gang sheets, glitter, glow in the dark. No minimums. Virginia-based print shop.">
+    <meta property="og:url" content="https://hatfield-mccoy-dtf.vercel.app/homepage-E-neon-electric.html">
     <link rel="icon" href="assets/images/logo-favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ============================================
@@ -94,9 +100,7 @@
                     0 0 7px var(--magenta),
                     0 0 10px var(--magenta),
                     0 0 21px var(--magenta),
-                    0 0 42px var(--magenta),
-                    0 0 82px var(--magenta),
-                    0 0 92px var(--magenta);
+                    0 0 42px var(--magenta);
                 opacity: 1;
             }
             20%, 24%, 55% {
@@ -112,9 +116,7 @@
                     0 0 7px var(--cyan),
                     0 0 10px var(--cyan),
                     0 0 21px var(--cyan),
-                    0 0 42px var(--cyan),
-                    0 0 82px var(--cyan),
-                    0 0 92px var(--cyan);
+                    0 0 42px var(--cyan);
                 opacity: 1;
             }
             13%, 34%, 63% {
@@ -1385,10 +1387,64 @@
             text-shadow: 0 0 6px rgba(57, 255, 20, 0.3);
         }
 
+        /* ============================================
+           ENHANCEMENTS
+           ============================================ */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--magenta);
+            z-index: 9999;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 8px var(--magenta);
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--magenta);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px var(--magenta);
+            line-height: 1;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* ============================================
            MOBILE RESPONSIVE
            ============================================ */
+        @media (min-width: 1280px) {
+            .hero-content {
+                max-width: 1100px;
+            }
+            .neon-title .line-hatfield,
+            .neon-title .line-mccoy {
+                font-size: 9rem;
+            }
+            .hero {
+                padding: 7rem 3rem 5rem;
+            }
+        }
+
         @media (max-width: 900px) {
             .nav-links {
                 display: none;
@@ -1484,6 +1540,7 @@
     </style>
 </head>
 <body>
+  <div id="scroll-progress"></div>
 
     <!-- ============================================
          STICKY NAVIGATION
@@ -1992,7 +2049,7 @@
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <img src="assets/images/logo-transparent.png" alt="Hatfield &amp; McCoy DTF" class="footer-logo" width="60" height="60">
+                <img src="assets/images/logo-transparent.png" alt="Hatfield &amp; McCoy DTF" class="footer-logo" width="60" height="60" loading="lazy">
                 <p>Custom direct-to-film transfers printed and shipped from Virginia. No minimums. No excuses. Just fire prints.</p>
             </div>
 
@@ -2148,7 +2205,33 @@
                 }
             });
         })();
+
+        /* ===========================================
+           ENHANCEMENT — SCROLL PROGRESS BAR
+           =========================================== */
+        (function() {
+            var bar = document.getElementById('scroll-progress');
+            if (!bar) return;
+            window.addEventListener('scroll', function() {
+                var scrollTop = window.scrollY || document.documentElement.scrollTop;
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                bar.style.width = pct + '%';
+            }, { passive: true });
+        })();
+
+        /* ===========================================
+           ENHANCEMENT — BACK TO TOP BUTTON
+           =========================================== */
+        (function() {
+            var btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            window.addEventListener('scroll', function() {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            }, { passive: true });
+        })();
     </script>
 
+    <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>

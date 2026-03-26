@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hatfield & McCoy DTF — Virginia's Print Shop</title>
   <meta name="description" content="Premium DTF transfers. 22&quot; and 46&quot; wide format. No minimums. Glitter, Glow in the Dark, and standard transfers. Ships from Virginia in 24-48 hours.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hatfield & McCoy DTF | Concept C — Shop-First Commerce">
+  <meta property="og:description" content="Premium DTF transfers. 22&quot; and 46&quot; wide format. No minimums. Glitter, Glow in the Dark, and standard transfers. Ships from Virginia in 24-48 hours.">
+  <meta property="og:url" content="https://hatfield-mccoy-dtf.vercel.app/homepage-C-product-forward.html">
   <link rel="icon" href="assets/images/logo-favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* ============================================
@@ -876,6 +882,48 @@
     }
 
     /* ============================================
+       ENHANCEMENTS
+       ============================================ */
+    #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: #E91E8C;
+        z-index: 9999;
+        transition: width 0.1s linear;
+        box-shadow: 0 0 8px #E91E8C;
+    }
+
+    #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        background: #E91E8C;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s, transform 0.3s;
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 12px #E91E8C;
+        line-height: 1;
+    }
+    #back-to-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 1024px) {
@@ -1037,6 +1085,7 @@
   </style>
 </head>
 <body>
+  <div id="scroll-progress"></div>
 
   <!-- ============================================
        NAVIGATION
@@ -1259,7 +1308,7 @@
 
       <!-- Col 1: Brand -->
       <div>
-        <img src="assets/images/logo-transparent.png" alt="Hatfield & McCoy DTF" class="footer__brand-logo" width="48" height="48">
+        <img src="assets/images/logo-transparent.png" alt="Hatfield & McCoy DTF" class="footer__brand-logo" width="48" height="48" loading="lazy">
         <p class="footer__brand-text">
           Born in the mountains, built for the hustle. Hatfield &amp; McCoy DTF prints premium transfers for makers, brands, and side-hustlers across the country. No minimums. No corporate BS. Just ink on film, done right.
         </p>
@@ -1417,7 +1466,33 @@
         }
       });
     })();
+
+    /* ===========================================
+       ENHANCEMENT — SCROLL PROGRESS BAR
+       =========================================== */
+    (function() {
+        var bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            bar.style.width = pct + '%';
+        }, { passive: true });
+    })();
+
+    /* ===========================================
+       ENHANCEMENT — BACK TO TOP BUTTON
+       =========================================== */
+    (function() {
+        var btn = document.getElementById('back-to-top');
+        if (!btn) return;
+        window.addEventListener('scroll', function() {
+            btn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+    })();
   </script>
 
+  <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>

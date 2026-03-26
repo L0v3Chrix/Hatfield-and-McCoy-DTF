@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hatfield &amp; McCoy DTF — Virginia's Premier DTF Print Shop</title>
   <meta name="description" content="No minimums. No bull. Custom DTF transfers up to 46 inches wide from Virginia's boldest print shop. Gang sheets, glitter, glow in the dark — we print it all.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hatfield & McCoy DTF | Concept A — Dark Industrial Beast">
+  <meta property="og:description" content="No minimums. No bull. Custom DTF transfers up to 46 inches wide from Virginia's boldest print shop. Gang sheets, glitter, glow in the dark — we print it all.">
+  <meta property="og:url" content="https://hatfield-mccoy-dtf.vercel.app/homepage-A-dark-industrial.html">
   <link rel="icon" href="assets/images/logo-favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -1038,6 +1044,48 @@
     }
 
     /* ============================================
+       ENHANCEMENTS
+       ============================================ */
+    #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: var(--magenta);
+        z-index: 9999;
+        transition: width 0.1s linear;
+        box-shadow: 0 0 8px var(--magenta);
+    }
+
+    #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        background: var(--magenta);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s, transform 0.3s;
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 12px var(--magenta);
+        line-height: 1;
+    }
+    #back-to-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ============================================
        MOBILE RESPONSIVE
        ============================================ */
     @media (max-width: 1024px) {
@@ -1161,6 +1209,7 @@
 </head>
 
 <body>
+  <div id="scroll-progress"></div>
 
   <!-- ==========================================
        NAVIGATION
@@ -1496,7 +1545,7 @@
        ========================================== -->
   <footer class="footer">
     <div class="footer-logo">
-      <img src="assets/images/logo-glow.png" alt="Hatfield &amp; McCoy DTF" onerror="this.src='assets/images/logo-transparent.png'">
+      <img src="assets/images/logo-glow.png" alt="Hatfield &amp; McCoy DTF" loading="lazy" onerror="this.src='assets/images/logo-transparent.png'">
     </div>
 
     <ul class="footer-nav">
@@ -1777,7 +1826,33 @@
     document.querySelectorAll('.faq-item').forEach(function(item, i) {
       item.style.transitionDelay = (i * 0.08) + 's';
     });
+
+    /* ===========================================
+       ENHANCEMENT — SCROLL PROGRESS BAR
+       =========================================== */
+    (function() {
+        var bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            bar.style.width = pct + '%';
+        }, { passive: true });
+    })();
+
+    /* ===========================================
+       ENHANCEMENT — BACK TO TOP BUTTON
+       =========================================== */
+    (function() {
+        var btn = document.getElementById('back-to-top');
+        if (!btn) return;
+        window.addEventListener('scroll', function() {
+            btn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+    })();
   </script>
 
+  <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>
