@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "purpose": "Runtime configuration for the Hatfield & McCoy DTF prototype. Non-secret values only — webhook proxy endpoint hides the real Discord URL.",
+    "last_updated": "2026-04-16"
+  },
+  "kicksy": {
+    "embed_url": "KICKSY_URL_PENDING",
+    "fallback_mode": "quote_form",
+    "iframe_height": "800",
+    "iframe_title": "Hatfield & McCoy Gang Sheet Builder",
+    "comment": "Replace KICKSY_URL_PENDING with the actual Kicksy embed URL before ship. If fallback_mode is 'quote_form', the #builder section renders a custom quote form instead of the iframe."
+  },
+  "webhook": {
+    "endpoint": "/api/intake",
+    "timeout_ms": 15000,
+    "cooldown_seconds": 15,
+    "comment": "Form posts here. Vercel Edge Function at /api/intake.js proxies to Discord. Never expose the real webhook URL to the client bundle."
+  },
+  "brand_email": "Harold@rmmarketing.ca",
+  "brand_email_display": "Harold at RM Marketing",
+  "shop_email": "hello@hatfieldmccoydtf.com",
+  "socials": {
+    "instagram": null,
+    "facebook": null,
+    "tiktok": null,
+    "comment": "Decision P-03: All nulls — social icons hidden in footer until handles are confirmed with client."
+  },
+  "site": {
+    "url_staging": "https://hatfield-mccoy-dtf.futrbusiness.com",
+    "url_production": null,
+    "preview_flag_enabled": false,
+    "preview_url_param": "preview",
+    "comment": "Set preview_flag_enabled=true via URL param ?preview=true on any page to show the .proto-flag watermark."
+  },
+  "cart": {
+    "storage_key": "hmdtf_cart_v1",
+    "max_quantity_per_line": 99,
+    "comment": "localStorage-backed cart. Stream A owns cart.js; swap to Shopify Cart API at launch. Same drawer UI."
+  },
+  "intake": {
+    "storage_key": "hmdtf_intake_draft_v1",
+    "cooldown_storage_key": "hmdtf_intake_last_submit",
+    "total_questions": 12,
+    "comment": "Form progress ceiling matches Q1..Q12. localStorage draft restore. 15s cooldown between submissions (anti-spam)."
+  }
+}

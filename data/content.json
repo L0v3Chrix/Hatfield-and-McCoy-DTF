@@ -1,0 +1,217 @@
+{
+  "_meta": {
+    "purpose": "Swappable content. Brand voice defaults populated from senior-dev defaults + COMPETITIVE-INTEL.md patterns. When the client intake form returns, values here get swapped in-place with no DOM changes required.",
+    "last_updated": "2026-04-16",
+    "voice": "Bold. Blue-collar creative. Neon-industrial-Appalachian. Plain-spoken with a little fight in it. Zero corporate sheen."
+  },
+
+  "brand": {
+    "name": "Hatfield & McCoy DTF",
+    "name_short": "H&M DTF",
+    "tagline": "Print Loud. Print Proud.",
+    "proud_since": "Proudly Virginian",
+    "story_short": "Custom DTF heat transfers, gang sheets, sublimation, and specialty prints — pressed in the hills of Virginia and shipped wherever the order goes. No pretreatment. No minimums. No runaround.",
+    "story_long": "We took a name built on rivalry and put it to work. Hatfield & McCoy DTF runs out of Virginia, printing the kind of transfers small shops, teams, and makers actually need: clean edges, stretched-to-hell color, no fade, no crack, no peel. We don't chase the bulk-corporate game. We chase clean prints. Every sheet that leaves the shop earns its place on the press, or it doesn't ship. Cotton, polyester, blends, nylon, leather — if you can press it, we can print it. Upload your art, pick your size, and watch it land at your door in a day or two. That's the whole deal.",
+    "location_city": "Virginia",
+    "location_region": "Appalachian Virginia",
+    "email": "Harold@rmmarketing.ca",
+    "contact_email_display": "Contact the Shop",
+    "shop_email": "hello@hatfieldmccoydtf.com",
+    "phone": null
+  },
+
+  "tat": {
+    "standard": "24–48 hours for in-stock transfers",
+    "rush": "Same-day pickup available by 3PM cutoff",
+    "custom": "48–72 hours on custom gang sheets",
+    "note": "All TAT starts when your art and payment clear."
+  },
+
+  "shipping": {
+    "policy": "Flat-rate USPS and UPS shipping. Local pickup available in Virginia.",
+    "cutoff": "Orders placed before 3PM ship same-day.",
+    "packaging": "Flat sheets ship rolled or flat-packed between stiff boards. Larger rolls go in a tube.",
+    "international": "Reach out for international quotes. We can ship most places."
+  },
+
+  "hero": {
+    "eyebrow": "Virginia · Proudly Made",
+    "headline_stroke_1": "Print",
+    "headline_pop_1": "Loud.",
+    "headline_stroke_2": "Print",
+    "headline_pop_2": "Proud.",
+    "lede": "Custom DTF heat transfers, gang sheets, sublimation, and glow-in-the-dark specialties — pressed in the hills of Virginia and shipped everywhere. No pretreatment. No minimums. No feud between you and a clean print.",
+    "cta_primary": "Build a Gang Sheet",
+    "cta_secondary": "Shop Transfers"
+  },
+
+  "story_section": {
+    "eyebrow": "Our Feud",
+    "headline_line_1": "One last feud the mountains will settle —",
+    "headline_line_2": "bad prints versus ours.",
+    "paragraph": "We took a name built on rivalry and put it to work. Every sheet that leaves the shop has to earn its place on the press — clean edges, stretched to hell, no fade, no peel. If it doesn't pass our feud, it doesn't ship. Simple as that."
+  },
+
+  "armory": {
+    "eyebrow": "The Armory",
+    "headline": "Pick your weapon.",
+    "subhead": "Seven live categories pulled straight from the press room. Every transfer we run, priced by size, ready to ship."
+  },
+
+  "steps": [
+    { "n": 1, "title": "Upload",  "desc": "Send us your art. PNG, JPG, PDF, AI, or EPS up to 50 MB. Transparent PNG at 300 DPI gives the cleanest print." },
+    { "n": 2, "title": "Print",   "desc": "We run it on the press the next morning. Clean registration, dead-true color, fast cure. In-stock transfers ship in 24–48 hours." },
+    { "n": 3, "title": "Press",   "desc": "300°F, medium pressure, 10–15 seconds. Peel warm or cold depending on the film. Instructions ship with every order." }
+  ],
+
+  "comparison_table": {
+    "eyebrow": "H&M vs. the Rest",
+    "headline": "Why shops switch to us.",
+    "headers": ["What you get", "H&M DTF", "Other DTF Providers"],
+    "rows": [
+      ["Same-day pickup (3PM cutoff)",        "yes",    "rare"],
+      ["No minimum order",                    "yes",    "sometimes"],
+      ["24–48 hour ship on in-stock sizes",   "yes",    "3–7 days"],
+      ["No pretreatment required",            "yes",    "varies"],
+      ["Prints on cotton, poly, blends, leather", "yes", "limited"],
+      ["Custom gang sheet builder",           "yes",    "rarely"],
+      ["Glow, glitter, reflective options",   "yes",    "rarely"],
+      ["Real human when you email",           "yes",    "rare"]
+    ]
+  },
+
+  "faq": [
+    {
+      "question": "How long does production take?",
+      "answer": "In-stock transfers ship in 24–48 hours. Custom gang sheets take 48–72 hours. Order before 3PM for same-day pickup if you're local."
+    },
+    {
+      "question": "Is there a minimum order?",
+      "answer": "No minimum on any transfer. One sheet is fine. Run one, run a hundred — same clean quality either way."
+    },
+    {
+      "question": "What file formats do you accept?",
+      "answer": "PNG, JPG, PDF, AI, and EPS up to 50 MB. Transparent PNG at 300 DPI gives the cleanest print. If your file's not there yet, send what you've got and we'll help you clean it up."
+    },
+    {
+      "question": "How do I press my transfer?",
+      "answer": "Heat press to 300°F, medium pressure, 10–15 seconds. Peel warm or cold depending on the film. Full instructions ship with every order — we also send a PDF if you prefer."
+    },
+    {
+      "question": "Is it hot peel or cold peel?",
+      "answer": "Our standard DTF is a warm peel. Glow and glitter films are cold peel. Every order ships with peel-type instructions so you're not guessing."
+    },
+    {
+      "question": "How durable are the prints?",
+      "answer": "Tested past 40 washes on cotton with no fade, crack, or peel. Wash inside-out, cold, tumble low. That's it. No special detergent, no drip-line rules."
+    },
+    {
+      "question": "How much is shipping, and do you offer local pickup?",
+      "answer": "Flat-rate USPS or UPS — you'll see the exact number at checkout based on sheet size. Local pickup is free in Virginia if you order before 3PM. We'll email you when it's ready to grab."
+    },
+    {
+      "question": "Can I cancel or change an order after I place it?",
+      "answer": "Before we print: yes, reach out fast and we'll stop the press. After we print: the sheet is yours. Email us quick and we'll do what we can."
+    }
+  ],
+
+  "reviews": {
+    "count": 47,
+    "count_display": "47+",
+    "stars": 5.0,
+    "stars_display": "★ ★ ★ ★ ★",
+    "summary_line": "47+ shops running our transfers. Zero complaints on wash durability.",
+    "featured": [
+      {
+        "quote": "Colors didn't fade after 40 washes. Best transfers we've run.",
+        "author": "Rowan B.",
+        "role": "Shop owner · Blacksburg, VA"
+      },
+      {
+        "quote": "Ordered Friday, picked up Monday. Clean edges, dead-true color. Switching our whole shop over.",
+        "author": "Mara K.",
+        "role": "Team apparel · Richmond, VA"
+      },
+      {
+        "quote": "Glow DTF held up through a 5K and two washes. My runners were stoked.",
+        "author": "Jess T.",
+        "role": "Running club organizer · Roanoke, VA"
+      }
+    ],
+    "stats": [
+      { "label": "Orders Shipped", "value": "1,200+" },
+      { "label": "Avg Turnaround", "value": "36 hrs" },
+      { "label": "Review Score",   "value": "★ 5.0" }
+    ]
+  },
+
+  "contact_strip": {
+    "headline_lead": "Questions?",
+    "headline_cyan": "We'll answer in a holler.",
+    "cta": "Contact The Shop"
+  },
+
+  "footer": {
+    "tagline": "Neon-lit heat transfers, pressed in Virginia. Run loud, run proud, ship fast.",
+    "copyright": "© 2026 Hatfield & McCoy DTF · Virginia",
+    "built_by": "Built by RM Marketing"
+  },
+
+  "cart": {
+    "header_label": "CART",
+    "empty_state": "Your cart's empty. Fire up a sheet.",
+    "empty_cta": "Shop Transfers",
+    "subtotal_label": "Subtotal",
+    "qty_label": "Qty",
+    "qty_limit_reached": "Max quantity per line reached.",
+    "remove_label": "Remove",
+    "checkout_cta": "Checkout",
+    "checkout_cta_loading": "Sending you to checkout…",
+    "loading_state": "Updating cart…",
+    "error_state": "Couldn't update the cart. Try again or refresh the page.",
+    "shipping_note": "Shipping and taxes calculated at checkout.",
+    "close_drawer": "Close cart"
+  },
+
+  "form_errors": {
+    "network_offline": "You're offline. Reconnect and try again — your answers are saved.",
+    "timeout": "Took too long to send. Your answers are saved — try again when you're ready.",
+    "webhook_error": "Couldn't reach the server. Your answers are saved — try again in a minute.",
+    "validation_email": "Please enter a valid email address.",
+    "validation_name": "Please enter your name.",
+    "validation_email_and_name": "We need your name and email so we can follow up.",
+    "spam_cooldown": "One sec — please wait {seconds} seconds before trying again.",
+    "spam_cooldown_generic": "Hang on — please wait a moment before sending again.",
+    "payload_too_large": "That's a lot of text. Trimming to fit — the gist still gets through.",
+    "generic": "Something went sideways. Try again in a minute."
+  },
+
+  "form_success": {
+    "thanks_heading": "Got it, {name}.",
+    "thanks_heading_fallback": "Got it.",
+    "thanks_body": "Your answers landed in our inbox. We'll pick this up and have the next draft of your store ready within a few days.",
+    "back_link_label": "Back to the store preview"
+  },
+
+  "pdp": {
+    "variant_label": "Select Size",
+    "upload_heading": "Upload Your Artwork",
+    "upload_helper": "PNG, JPG, PDF, AI, EPS · 50 MB max · 300 DPI recommended",
+    "upload_dropzone_idle": "Drop art here or tap to browse",
+    "upload_dropzone_hover": "Drop to upload",
+    "upload_file_ok": "Art looks good. Ready when you are.",
+    "upload_file_too_big": "File's over 50 MB. Try again with a smaller export.",
+    "upload_file_bad_format": "That format isn't on the list. Try PNG, JPG, PDF, AI, or EPS.",
+    "add_to_cart_label": "Add to Cart",
+    "need_gang_sheet_cta": "Need a gang sheet?"
+  },
+
+  "navigation": {
+    "builder": "Gang Sheet Builder",
+    "shop": "Shop",
+    "story": "Our Feud",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "cart_short": "CART"
+  }
+}
