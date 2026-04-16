@@ -190,22 +190,52 @@
   .btn-ghost { border: 1px solid var(--cyan); color: var(--cyan); background: transparent; }
   .btn-ghost:hover { text-decoration: none; background: rgba(0,229,255,0.08); box-shadow: 0 0 20px rgba(0,229,255,0.4); }
 
-  /* Hero-right: workshop image */
+  /* Hero-right: workshop image + HTML text overlay (D-101a fix) */
   .hero-visual {
     position: relative; border-radius: 10px; overflow: hidden;
     border: 1px solid var(--line);
     box-shadow: 0 0 0 1px rgba(0,229,255,0.08), 0 40px 120px rgba(0,0,0,0.6);
+    aspect-ratio: 4/5;
   }
-  .hero-visual img {
-    display: block; width: 100%; height: auto; aspect-ratio: 4/5;
+  .hero-visual picture { display: block; width: 100%; height: 100%; }
+  .hero-visual-img {
+    display: block; width: 100%; height: 100%;
     object-fit: cover;
     filter: drop-shadow(0 10px 40px rgba(233,30,140,0.15));
   }
+  .hero-visual-overlay {
+    position: absolute; inset: 0;
+    padding: clamp(18px, 3vw, 32px);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(10,10,10,0) 40%, rgba(10,10,10,0.55) 100%);
+  }
+  .hero-visual-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    color: #fff;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6);
+    margin: 0 0 6px 0;
+  }
+  .hero-visual-sub {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+    color: #E8E8F0;
+    margin: 0;
+    max-width: 90%;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  /* WV "Pressed in West Virginia" chip — kept at top-left, scales with container */
   .hero-tag {
     position: absolute; top: 14px; left: 14px; z-index: 2;
-    padding: 4px 10px; border-radius: 2px;
-    background: rgba(57,255,20,0.18);
+    padding: 5px 11px; border-radius: 2px;
+    background: rgba(57,255,20,0.22);
     color: var(--lime); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    font-family: 'Anton', Impact, sans-serif;
+    pointer-events: none;
   }
 
   /* Steps section (T-A16) */
@@ -343,8 +373,23 @@
     aspect-ratio: 4/3; position: relative; background: #0A0A0E;
     display: flex; align-items: center; justify-content: center; overflow: hidden;
   }
+  .product .thumb picture { display: block; width: 100%; height: 100%; }
   .product .thumb-img {
     width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  /* HTML overlay title — replaces baked-in image text (D-101b fix) */
+  .product .thumb-title {
+    position: absolute;
+    left: 16px; right: 16px; bottom: 14px;
+    margin: 0;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.85);
+    pointer-events: none;
   }
   .product-body { padding: 16px; }
   .product-body h4 { font-family: 'Anton'; text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.2rem; color: var(--ink); }
@@ -359,7 +404,21 @@
     border-radius: 8px; position: relative; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
   }
+  .pdp-hero picture { display: block; width: 100%; height: 100%; }
   .pdp-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pdp-hero-title {
+    position: absolute;
+    left: 22px; right: 22px; bottom: 20px;
+    margin: 0;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.95), 0 0 6px rgba(0,0,0,0.85);
+    pointer-events: none;
+  }
   .pdp h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
   .pdp .from { color: var(--lime); font-family: 'Anton'; font-size: 2rem; margin: 12px 0 24px; }
   .pdp .desc { color: #D6D6E0; margin-bottom: 28px; }
@@ -560,7 +619,9 @@
 <header class="nav">
   <div class="nav-inner">
     <a href="#top" class="logo">
-      <img src="/assets/images/logo-primary.png" alt="Hatfield & McCoy DTF" class="logo-img" width="42" height="42">
+      <img src="/assets/images/logo-64.png"
+           srcset="/assets/images/logo-64.png 1x, /assets/images/logo-128.png 2x, /assets/images/logo-256.png 3x"
+           alt="Hatfield & McCoy DTF" class="logo-img" width="42" height="42" decoding="async">
       <span>Hatfield &amp; McCoy DTF</span>
     </a>
     <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
@@ -598,8 +659,20 @@
         </div>
       </div>
       <div class="hero-visual">
-        <span class="hero-tag">Pressed in West Virginia</span>
-        <img src="/assets/images/hero/workshop.png" alt="Hatfield & McCoy DTF workshop — a DTF print job curing under the press" loading="eager">
+        <span class="hero-tag" data-wv-chip>Pressed in West Virginia</span>
+        <picture>
+          <source type="image/webp" srcset="/assets/images/hero/workshop.webp">
+          <img src="/assets/images/hero/workshop.png"
+               alt=""
+               width="1600" height="900"
+               class="hero-visual-img"
+               loading="eager"
+               decoding="async">
+        </picture>
+        <div class="hero-visual-overlay">
+          <h2 class="hero-visual-title">Neon-lit shop.</h2>
+          <p class="hero-visual-sub">Where the sheets come alive.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -886,7 +959,9 @@
     <div class="foot-grid">
       <div>
         <div class="logo" style="margin-bottom: 16px;">
-          <img src="/assets/images/logo-primary.png" alt="Hatfield & McCoy DTF" class="logo-img" width="42" height="42">
+          <img src="/assets/images/logo-64.png"
+           srcset="/assets/images/logo-64.png 1x, /assets/images/logo-128.png 2x, /assets/images/logo-256.png 3x"
+           alt="Hatfield & McCoy DTF" class="logo-img" width="42" height="42" decoding="async">
           <span>Hatfield &amp; McCoy DTF</span>
         </div>
         <p style="max-width: 360px;">Neon-lit heat transfers, pressed in West Virginia. Run loud, run proud, ship fast.</p>

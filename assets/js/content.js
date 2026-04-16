@@ -423,6 +423,15 @@
     return col.cover_image || ('assets/images/covers/' + slugToClass(col.slug) + '.png');
   }
 
+  function coverWebpForCollection(col) {
+    // Derive .webp sibling path when cover_image is a .png, otherwise null
+    const png = coverForCollection(col);
+    if (typeof png === 'string' && /\.png$/i.test(png)) {
+      return png.replace(/\.png$/i, '.webp');
+    }
+    return null;
+  }
+
   function describeVariantCount(col) {
     if (Array.isArray(col.products)) {
       if (col.products.length === 1 && col.products[0].price_model === 'builder') {
@@ -461,16 +470,32 @@
 
       const thumb = el('div', { class: 'thumb' });
       const cover = coverForCollection(col);
+      const coverWebp = coverWebpForCollection(col);
       const altDesc = col.description
         ? (col.description.length > 80 ? col.description.slice(0, 80).trimEnd() + '…' : col.description)
         : 'product cover image';
+      const picture = el('picture');
+      if (coverWebp) {
+        const source = el('source', {
+          type: 'image/webp',
+          srcset: coverWebp
+        });
+        picture.appendChild(source);
+      }
       const img = el('img', {
         src: cover,
         alt: col.name + ' — ' + altDesc,
+        width: '1200',
+        height: '800',
         loading: 'lazy',
+        decoding: 'async',
         class: 'thumb-img'
       });
-      thumb.appendChild(img);
+      picture.appendChild(img);
+      thumb.appendChild(picture);
+      // HTML overlay title — replaces baked-in image text (D-101b fix)
+      const title = el('h3', { class: 'thumb-title', text: col.name });
+      thumb.appendChild(title);
       link.appendChild(thumb);
 
       const body = el('div', { class: 'product-body' });
@@ -522,13 +547,24 @@
 
     const grid = el('div', { class: 'pdp-grid pdp' });
     const heroThumb = el('div', { class: 'pdp-hero' });
+    const heroPicture = el('picture');
+    const heroWebp = coverWebpForCollection(col);
+    if (heroWebp) {
+      heroPicture.appendChild(el('source', { type: 'image/webp', srcset: heroWebp }));
+    }
     const heroImg = el('img', {
       src: coverForCollection(col),
       alt: col.name,
+      width: '1200',
+      height: '800',
       class: 'pdp-hero-img',
-      loading: 'eager'
+      loading: 'eager',
+      decoding: 'async'
     });
-    heroThumb.appendChild(heroImg);
+    heroPicture.appendChild(heroImg);
+    heroThumb.appendChild(heroPicture);
+    // HTML overlay title — consistent with shop grid
+    heroThumb.appendChild(el('h2', { class: 'pdp-hero-title', text: col.name }));
 
     const pdp = el('div');
     pdp.appendChild(el('h1', { text: col.name }));
