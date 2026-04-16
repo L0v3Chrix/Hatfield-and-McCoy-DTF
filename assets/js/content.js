@@ -149,7 +149,7 @@
       fetchJson('data/products.json', DEFAULT_PRODUCTS),
       fetchJson('data/config.json', DEFAULT_CONFIG)
     ]);
-    state.content = content || DEFAULT_CONTENT;
+    state.content = normalizeContent(content || DEFAULT_CONTENT);
     state.products = products || DEFAULT_PRODUCTS;
     state.config = config || DEFAULT_CONFIG;
     window.__HM = state;
@@ -167,6 +167,136 @@
     renderPDP();
 
     window.dispatchEvent(new Event('content-loaded'));
+  }
+
+  /**
+   * Normalize content.json shape → schema the renderers expect.
+   * Stream B's content.json and Stream A's DEFAULT_CONTENT evolved in parallel
+   * and drifted slightly. Rather than rewrite either, normalize at load time.
+   *
+   * Coverage:
+   *  - comparison_table.rows: array form [feature, hm, others] → {feature, hm, others}
+   *  - faq[]: {question, answer} → {q, a}  (accepts either)
+   *  - reviews: content.json puts featured[] + stats on reviews; renderer wants
+   *    top-level {quote, meta, stars} + stats. Lift first featured review.
+   *  - about/contact sections exist as HTML bindings but content.json puts
+   *    about in brand.story_long and contact in contact_strip — synthesize bodies.
+   *  - shipping: HTML binds to shipping.body and shipping.cutoff. content.json
+   *    has shipping.policy (→ body) and shipping.cutoff already. Copy over.
+   *  - stats: content.json nests under reviews.stats as array of {label, value};
+   *    renderer wants flat top-level {orders_shipped, avg_tat, review_score}.
+   */
+  function normalizeContent(c) {
+    if (!c || typeof c !== 'object') return c;
+    const out = Object.assign({}, c);
+
+    // --- comparison rows: array → object form ---
+    const ct = out.comparison_table;
+    if (ct && Array.isArray(ct.rows) && ct.rows.length > 0) {
+      out.comparison_table = Object.assign({}, ct, {
+        heading: ct.heading || ct.headline || 'Comparison',
+        rows: ct.rows.map(row => {
+          if (Array.isArray(row)) {
+            const [feature, hm, others] = row;
+            return {
+              feature: String(feature || ''),
+              hm: coerceYesNo(hm),
+              others: coerceYesNo(others)
+            };
+          }
+          // Already in object form — keep as-is but coerce yes/no/sometimes values
+          return {
+            feature: row.feature || '',
+            hm: coerceYesNo(row.hm),
+            others: coerceYesNo(row.others)
+          };
+        })
+      });
+    }
+
+    // --- FAQ: accept question/answer OR q/a ---
+    if (Array.isArray(out.faq)) {
+      out.faq = out.faq.map(item => ({
+        q: item.q || item.question || '',
+        a: item.a || item.answer || ''
+      }));
+    }
+
+    // --- reviews: lift first featured into top-level + collect stats ---
+    if (out.reviews && typeof out.reviews === 'object') {
+      const r = out.reviews;
+      const featured = Array.isArray(r.featured) && r.featured[0] ? r.featured[0] : null;
+      const starCount = typeof r.stars === 'number' ? r.stars
+        : (r.stars_display && (r.stars_display.match(/★/g) || []).length) || 5;
+      out.reviews = Object.assign({}, r, {
+        quote: r.quote || (featured && featured.quote) || '',
+        meta: r.meta || (featured && [featured.author, featured.role].filter(Boolean).join(' · ')) || '',
+        stars: starCount
+      });
+
+      // Stats: content.json has reviews.stats = [{label, value}, ...]
+      // Renderer wants top-level state.content.stats = {orders_shipped, avg_tat, review_score}
+      if (!out.stats && Array.isArray(r.stats) && r.stats.length > 0) {
+        const statsMap = {};
+        r.stats.forEach(s => {
+          const label = (s.label || '').toLowerCase();
+          if (label.includes('order') || label.includes('ship')) statsMap.orders_shipped = s.value;
+          else if (label.includes('turn') || label.includes('tat')) statsMap.avg_tat = s.value;
+          else if (label.includes('review') || label.includes('score') || label.includes('rat')) statsMap.review_score = s.value;
+        });
+        out.stats = statsMap;
+      }
+    }
+
+    // --- about: synthesize from brand.story_long if no about section exists ---
+    if (!out.about && out.brand) {
+      out.about = {
+        heading: 'Run by printers, for printers.',
+        body: out.brand.story_long || out.brand.story_short || ''
+      };
+    } else if (out.about && !out.about.body && out.brand && out.brand.story_long) {
+      out.about = Object.assign({}, out.about, { body: out.brand.story_long });
+    }
+
+    // --- shipping: map policy → body if body missing ---
+    if (out.shipping && !out.shipping.body) {
+      out.shipping = Object.assign({}, out.shipping, {
+        heading: out.shipping.heading || 'Shipping & Turnaround',
+        body: out.shipping.policy || ''
+      });
+    }
+
+    // --- contact: synthesize from contact_strip / brand.email if missing ---
+    if (!out.contact) {
+      const strip = out.contact_strip || {};
+      const email = (out.brand && out.brand.email) || 'Harold@rmmarketing.ca';
+      out.contact = {
+        heading: strip.headline_lead
+          ? String(strip.headline_lead) + (strip.headline_cyan ? ' ' + strip.headline_cyan : '')
+          : "Questions? We'll answer in a holler.",
+        body: "Email " + email + " and you'll hear back the same day. We'd rather talk to a real customer than run another ad."
+      };
+    } else if (!out.contact.body) {
+      const email = (out.brand && out.brand.email) || 'Harold@rmmarketing.ca';
+      out.contact = Object.assign({}, out.contact, {
+        body: "Email " + email + " and you'll hear back the same day. We'd rather talk to a real customer than run another ad."
+      });
+    }
+
+    return out;
+  }
+
+  /**
+   * Coerce a yes/no/sometimes/rare/varies/etc. string to a boolean-ish marker.
+   * Truthy ("yes", "✓", true) → true. Everything else → the raw string (so
+   * "sometimes" or "rare" renders literally rather than as "—").
+   */
+  function coerceYesNo(v) {
+    if (v === true || v === 1) return true;
+    if (v === false || v === 0 || v == null) return '';
+    const s = String(v).trim().toLowerCase();
+    if (s === 'yes' || s === 'y' || s === '✓' || s === 'true') return true;
+    return String(v).trim();
   }
 
   // --- helpers ---
@@ -210,12 +340,22 @@
     state.content.comparison_table.rows.forEach(row => {
       const tr = el('tr');
       tr.appendChild(el('td', { class: 'compare-feature', text: row.feature }));
-      const hm = el('td', { class: 'compare-cell compare-hm' + (row.hm ? ' yes' : ''), text: row.hm ? '✓' : '—' });
-      const other = el('td', { class: 'compare-cell compare-other' + (row.others ? ' yes' : ''), text: row.others ? '✓' : '—' });
-      tr.appendChild(hm);
-      tr.appendChild(other);
+      tr.appendChild(buildCompareCell(row.hm, 'compare-hm'));
+      tr.appendChild(buildCompareCell(row.others, 'compare-other'));
       tbody.appendChild(tr);
     });
+  }
+
+  // Cell rendering: true → ✓ with "yes" class; empty → —; any other
+  // string ("sometimes", "rare", "varies") renders literally.
+  function buildCompareCell(value, role) {
+    if (value === true) {
+      return el('td', { class: 'compare-cell ' + role + ' yes', text: '✓' });
+    }
+    if (!value || value === '') {
+      return el('td', { class: 'compare-cell ' + role, text: '—' });
+    }
+    return el('td', { class: 'compare-cell ' + role + ' qualifier', text: String(value) });
   }
 
   function renderFAQ() {
