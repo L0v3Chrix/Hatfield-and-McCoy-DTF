@@ -16,24 +16,36 @@
 (function () {
   const STORAGE_KEY = 'hm_cart_v1';
 
+  // Module-level cache (D-130): avoid re-parsing localStorage on every getter.
+  // Invalidated when another tab writes (storage event) or when we save.
+  let _cache = null;
+
   function load() {
+    if (_cache !== null) return _cache;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
+      if (!raw) { _cache = []; return _cache; }
       const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
+      _cache = Array.isArray(parsed) ? parsed : [];
+      return _cache;
     } catch (err) {
       console.warn('[cart] failed to parse cart storage', err);
-      return [];
+      _cache = [];
+      return _cache;
     }
   }
 
   function save(items) {
+    _cache = items;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch (err) {
       console.warn('[cart] failed to save cart', err);
     }
+  }
+
+  function invalidateCache() {
+    _cache = null;
   }
 
   function notify() {
@@ -108,9 +120,12 @@
     }
   };
 
-  // Cross-tab sync
+  // Cross-tab sync — invalidate cache so next load() re-reads, then notify.
   window.addEventListener('storage', (e) => {
-    if (e.key === STORAGE_KEY) notify();
+    if (e.key === STORAGE_KEY) {
+      invalidateCache();
+      notify();
+    }
   });
 
   window.Cart = Cart;
