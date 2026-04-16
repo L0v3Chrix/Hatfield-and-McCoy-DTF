@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Catalog Intake — Hatfield & McCoy DTF</title>
 <meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -387,7 +389,7 @@
       <div class="reveal">
         <label class="field">
           <span>Shop address (for pickup instructions)</span>
-          <input type="text" name="pickup_address" maxlength="200" placeholder="Street, City, VA Zip" />
+          <input type="text" name="pickup_address" maxlength="200" placeholder="Street, City, WV Zip" />
         </label>
       </div>
     </div>
@@ -520,11 +522,16 @@
     custom_gang: 'Custom Gang Sheet'
   };
 
-  // Attempt to fetch external data files (non-blocking; falls back to inline defaults if missing)
+  // Attempt to fetch external data files in parallel (non-blocking; falls back to inline defaults if missing)
   (async function loadExternalData() {
-    try {
-      const cfgRes = await fetch('data/config.json', { cache: 'no-cache' });
-      if (cfgRes.ok) {
+    const [cfgRes, contentRes, labelsRes] = await Promise.all([
+      fetch('data/config.json').catch(() => null),
+      fetch('data/content.json').catch(() => null),
+      fetch('data/chip-labels.json').catch(() => null)
+    ]);
+
+    if (cfgRes && cfgRes.ok) {
+      try {
         const cfg = await cfgRes.json();
         if (cfg && typeof cfg === 'object') {
           CONFIG = {
@@ -538,24 +545,24 @@
             el.textContent = CONFIG.brand_email;
           });
         }
-      }
-    } catch (e) { /* fallback to defaults */ }
-    try {
-      const contentRes = await fetch('data/content.json', { cache: 'no-cache' });
-      if (contentRes.ok) {
+      } catch (e) { /* fallback to defaults */ }
+    }
+
+    if (contentRes && contentRes.ok) {
+      try {
         const content = await contentRes.json();
         if (content && content.form_errors) {
           ERROR_COPY = Object.assign(ERROR_COPY, content.form_errors);
         }
-      }
-    } catch (e) { /* fallback to defaults */ }
-    try {
-      const labelsRes = await fetch('data/chip-labels.json', { cache: 'no-cache' });
-      if (labelsRes.ok) {
+      } catch (e) { /* fallback to defaults */ }
+    }
+
+    if (labelsRes && labelsRes.ok) {
+      try {
         const labels = await labelsRes.json();
         if (labels && typeof labels === 'object') Object.assign(CHIP_LABELS, labels);
-      }
-    } catch (e) { /* fallback to defaults */ }
+      } catch (e) { /* fallback to defaults */ }
+    }
   })();
 
   // ————— state —————

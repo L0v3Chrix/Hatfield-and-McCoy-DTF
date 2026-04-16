@@ -39,7 +39,7 @@
   // --- data fetch with fallback ---
   async function fetchJson(path, fallback) {
     try {
-      const res = await fetch(path, { cache: 'no-store' });
+      const res = await fetch(path);
       if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
       return await res.json();
     } catch (err) {
@@ -61,13 +61,13 @@
   const DEFAULT_CONTENT = {
     brand: {
       tagline: 'Print Loud. Print Proud.',
-      story_long: 'Hatfield & McCoy DTF prints custom heat transfers, gang sheets, sublimation, and specialty films out of Virginia. We took a name built on rivalry and put it to work — every sheet that leaves the shop has to earn its place on the press. Clean edges, stretched to hell, no fade, no peel. If it doesn\'t pass our feud, it doesn\'t ship.',
+      story_long: 'Hatfield & McCoy DTF prints custom heat transfers, gang sheets, sublimation, and specialty films out of Logan, West Virginia. We took a name built on rivalry and put it to work — every sheet that leaves the shop has to earn its place on the press. Clean edges, stretched to hell, no fade, no peel. If it doesn\'t pass our feud, it doesn\'t ship.',
       established: '2024',
-      location: 'Virginia'
+      location: 'Logan, West Virginia'
     },
     hero: {
-      eyebrow: 'Virginia DTF Print Shop',
-      lede: 'Custom DTF heat transfers, gang sheets, sublimation, and glow-in-the-dark specialties — pressed in the hills of Virginia and shipped everywhere. No pretreatment. No minimums. No feud between you and a clean print.'
+      eyebrow: 'Logan, WV · Proudly Made',
+      lede: 'Custom DTF heat transfers, gang sheets, sublimation, and glow-in-the-dark specialties — pressed in the hills of West Virginia and shipped everywhere. No pretreatment. No minimums. No feud between you and a clean print.'
     },
     steps: [
       { n: 1, title: 'Upload', desc: 'Send us your artwork — PNG, JPG, PDF, AI, or EPS at 300 DPI. Transparency prints cleanest.' },
@@ -83,7 +83,7 @@
         { feature: 'Stretches without cracking', hm: true, others: false },
         { feature: '22″ and 46″ widths in stock', hm: true, others: false },
         { feature: 'Custom gang sheet builder', hm: true, others: true },
-        { feature: 'Virginia-based production', hm: true, others: false }
+        { feature: 'West Virginia-based production', hm: true, others: false }
       ]
     },
     tat: {
@@ -93,7 +93,7 @@
       { q: 'How long does production take?', a: 'Most in-stock DTF transfers ship in 24–48 hours. Gang sheets and large orders may take 2–3 business days. Rush options available — contact us before you order.' },
       { q: 'What file formats do you accept?', a: 'PNG, JPG, PDF, AI, and EPS up to 50 MB. A transparent PNG at 300 DPI prints the cleanest.' },
       { q: 'Is there a minimum order?', a: 'No minimum. One sheet is fine. Bulk pricing kicks in automatically at higher quantities.' },
-      { q: 'Do you offer local pickup?', a: 'Yes — local pickup is available in Virginia by appointment. Select "Pickup" at checkout and we\'ll send pickup instructions with your order confirmation.' },
+      { q: 'Do you offer local pickup?', a: 'Yes — local pickup is available in Logan, WV by appointment. Select "Pickup" at checkout and we\'ll send pickup instructions with your order confirmation.' },
       { q: 'How do I press my transfer?', a: 'Heat press to 300°F, medium pressure, 10–15 seconds. Peel warm for a matte finish, peel cold for glossy. Full instructions ship with every order.' },
       { q: 'What garments can I press onto?', a: 'DTF works on cotton, polyester, blends, nylon, and even leather. No pretreatment required.' },
       { q: 'Will the prints fade or crack?', a: 'Not if pressed correctly. Our DTF transfers are rated for 50+ wash cycles with no fade and no peel. Wash inside out in cold water for the longest life.' },
@@ -108,7 +108,7 @@
     },
     reviews: {
       quote: 'Colors didn\'t fade after 40 washes. Best transfers we\'ve run.',
-      meta: 'Virginia print shop',
+      meta: 'West Virginia print shop',
       stars: 5,
       count: 47
     },
@@ -119,11 +119,11 @@
     },
     about: {
       heading: 'Run by printers, for printers.',
-      body: 'Hatfield & McCoy DTF is a small, Virginia-based print shop. We run 22″ and 46″ DTF printers, a sublimation press, and a reject pile that gets bigger than we\'d like because we don\'t ship what we wouldn\'t wear. If you\'ve got a question about print quality, a weird fabric, or a deadline — email Harold@rmmarketing.ca and we\'ll actually answer.'
+      body: 'Hatfield & McCoy DTF is a small, Logan, WV-based print shop. We run 22″ and 46″ DTF printers, a sublimation press, and a reject pile that gets bigger than we\'d like because we don\'t ship what we wouldn\'t wear. If you\'ve got a question about print quality, a weird fabric, or a deadline — email Harold@rmmarketing.ca and we\'ll actually answer.'
     },
     shipping: {
       heading: 'Shipping & turnaround',
-      body: 'Most orders ship in 24–48 hours via USPS First Class or UPS Ground. Cutoff is 2 PM ET for same-day production. Local pickup in Virginia available by appointment. Shipping rates are calculated at checkout based on weight and destination.',
+      body: 'Most orders ship in 24–48 hours via USPS First Class or UPS Ground. Cutoff is 2 PM ET for same-day production. Local pickup in Logan, WV available by appointment. Shipping rates are calculated at checkout based on weight and destination.',
       cutoff: '2 PM ET — orders placed after cutoff roll to the next business day.'
     },
     contact: {
@@ -461,9 +461,12 @@
 
       const thumb = el('div', { class: 'thumb' });
       const cover = coverForCollection(col);
+      const altDesc = col.description
+        ? (col.description.length > 80 ? col.description.slice(0, 80).trimEnd() + '…' : col.description)
+        : 'product cover image';
       const img = el('img', {
         src: cover,
-        alt: col.name + ' — ' + (col.description ? col.description.slice(0, 60) + '…' : 'product'),
+        alt: col.name + ' — ' + altDesc,
         loading: 'lazy',
         class: 'thumb-img'
       });

@@ -214,6 +214,7 @@
     if (!drawer) return;
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
+    drawer.removeAttribute('inert');
     if (scrim) scrim.classList.add('open');
     document.body.classList.add('cart-open');
     const close = drawer.querySelector('.cart-close');
@@ -226,6 +227,7 @@
     if (!drawer) return;
     drawer.classList.remove('open');
     drawer.setAttribute('aria-hidden', 'true');
+    drawer.setAttribute('inert', '');
     if (scrim) scrim.classList.remove('open');
     document.body.classList.remove('cart-open');
   }

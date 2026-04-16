@@ -9,11 +9,11 @@
     "name": "Hatfield & McCoy DTF",
     "name_short": "H&M DTF",
     "tagline": "Print Loud. Print Proud.",
-    "proud_since": "Proudly Virginian",
-    "story_short": "Custom DTF heat transfers, gang sheets, sublimation, and specialty prints — pressed in the hills of Virginia and shipped wherever the order goes. No pretreatment. No minimums. No runaround.",
-    "story_long": "We took a name built on rivalry and put it to work. Hatfield & McCoy DTF runs out of Virginia, printing the kind of transfers small shops, teams, and makers actually need: clean edges, stretched-to-hell color, no fade, no crack, no peel. We don't chase the bulk-corporate game. We chase clean prints. Every sheet that leaves the shop earns its place on the press, or it doesn't ship. Cotton, polyester, blends, nylon, leather — if you can press it, we can print it. Upload your art, pick your size, and watch it land at your door in a day or two. That's the whole deal.",
-    "location_city": "Virginia",
-    "location_region": "Appalachian Virginia",
+    "proud_since": "Proudly West Virginian",
+    "story_short": "Custom DTF heat transfers, gang sheets, sublimation, and specialty prints — pressed in the hills of West Virginia and shipped wherever the order goes. No pretreatment. No minimums. No runaround.",
+    "story_long": "We took a name built on rivalry and put it to work. Hatfield & McCoy DTF runs out of Logan, West Virginia, printing the kind of transfers small shops, teams, and makers actually need: clean edges, stretched-to-hell color, no fade, no crack, no peel. We don't chase the bulk-corporate game. We chase clean prints. Every sheet that leaves the shop earns its place on the press, or it doesn't ship. Cotton, polyester, blends, nylon, leather — if you can press it, we can print it. Upload your art, pick your size, and watch it land at your door in a day or two. That's the whole deal.",
+    "location_city": "Logan, West Virginia",
+    "location_region": "Appalachian West Virginia",
     "email": "Harold@rmmarketing.ca",
     "contact_email_display": "Contact the Shop",
     "shop_email": "hello@hatfieldmccoydtf.com",
@@ -28,19 +28,19 @@
   },
 
   "shipping": {
-    "policy": "Flat-rate USPS and UPS shipping. Local pickup available in Virginia.",
+    "policy": "Flat-rate USPS and UPS shipping. Local pickup available in Logan, WV.",
     "cutoff": "Orders placed before 3PM ship same-day.",
     "packaging": "Flat sheets ship rolled or flat-packed between stiff boards. Larger rolls go in a tube.",
     "international": "Reach out for international quotes. We can ship most places."
   },
 
   "hero": {
-    "eyebrow": "Virginia · Proudly Made",
+    "eyebrow": "Logan, WV · Proudly Made",
     "headline_stroke_1": "Print",
     "headline_pop_1": "Loud.",
     "headline_stroke_2": "Print",
     "headline_pop_2": "Proud.",
-    "lede": "Custom DTF heat transfers, gang sheets, sublimation, and glow-in-the-dark specialties — pressed in the hills of Virginia and shipped everywhere. No pretreatment. No minimums. No feud between you and a clean print.",
+    "lede": "Custom DTF heat transfers, gang sheets, sublimation, and glow-in-the-dark specialties — pressed in the hills of West Virginia and shipped everywhere. No pretreatment. No minimums. No feud between you and a clean print.",
     "cta_primary": "Build a Gang Sheet",
     "cta_secondary": "Shop Transfers"
   },
@@ -107,7 +107,7 @@
     },
     {
       "question": "How much is shipping, and do you offer local pickup?",
-      "answer": "Flat-rate USPS or UPS — you'll see the exact number at checkout based on sheet size. Local pickup is free in Virginia if you order before 3PM. We'll email you when it's ready to grab."
+      "answer": "Flat-rate USPS or UPS — you'll see the exact number at checkout based on sheet size. Local pickup is free in Logan, WV if you order before 3PM. We'll email you when it's ready to grab."
     },
     {
       "question": "Can I cancel or change an order after I place it?",
@@ -125,17 +125,17 @@
       {
         "quote": "Colors didn't fade after 40 washes. Best transfers we've run.",
         "author": "Rowan B.",
-        "role": "Shop owner · Blacksburg, VA"
+        "role": "Shop owner · Charleston, WV"
       },
       {
         "quote": "Ordered Friday, picked up Monday. Clean edges, dead-true color. Switching our whole shop over.",
         "author": "Mara K.",
-        "role": "Team apparel · Richmond, VA"
+        "role": "Team apparel · Morgantown, WV"
       },
       {
         "quote": "Glow DTF held up through a 5K and two washes. My runners were stoked.",
         "author": "Jess T.",
-        "role": "Running club organizer · Roanoke, VA"
+        "role": "Running club organizer · Huntington, WV"
       }
     ],
     "stats": [
@@ -152,8 +152,8 @@
   },
 
   "footer": {
-    "tagline": "Neon-lit heat transfers, pressed in Virginia. Run loud, run proud, ship fast.",
-    "copyright": "© 2026 Hatfield & McCoy DTF · Virginia",
+    "tagline": "Neon-lit heat transfers, pressed in West Virginia. Run loud, run proud, ship fast.",
+    "copyright": "© 2026 Hatfield & McCoy DTF · Logan, WV",
     "built_by": "Built by RM Marketing"
   },
 
