@@ -3,1040 +3,1555 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Catalog Intake — Hatfield & McCoy DTF</title>
+<title>Catalog Intake — Hatfield &amp; McCoy DTF</title>
+<meta name="description" content="Build your catalog — Hatfield & McCoy DTF intake form. Capture every SKU, price, and detail so we can wire your Shopify store in one pass.">
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
 <style>
   :root {
-    --magenta: #E91E8C; --cyan: #00E5FF; --lime: #39FF14;
-    --bg: #0E0E12; --bg-2: #17171E; --ink: #FFFFFF; --muted: #A0A0B0;
+    --magenta: #E91E8C; --magenta-bright: #FF2D9E;
+    --cyan: #00E5FF; --lime: #39FF14;
+    --bg: #0E0E12; --bg-2: #17171E; --bg-3: #1E1E28;
+    --ink: #FFFFFF; --muted: #A0A0B0; --muted-2: #C0C0D0;
     --line: rgba(255,255,255,0.08);
+    --ok: #39FF14; --warn: #FFB86B; --err: #FF5577;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  /* T-C09: explicit root font-size to prevent iOS zoom risk when user overrides */
   html { font-size: 16px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--ink); font-family: 'Space Grotesk', system-ui, sans-serif; line-height: 1.5; }
   body::before {
     content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(233,30,140,0.18), transparent 60%),
-      radial-gradient(900px 500px at 110% 10%, rgba(0,229,255,0.12), transparent 60%);
+      radial-gradient(1200px 600px at 10% -10%, rgba(233,30,140,0.15), transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, rgba(0,229,255,0.10), transparent 60%);
   }
-  main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 40px 24px 120px; }
+  .page-wrap { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 32px 20px 120px; }
 
   h1, h2 { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.95; }
-  h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 12px; }
-  h2 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 8px; color: var(--cyan); }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 10px; }
+  h2 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); margin-bottom: 6px; color: var(--cyan); }
+  h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink); margin-bottom: 6px; }
 
-  .header {
-    text-align: center; padding: 30px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 40px;
-  }
-  .logo-row { display: inline-flex; align-items: center; gap: 10px; font-family: 'Anton'; font-size: 1.2rem; margin-bottom: 20px; }
+  .header-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
   .logo-mark {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: conic-gradient(from 210deg, var(--magenta), var(--cyan), var(--lime), var(--magenta));
-    box-shadow: 0 0 18px rgba(233,30,140,0.55), inset 0 0 0 2px #0E0E12;
+    width: 36px; height: 36px; border-radius: 8px;
+    background: conic-gradient(from 45deg, var(--magenta), var(--cyan), var(--lime), var(--magenta));
+    box-shadow: 0 0 16px rgba(233,30,140,0.4);
   }
-  .header p { color: var(--muted); max-width: 520px; margin: 0 auto; }
-  .time-hint { color: var(--lime); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 12px; }
+  .header-text { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.95rem; }
 
-  /* Progress bar (T-C09: single padding declaration, no shadowed value) */
-  .progress {
-    position: sticky; top: 0; z-index: 10; background: var(--bg);
-    margin: -40px -24px 40px; padding: 14px 24px;
-    border-bottom: 1px solid var(--line);
-  }
-  .progress-bar { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--magenta), var(--cyan)); width: 0%; transition: width 200ms ease; }
-  .progress-text { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 6px; text-align: center; }
+  .intro { max-width: 800px; margin-bottom: 28px; color: var(--muted-2); }
+  .intro strong { color: var(--ink); }
+  .time-hint { display: inline-block; margin-top: 10px; padding: 4px 10px; background: rgba(57,255,20,0.1); color: var(--lime); border-radius: 4px; font-size: 0.82rem; font-weight: 500; border: 1px solid rgba(57,255,20,0.3); }
 
-  /* Card styling (T-C09: absolute positioning for checkmark instead of ::before reflow hack) */
-  .card {
-    position: relative;
-    border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2);
-    padding: 28px; margin-bottom: 20px;
-    transition: border-color 180ms ease;
-  }
-  .card.answered { border-color: rgba(57,255,20,0.3); }
-  .card.answered::before {
-    content: '✓';
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    color: var(--lime);
-    font-weight: 700;
-    font-size: 1.1rem;
-    line-height: 1;
-  }
-  .step { color: var(--muted); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; }
-  .question { font-family: 'Anton'; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 8px; line-height: 1.1; }
-  .helper { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
-
-  /* Big yes/no buttons */
-  .yn {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  }
-  .yn button {
-    padding: 18px; border: 2px solid var(--line); background: transparent; color: var(--ink);
-    font-family: 'Anton'; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.04em;
-    border-radius: 6px; cursor: pointer;
-    min-height: 44px;
-    transition: all 150ms ease;
-  }
-  .yn button:hover { border-color: var(--cyan); }
-  .yn button.on[data-val="yes"] { border-color: var(--lime); background: rgba(57,255,20,0.1); color: var(--lime); }
-  .yn button.on[data-val="no"] { border-color: var(--magenta); background: rgba(233,30,140,0.1); color: var(--magenta); }
-
-  /* Chip list (T-C12: 44px min-height for tap targets) */
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .chip {
-    padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px;
-    background: transparent; color: var(--ink); cursor: pointer;
-    font-family: 'Space Grotesk'; font-weight: 500; font-size: 0.95rem;
-    min-height: 44px;
-    display: inline-flex; align-items: center;
-    transition: all 150ms ease;
-  }
-  .chip:hover { border-color: var(--cyan); }
-  .chip.on { border-color: var(--lime); background: rgba(57,255,20,0.12); color: var(--lime); }
-  .chip.on::before { content: '✓ '; }
-
-  /* T-C09: :focus-visible styles on all interactive controls */
-  .yn button:focus-visible,
-  .chip:focus-visible,
-  .btn-submit:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  .mini-yn button:focus-visible,
-  .btn-retry:focus-visible {
-    outline: 2px solid var(--cyan);
-    outline-offset: 2px;
+  /* Desktop 2-column */
+  .layout { display: grid; gap: 32px; grid-template-columns: 1fr; }
+  @media (min-width: 1024px) {
+    .layout { grid-template-columns: minmax(0, 1fr) 320px; }
   }
 
-  /* Text/number inputs */
-  label.field { display: block; margin-bottom: 16px; }
-  label.field span { display: block; color: var(--muted); font-size: 0.85rem; margin-bottom: 6px; letter-spacing: 0.05em; }
-  input[type="text"], input[type="email"], input[type="number"], textarea {
-    width: 100%; padding: 14px; background: #0A0A0E; border: 1px solid var(--line);
-    color: var(--ink); border-radius: 6px; font-family: 'Space Grotesk'; font-size: 1rem;
-    transition: border-color 150ms ease;
-  }
-  input:focus, textarea:focus { outline: none; border-color: var(--cyan); }
-  textarea { resize: vertical; min-height: 80px; }
-
-  /* T-C07: character counter */
-  .char-counter {
-    color: var(--muted);
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-align: right;
-    margin-top: 4px;
-  }
-  .char-counter.near-limit { color: var(--magenta); }
-
-  /* Conditional reveal blocks */
-  .reveal { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); display: none; }
-  .reveal.show { display: block; animation: fadeIn 220ms ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* Pre-filled grid showing what we already have */
-  .confirm-grid { display: grid; gap: 10px; }
-  .confirm-row {
-    display: grid; grid-template-columns: 1fr auto; align-items: center;
-    padding: 12px 14px; background: #0A0A0E; border: 1px solid var(--line); border-radius: 6px;
-  }
-  .confirm-row strong { font-family: 'Anton'; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.02em; }
-  .confirm-row small { color: var(--muted); display: block; margin-top: 2px; font-family: 'Space Grotesk'; }
-  .mini-yn { display: flex; gap: 6px; }
-  .mini-yn button {
-    width: 44px; height: 36px; border: 1px solid var(--line); background: transparent; color: var(--muted);
-    font-family: 'Anton'; font-size: 0.95rem; border-radius: 4px; cursor: pointer;
-  }
-  .mini-yn button.on[data-val="yes"] { border-color: var(--lime); background: rgba(57,255,20,0.12); color: var(--lime); }
-  .mini-yn button.on[data-val="no"] { border-color: var(--magenta); background: rgba(233,30,140,0.12); color: var(--magenta); }
-
-  /* Submit area */
-  .submit-card {
-    border: 1px solid var(--magenta); background: linear-gradient(180deg, rgba(233,30,140,0.08), rgba(14,14,18,0.95));
-    box-shadow: 0 0 40px rgba(233,30,140,0.15);
-  }
-  .btn-submit {
-    width: 100%; padding: 20px; background: var(--magenta); color: #fff;
-    font-family: 'Anton'; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.08em;
-    border: none; border-radius: 6px; cursor: pointer;
-    box-shadow: 0 0 30px rgba(233,30,140,0.4);
-    min-height: 44px;
-    transition: transform 120ms ease, box-shadow 120ms ease;
-  }
-  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 0 50px rgba(233,30,140,0.7); }
-  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-
-  /* T-C02: spinner inside submit button */
-  .spinner {
-    display: inline-block;
-    width: 16px; height: 16px;
-    border: 2px solid rgba(255,255,255,0.35);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    vertical-align: -2px;
-    margin-right: 8px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* T-C02: retry button inside error banner */
-  .btn-retry {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 18px;
-    background: transparent;
-    border: 1px solid var(--magenta);
-    color: var(--magenta);
-    font-family: 'Anton';
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 6px;
-    cursor: pointer;
-    min-height: 44px;
-    transition: all 150ms ease;
-  }
-  .btn-retry:hover { background: rgba(233,30,140,0.1); }
-
-  /* Thank you state */
-  .thanks {
-    display: none; text-align: center; padding: 60px 20px;
-  }
-  .thanks.show { display: block; animation: fadeIn 400ms ease; }
-  .thanks .check {
-    width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--lime);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-family: 'Anton'; font-size: 3rem; color: var(--lime);
-    margin-bottom: 24px; box-shadow: 0 0 40px rgba(57,255,20,0.3);
-  }
-  .thanks h1 { color: var(--lime); margin-bottom: 14px; }
-  .thanks p { color: var(--muted); max-width: 440px; margin: 0 auto 8px; }
-
-  /* Error state */
-  .error-banner {
-    display: none; padding: 14px; background: rgba(233,30,140,0.12); border: 1px solid var(--magenta);
-    border-radius: 6px; color: var(--magenta); margin-bottom: 20px; font-size: 0.95rem;
-  }
-  .error-banner.show { display: block; }
-  .error-banner strong { display: block; font-family: 'Anton'; letter-spacing: 0.04em; margin-bottom: 6px; }
-
-  /* T-C15: cooldown countdown note */
-  .cooldown-note {
-    color: var(--muted);
-    font-size: 0.85rem;
-    text-align: center;
-    margin-top: 10px;
+  /* Sidebar */
+  .sidebar {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 20px;
+    position: sticky; top: 20px;
+    align-self: start;
     display: none;
   }
-  .cooldown-note.show { display: block; }
+  @media (min-width: 1024px) { .sidebar { display: block; } }
+  .sidebar h3 { color: var(--cyan); margin-bottom: 16px; font-size: 1rem; }
+  .sidebar-row { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--line); font-size: 0.9rem; }
+  .sidebar-row:first-of-type { border-top: 0; }
+  .sidebar-row .label { color: var(--muted); }
+  .sidebar-row .value { color: var(--ink); font-weight: 500; }
+  .sidebar .save-indicator { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--muted); }
+  .sidebar .save-indicator.saved { color: var(--ok); }
 
-  /* Honeypot — hidden from humans */
-  .hp { position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none; }
-
-  /* Small screen tweaks */
-  @media (max-width: 600px) {
-    main { padding: 24px 16px 80px; }
-    .card { padding: 22px 18px; }
-    .question { font-size: 1.25rem; }
-    .yn button { font-size: 1.1rem; padding: 16px; }
+  .progress-top {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(14,14,18,0.92);
+    backdrop-filter: blur(10px);
+    margin: -32px -20px 20px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
   }
+  .progress-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--magenta), var(--cyan)); transition: width 300ms; width: 0; }
+  .progress-text { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); }
+  .progress-text .save-indicator.saved { color: var(--ok); }
+
+  .sections-nav { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; margin-bottom: 18px; -webkit-overflow-scrolling: touch; }
+  .sections-nav button {
+    flex-shrink: 0;
+    background: var(--bg-2); border: 1px solid var(--line); color: var(--muted);
+    padding: 6px 12px; border-radius: 20px; font-family: inherit; font-size: 0.8rem; cursor: pointer;
+    min-height: 34px;
+    transition: background 150ms, border-color 150ms, color 150ms;
+  }
+  .sections-nav button.current { background: var(--magenta); color: #fff; border-color: var(--magenta); }
+  .sections-nav button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+  .card {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 24px 22px; margin-bottom: 16px;
+  }
+  .card-subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .field > label, .field > .label-text { font-size: 0.88rem; color: var(--muted); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .field input[type="text"], .field input[type="email"], .field input[type="number"], .field input[type="tel"], .field input[type="url"], .field textarea, .field select {
+    background: var(--bg-3); color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 8px; padding: 10px 12px;
+    font-family: inherit; font-size: 1rem;
+    min-height: 44px;
+  }
+  .field input:focus-visible, .field textarea:focus-visible, .field select:focus-visible {
+    outline: 2px solid var(--cyan); outline-offset: 1px; border-color: var(--cyan);
+  }
+  .field textarea { min-height: 88px; resize: vertical; line-height: 1.5; }
+  .field .help { font-size: 0.78rem; color: var(--muted); }
+  .field-row { display: grid; gap: 12px; }
+  @media (min-width: 640px) { .field-row.two { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 640px) { .field-row.three { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .tip { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: rgba(0,229,255,0.15); color: var(--cyan); font-size: 0.7rem; line-height: 1; cursor: help; border: 1px solid rgba(0,229,255,0.4); position: relative; }
+  .tip:hover::after, .tip:focus::after { content: attr(data-tip); position: absolute; top: 100%; left: 0; background: var(--bg-3); color: var(--ink); padding: 8px 10px; border-radius: 6px; font-size: 0.75rem; max-width: 240px; z-index: 100; box-shadow: 0 4px 16px rgba(0,0,0,0.5); margin-top: 4px; white-space: normal; width: max-content; }
+
+  .char-counter { font-size: 0.75rem; color: var(--muted); text-align: right; margin-top: 2px; }
+  .char-counter.near-limit { color: var(--warn); }
+  .char-counter.over { color: var(--err); }
+
+  .toggle-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toggle-group button {
+    background: var(--bg-3); border: 1px solid var(--line); color: var(--ink);
+    padding: 10px 16px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; cursor: pointer;
+    min-height: 44px;
+    transition: background 150ms, border-color 150ms, transform 80ms;
+  }
+  .toggle-group button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .toggle-group button[aria-pressed="true"][data-val="yes"],
+  .toggle-group button[aria-pressed="true"][data-val="offered"],
+  .toggle-group button[aria-pressed="true"][data-val="confirm_as_is"],
+  .toggle-group button[aria-pressed="true"][data-val="ready"],
+  .toggle-group button[aria-pressed="true"][data-val="have"] { background: rgba(57,255,20,0.15); border-color: var(--lime); color: var(--lime); }
+  .toggle-group button[aria-pressed="true"][data-val="no"],
+  .toggle-group button[aria-pressed="true"][data-val="remove"],
+  .toggle-group button[aria-pressed="true"][data-val="not_offered"],
+  .toggle-group button[aria-pressed="true"][data-val="none"] { background: rgba(255,85,119,0.15); border-color: var(--err); color: var(--err); }
+  .toggle-group button[aria-pressed="true"][data-val="coming_soon"],
+  .toggle-group button[aria-pressed="true"][data-val="edited"],
+  .toggle-group button[aria-pressed="true"][data-val="needs_setup"],
+  .toggle-group button[aria-pressed="true"][data-val="quote"],
+  .toggle-group button[aria-pressed="true"][data-val="fallback"] { background: rgba(0,229,255,0.15); border-color: var(--cyan); color: var(--cyan); }
+  .toggle-group button[aria-pressed="true"]:active { transform: translateY(1px); }
+
+  .collection-card {
+    border-radius: 10px; border: 1px solid var(--line);
+    background: var(--bg-3); padding: 18px 16px; margin-bottom: 14px;
+  }
+  .collection-head { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+  .collection-thumb { width: 56px; height: 56px; border-radius: 6px; overflow: hidden; flex-shrink: 0; background: var(--bg-2); }
+  .collection-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .collection-meta { flex: 1; min-width: 0; }
+  .collection-meta h3 { margin-bottom: 4px; }
+  .collection-meta .summary { font-size: 0.85rem; color: var(--muted); }
+
+  .reveal { display: none; margin-top: 14px; }
+  .reveal.open { display: block; }
+
+  .rows-table { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+  .rows-header {
+    display: grid; gap: 8px; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 6px 4px;
+    grid-template-columns: 1.2fr 0.9fr 1.2fr 0.7fr 40px;
+  }
+  .rows-header > span:nth-child(n+3) { display: none; }
+  @media (min-width: 720px) { .rows-header > span { display: block !important; } }
+  .row-item {
+    display: grid; gap: 8px;
+    padding: 8px 4px;
+    border-top: 1px solid var(--line);
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  @media (min-width: 720px) { .row-item { grid-template-columns: 1.2fr 0.9fr 1.2fr 0.7fr 40px; } }
+  .row-item input {
+    background: var(--bg-2); border: 1px solid var(--line); color: var(--ink);
+    border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 0.92rem; min-height: 40px; width: 100%;
+  }
+  .row-item input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+  .row-item .row-remove {
+    background: rgba(255,85,119,0.15); border: 1px solid rgba(255,85,119,0.4); color: var(--err);
+    border-radius: 6px; min-height: 40px; cursor: pointer; font-family: inherit;
+  }
+  .row-note-label { grid-column: 1/-1; font-size: 0.78rem; color: var(--muted); margin-top: 4px; margin-bottom: 8px; }
+  .row-add {
+    background: rgba(0,229,255,0.08); border: 1px dashed rgba(0,229,255,0.35); color: var(--cyan);
+    border-radius: 8px; padding: 10px; margin-top: 10px; cursor: pointer; width: 100%; font-family: inherit;
+    font-size: 0.92rem; min-height: 44px;
+  }
+  .row-add:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+  .inline-warn { padding: 10px 12px; background: rgba(255,184,107,0.1); border: 1px solid rgba(255,184,107,0.3); border-radius: 6px; font-size: 0.85rem; color: var(--warn); margin: 10px 0; }
+
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chips button {
+    background: var(--bg-3); border: 1px solid var(--line); color: var(--ink);
+    padding: 8px 14px; border-radius: 20px; font-family: inherit; font-size: 0.85rem; cursor: pointer;
+    min-height: 40px;
+  }
+  .chips button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .chips button[aria-pressed="true"] { background: var(--magenta); color: #fff; border-color: var(--magenta); }
+
+  .section-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+  .btn {
+    background: var(--bg-3); border: 1px solid var(--line); color: var(--ink);
+    padding: 12px 22px; border-radius: 8px; font-family: 'Anton', Impact, sans-serif;
+    font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer;
+    min-height: 44px;
+  }
+  .btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .btn-primary { background: var(--magenta-bright); color: #0A0A0A; border-color: var(--magenta-bright); font-weight: 700; }
+  .btn-primary:hover { background: var(--lime); border-color: var(--lime); color: #0A0A0A; }
+  .btn-ghost { color: var(--muted); }
+  .btn-submit {
+    background: var(--magenta-bright); color: #0A0A0A; border-color: var(--magenta-bright);
+    padding: 14px 28px; font-size: 1.1rem; font-weight: 700;
+    min-height: 52px; width: 100%;
+    font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.04em;
+    border-radius: 8px; cursor: pointer; border: 1px solid var(--magenta-bright);
+  }
+  .btn-submit[disabled] { opacity: 0.6; cursor: wait; }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 800ms linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-banner { background: rgba(255,85,119,0.12); border: 1px solid rgba(255,85,119,0.4); color: var(--err); padding: 12px 14px; border-radius: 8px; margin: 12px 0; font-size: 0.92rem; }
+  .btn-retry { background: var(--err); color: #fff; border: 0; padding: 8px 14px; border-radius: 6px; margin-left: 8px; cursor: pointer; min-height: 40px; font-family: inherit; font-weight: 700; }
+  .cooldown-note { font-size: 0.82rem; color: var(--warn); margin-top: 10px; min-height: 20px; }
+
+  .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .summary-row:last-child { border-bottom: 0; }
+  .summary-row .summary-label { color: var(--muted); }
+  .summary-row .summary-value { color: var(--ink); font-weight: 500; text-align: right; max-width: 60%; word-break: break-word; }
+  .summary-section { margin-bottom: 18px; }
+  .summary-section h3 { color: var(--cyan); margin-bottom: 8px; font-size: 1rem; display: flex; justify-content: space-between; align-items: center; }
+  .summary-section h3 a { color: var(--muted); font-size: 0.78rem; text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-weight: 500; letter-spacing: 0; text-transform: none; }
+  .summary-section h3 a:hover { color: var(--cyan); }
+
+  .thanks { display: none; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 40px 28px; text-align: center; }
+  .thanks.active { display: block; }
+  .thanks .check { width: 56px; height: 56px; background: var(--lime); color: #000; border-radius: 50%; margin: 0 auto 16px; line-height: 56px; font-size: 1.6rem; font-weight: 700; }
+  .thanks h1 { color: var(--lime); }
+  .thanks .tracker { margin: 24px auto 0; max-width: 400px; text-align: left; }
+  .tracker-step { padding: 10px 0; display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--line); }
+  .tracker-step:first-child { border-top: 0; }
+  .tracker-step .icon { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; font-weight: 700; }
+  .tracker-step.done .icon { background: var(--lime); color: #000; }
+  .tracker-step.current .icon { background: var(--cyan); color: #000; animation: pulse 1500ms infinite; }
+  .tracker-step.future .icon { background: var(--bg-3); color: var(--muted); border: 1px solid var(--line); }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  :focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 </style>
 </head>
 <body>
-<main>
-  <div class="progress">
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-text" id="progressText">0 of 12 answered</div>
+
+<div class="page-wrap">
+  <div class="progress-top">
+    <div class="progress-text">
+      <span id="section-label">Loading…</span>
+      <span id="save-indicator" class="save-indicator"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
 
-  <div class="header">
-    <div class="logo-row"><span class="logo-mark"></span><span>Hatfield &amp; McCoy DTF</span></div>
-    <h1>Let's Build Your Catalog</h1>
-    <p>Short answers, big buttons. No jargon, no logins. Just tap through and we'll have your store loaded up. If something doesn't apply, skip it — we'll circle back.</p>
-    <div class="time-hint">~5 minutes · Saves as you go</div>
+  <div class="header-row">
+    <div class="logo-mark" aria-hidden="true"></div>
+    <div class="header-text">Hatfield &amp; McCoy DTF · Catalog Intake</div>
   </div>
 
-  <form id="intakeForm" novalidate>
-    <!-- T-C14: Honeypot wrapper aria-hidden so screen readers skip it; renamed from 'website' to 'url_referrer' to look more plausible to bots -->
-    <div class="hp" aria-hidden="true">
-      <label>Leave this empty <input type="text" name="url_referrer" tabindex="-1" autocomplete="off"></label>
-    </div>
+  <h1>Build Your Catalog</h1>
+  <p class="intro">
+    Answer as much as you can — the more detail you give, the faster we can wire your Shopify store.
+    Skip anything you don't offer. <strong>Your answers autosave as you type.</strong>
+  </p>
+  <div class="time-hint">~10 min · saves as you go · jump between sections anytime</div>
 
-    <!-- T-C08: role=alert + aria-live so screen readers announce errors immediately -->
-    <div class="error-banner" id="errorBanner" role="alert" aria-live="polite" hidden></div>
+  <div class="sections-nav" role="tablist" id="sections-nav" aria-label="Form sections"></div>
 
-    <!-- Q1: Unit confirmation -->
-    <div class="card" data-q="units">
-      <div class="step">Question 1 of 12</div>
-      <div class="question" id="q-units-label">Are your sheet sizes in inches?</div>
-      <div class="helper">Your price sheet shows sizes like "22' x 300'". We're reading those as <strong>22 inches × 300 inches</strong>. Is that right?</div>
-      <div class="yn" data-name="units" role="radiogroup" aria-labelledby="q-units-label">
-        <button type="button" role="radio" aria-checked="false" data-val="yes">Yes — inches</button>
-        <button type="button" role="radio" aria-checked="false" data-val="no">No — something else</button>
-      </div>
-      <div class="reveal">
-        <label class="field">
-          <span>What unit are they in?</span>
-          <input type="text" name="units_other" maxlength="200" placeholder="e.g., centimeters, or explain" />
-        </label>
-      </div>
-    </div>
+  <div class="layout">
+    <main>
+      <form id="intakeForm" novalidate>
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty <input type="text" name="url_referrer" tabindex="-1" autocomplete="off"></label>
+        </div>
 
-    <!-- Q2: Glow pricing typo -->
-    <div class="card" data-q="glow">
-      <div class="step">Question 2 of 12</div>
-      <div class="question" id="q-glow-label">Fix a pricing typo?</div>
-      <div class="helper">Your glow sheet lists <strong>22″ × 300″ at $153</strong>. Based on the rest of the ladder it should be closer to <strong>$225</strong>. Which is right?</div>
-      <div class="yn" data-name="glow_price" role="radiogroup" aria-labelledby="q-glow-label">
-        <button type="button" role="radio" aria-checked="false" data-val="yes">$225 is correct — fix it</button>
-        <button type="button" role="radio" aria-checked="false" data-val="no">$153 is correct — leave it</button>
-      </div>
-    </div>
+        <div class="error-banner" id="errorBanner" role="alert" aria-live="polite" hidden></div>
 
-    <!-- Q3: 3D printing confirmation -->
-    <div class="card" data-q="threeDD">
-      <div class="step">Question 3 of 12</div>
-      <div class="question" id="q-threed-label">Do you actually offer 3D printing?</div>
-      <div class="helper">Your PDF lists "3D Printer X1" and "3D Printer H2S" pricing. Those weren't in our original plan. Are you selling 3D prints as a service?</div>
-      <div class="yn" data-name="threeD" role="radiogroup" aria-labelledby="q-threed-label">
-        <button type="button" role="radio" aria-checked="false" data-val="yes">Yes — list it</button>
-        <button type="button" role="radio" aria-checked="false" data-val="no">No — remove it</button>
-      </div>
-    </div>
+        <section class="section" data-section="welcome">
+          <div class="card">
+            <h2>Welcome</h2>
+            <p class="card-subtitle">Quick context before we jump in.</p>
+            <p>We've pulled your existing price sheet into a catalog of <strong id="preset-count">7 collections</strong>. In the next section you'll confirm or tweak each one. Then we'll ask about additional services, operations, brand, and assets.</p>
+            <p style="margin-top: 10px;">Every question has a <span class="tip" data-tip="Hover or tap these for more detail." tabindex="0">?</span> if you want more detail. Numeric fields accept prices like <code>12.50</code>.</p>
+            <div class="section-nav">
+              <span></span>
+              <button type="button" class="btn btn-primary" data-nav-next>Start →</button>
+            </div>
+          </div>
+        </section>
 
-    <!-- Q4: Fill size ladder gaps -->
-    <div class="card" data-q="gaps">
-      <div class="step">Question 4 of 12</div>
-      <div class="question" id="q-gaps-label">Fill in the missing sizes?</div>
-      <div class="helper">A few sizes are skipped in your ladders. Want us to fill them in at the same per-inch pricing, or leave them out?</div>
-      <div class="chips" data-name="gaps" role="group" aria-labelledby="q-gaps-label">
-        <button type="button" class="chip" aria-pressed="false" data-val="dtf46">46″ DTF: 88, 92</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="dtf22">22″ DTF: 204–288</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="sub24">Sublim 24″: 108–144</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="none">Leave all as-is</button>
-      </div>
-      <div class="helper" style="font-size: 0.85rem; margin: 0;">Tap the ones you want us to fill in.</div>
-    </div>
+        <section class="section" data-section="catalog">
+          <div class="card">
+            <h2>Your Existing Catalog</h2>
+            <p class="card-subtitle">For each collection, confirm as-is, edit specific rows, mark "coming soon," or remove from the site.</p>
+            <div id="collections-list"></div>
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Additional Services →</button>
+            </div>
+          </div>
+        </section>
 
-    <!-- Q5: Which categories you offer -->
-    <div class="card" data-q="categories">
-      <div class="step">Question 5 of 12</div>
-      <div class="question" id="q-categories-label">Which of these do you offer?</div>
-      <div class="helper">Tap every service you provide. You can add pricing below. Leave untapped what you don't do.</div>
-      <div class="chips" data-name="categories" role="group" aria-labelledby="q-categories-label">
-        <button type="button" class="chip" aria-pressed="false" data-val="uv_dtf">UV DTF</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="reflective">Reflective DTF</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="embroidery">Embroidery</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="3d_puff">3D Puff Transfers</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="spangle">Spangle / Sequin</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="banners">Banners</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="die_cut">Die Cut Stickers</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="wrapping">Wrapping Paper</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="laser">Laser Engraving</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="personalized">Tumblers / Pens / Golf Balls</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="sample_packs">Sample Packs</button>
-        <button type="button" class="chip" aria-pressed="false" data-val="custom_gang">Custom Gang Sheet</button>
-      </div>
-      <div class="reveal" id="categoryPricing">
-        <label class="field">
-          <span>Quick pricing notes for the ones you tapped (free-form, we'll clean up)</span>
-          <textarea name="category_pricing" maxlength="1000" placeholder="e.g., Embroidery $5 up to 5k stitches, +$1 per 1k after. Banners $12/sq ft. Sample pack $10 flat."></textarea>
-          <div class="char-counter" aria-live="polite" data-counter-for="category_pricing">0 / 1000</div>
-        </label>
-      </div>
-    </div>
+        <section class="section" data-section="services">
+          <div class="card">
+            <h2>Additional Services</h2>
+            <p class="card-subtitle">Services beyond your existing catalog. If you offer any, we'll add them to the site with pricing you provide.</p>
+            <div id="services-list"></div>
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Operations →</button>
+            </div>
+          </div>
+        </section>
 
-    <!-- Q6: Silver spelling -->
-    <div class="card" data-q="silver">
-      <div class="step">Question 6 of 12</div>
-      <div class="question" id="q-silver-label">Fix the "Sliver" typo?</div>
-      <div class="helper">Your glitter page reads "Sliver" — we're guessing you meant "Silver." Confirm?</div>
-      <div class="yn" data-name="silver" role="radiogroup" aria-labelledby="q-silver-label">
-        <button type="button" role="radio" aria-checked="false" data-val="yes">Yes — Silver</button>
-        <button type="button" role="radio" aria-checked="false" data-val="no">No — Sliver is correct</button>
-      </div>
-    </div>
+        <section class="section" data-section="operations">
+          <div class="card">
+            <h2>Operations</h2>
+            <p class="card-subtitle">Shipping rates, tools you use, and the stuff that makes orders actually ship.</p>
 
-    <!-- Q7: Turnaround times -->
-    <div class="card" data-q="turnaround">
-      <div class="step">Question 7 of 12</div>
-      <div class="question">How fast do you ship?</div>
-      <div class="helper">Give us a rough turnaround window. This goes on the FAQ and product pages.</div>
-      <label class="field">
-        <span>Turnaround time (one line is fine)</span>
-        <input type="text" name="turnaround" maxlength="500" placeholder="e.g., Ships in 24–48 hours, same-day if ordered by 2pm" />
-      </label>
-    </div>
+            <h3 style="margin-top: 18px;">Shipping</h3>
+            <div class="field-row two">
+              <div class="field">
+                <label>Domestic flat shipping rate ($)</label>
+                <input type="number" name="op_ship_flat" step="0.01" min="0" inputmode="decimal" placeholder="10.00">
+                <div class="help">What you charge for standard US shipping.</div>
+              </div>
+              <div class="field">
+                <label>Overnight offered?</label>
+                <div class="toggle-group" data-toggle="op_ship_overnight">
+                  <button type="button" aria-pressed="false" data-val="yes">Yes</button>
+                  <button type="button" aria-pressed="false" data-val="no">No</button>
+                </div>
+              </div>
+            </div>
+            <div class="field reveal" data-reveal-for="op_ship_overnight" data-reveal-on="yes">
+              <label>Overnight price ($)</label>
+              <input type="number" name="op_ship_overnight_price" step="0.01" min="0" inputmode="decimal" placeholder="32.00">
+            </div>
 
-    <!-- Q8: Local pickup -->
-    <div class="card" data-q="pickup">
-      <div class="step">Question 8 of 12</div>
-      <div class="question" id="q-pickup-label">Offer local pickup?</div>
-      <div class="helper">If yes, we'll add it as a free shipping option at checkout.</div>
-      <div class="yn" data-name="pickup" role="radiogroup" aria-labelledby="q-pickup-label">
-        <button type="button" role="radio" aria-checked="false" data-val="yes">Yes — offer pickup</button>
-        <button type="button" role="radio" aria-checked="false" data-val="no">No — shipping only</button>
-      </div>
-      <div class="reveal">
-        <label class="field">
-          <span>Shop address (for pickup instructions)</span>
-          <input type="text" name="pickup_address" maxlength="200" placeholder="Street, City, WV Zip" />
-        </label>
-      </div>
-    </div>
+            <div class="field-row two" style="margin-top: 10px;">
+              <div class="field">
+                <label>Free shipping threshold?</label>
+                <div class="toggle-group" data-toggle="op_ship_free">
+                  <button type="button" aria-pressed="false" data-val="yes">Yes</button>
+                  <button type="button" aria-pressed="false" data-val="no">No</button>
+                </div>
+              </div>
+              <div class="field reveal" data-reveal-for="op_ship_free" data-reveal-on="yes">
+                <label>Minimum order for free ship ($)</label>
+                <input type="number" name="op_ship_free_min" step="0.01" min="0" inputmode="decimal" placeholder="75.00">
+              </div>
+            </div>
 
-    <!-- Q9: Brand story -->
-    <div class="card" data-q="story">
-      <div class="step">Question 9 of 12</div>
-      <div class="question">Tell us your story.</div>
-      <div class="helper">Two or three sentences. How did H&amp;M DTF start, and what makes you different? Don't overthink it — talk how you talk.</div>
-      <label class="field">
-        <span>Your story, in your words</span>
-        <textarea name="story" maxlength="1000" placeholder="e.g., We started H&M in a garage in 2024 after fixing a broken press for a church fundraiser..."></textarea>
-        <div class="char-counter" aria-live="polite" data-counter-for="story">0 / 1000</div>
-      </label>
-    </div>
+            <div class="field">
+              <label>International shipping?</label>
+              <div class="toggle-group" data-toggle="op_ship_intl">
+                <button type="button" aria-pressed="false" data-val="yes">Yes</button>
+                <button type="button" aria-pressed="false" data-val="quote">Quote on request</button>
+                <button type="button" aria-pressed="false" data-val="no">No</button>
+              </div>
+            </div>
 
-    <!-- Q10: Shopify admin -->
-    <div class="card" data-q="shopify">
-      <div class="step">Question 10 of 12</div>
-      <div class="question" id="q-shopify-label">Is your Shopify store set up?</div>
-      <div class="yn" data-name="shopify" role="radiogroup" aria-labelledby="q-shopify-label">
-        <button type="button" role="radio" aria-checked="false" data-val="yes">Yes — it's ready</button>
-        <button type="button" role="radio" aria-checked="false" data-val="no">No — need help setting it up</button>
-      </div>
-      <div class="reveal">
-        <label class="field">
-          <span>Your Shopify store URL (yourstore.myshopify.com)</span>
-          <input type="text" name="shopify_url" maxlength="200" placeholder="hatfieldmccoydtf.myshopify.com" />
-        </label>
-        <p style="color: var(--muted); font-size: 0.85rem; margin-top: 8px;">Next step: add <strong style="color: var(--cyan);" data-brand-email>Harold@rmmarketing.ca</strong> as a Collaborator in Settings → Users and permissions.</p>
-      </div>
-    </div>
+            <h3 style="margin-top: 22px;">Local Pickup</h3>
+            <div class="field">
+              <label>Offer local pickup?</label>
+              <div class="toggle-group" data-toggle="op_pickup">
+                <button type="button" aria-pressed="false" data-val="yes">Yes</button>
+                <button type="button" aria-pressed="false" data-val="no">No</button>
+              </div>
+            </div>
+            <div class="reveal" data-reveal-for="op_pickup" data-reveal-on="yes">
+              <div class="field">
+                <label>Pickup address</label>
+                <input type="text" name="op_pickup_address" maxlength="200" placeholder="311 George Kostas Dr, Logan, WV 25601">
+                <div class="help">Prefilled with your shop address — edit if needed.</div>
+              </div>
+              <div class="field-row two">
+                <div class="field">
+                  <label>Pickup hours</label>
+                  <input type="text" name="op_pickup_hours" maxlength="100" placeholder="Mon–Fri 9–5">
+                </div>
+                <div class="field">
+                  <label>Same-day cutoff time</label>
+                  <input type="text" name="op_pickup_cutoff" maxlength="50" placeholder="3 PM ET">
+                </div>
+              </div>
+            </div>
 
-    <!-- Q11: Anything else -->
-    <div class="card" data-q="notes">
-      <div class="step">Question 11 of 12</div>
-      <div class="question">Anything we missed?</div>
-      <div class="helper">Optional. Wide open.</div>
-      <label class="field">
-        <span>Notes, questions, files to send separately, etc.</span>
-        <textarea name="notes" maxlength="1000" placeholder="Anything at all."></textarea>
-        <div class="char-counter" aria-live="polite" data-counter-for="notes">0 / 1000</div>
-      </label>
-    </div>
+            <h3 style="margin-top: 22px;">Tools</h3>
+            <div class="field">
+              <label>Shipping tool</label>
+              <div class="toggle-group" data-toggle="op_ship_tool">
+                <button type="button" aria-pressed="false" data-val="shopify_shipping">Shopify Shipping</button>
+                <button type="button" aria-pressed="false" data-val="pirate_ship">Pirate Ship</button>
+                <button type="button" aria-pressed="false" data-val="shipstation">ShipStation</button>
+                <button type="button" aria-pressed="false" data-val="manual">Manual labels</button>
+                <button type="button" aria-pressed="false" data-val="other">Other</button>
+              </div>
+            </div>
+            <div class="field reveal" data-reveal-for="op_ship_tool" data-reveal-on="other">
+              <label>Which one?</label>
+              <input type="text" name="op_ship_tool_other" maxlength="100">
+            </div>
 
-    <!-- Q12: Contact -->
-    <div class="card submit-card" data-q="contact">
-      <div class="step">Question 12 of 12 · Last one</div>
-      <div class="question">Who are we talking to?</div>
-      <div class="helper">So we know who sent this when it hits our inbox.</div>
-      <label class="field">
-        <span>Your name</span>
-        <input type="text" name="name" required autocomplete="name" maxlength="100" placeholder="Nicole" />
-      </label>
-      <label class="field">
-        <span>Email (in case we have a follow-up question)</span>
-        <input type="email" name="email" required autocomplete="email" maxlength="200" placeholder="nicole@hatfieldmccoydtf.com" />
-      </label>
-      <button type="submit" class="btn-submit" id="submitBtn">Send It →</button>
-      <div class="cooldown-note" id="cooldownNote" aria-live="polite"></div>
-      <p style="color: var(--muted); font-size: 0.8rem; text-align: center; margin-top: 14px;">Your answers go directly to the Hatfield &amp; McCoy DTF build team.</p>
-    </div>
-  </form>
+            <div class="field">
+              <label>Kicksy (gang sheet builder) account?</label>
+              <div class="toggle-group" data-toggle="op_kicksy">
+                <button type="button" aria-pressed="false" data-val="have">Yes — I have one</button>
+                <button type="button" aria-pressed="false" data-val="fallback">Use fallback quote form</button>
+                <button type="button" aria-pressed="false" data-val="none">No custom builder needed</button>
+              </div>
+            </div>
+            <div class="field reveal" data-reveal-for="op_kicksy" data-reveal-on="have">
+              <label>Kicksy embed URL</label>
+              <input type="url" name="op_kicksy_url" maxlength="300" placeholder="https://kicksy.app/...">
+            </div>
 
-  <div class="thanks" id="thanks">
+            <h3 style="margin-top: 22px;">T-Shirt Brand Compatibility</h3>
+            <p class="card-subtitle" style="margin-bottom: 10px;">Which shirt brands do you press on most? We can list these as "Compatible with" on the site.</p>
+            <div class="chips" role="group" aria-label="T-shirt brands" data-chip-group="op_shirt_brands">
+              <button type="button" class="chip" aria-pressed="false" data-val="gildan">Gildan</button>
+              <button type="button" class="chip" aria-pressed="false" data-val="bella_canvas">Bella+Canvas</button>
+              <button type="button" class="chip" aria-pressed="false" data-val="comfort_colors">Comfort Colors</button>
+              <button type="button" class="chip" aria-pressed="false" data-val="next_level">Next Level</button>
+              <button type="button" class="chip" aria-pressed="false" data-val="jerzees">Jerzees</button>
+              <button type="button" class="chip" aria-pressed="false" data-val="port_company">Port &amp; Company</button>
+              <button type="button" class="chip" aria-pressed="false" data-val="american_apparel">American Apparel</button>
+            </div>
+            <div class="field" style="margin-top: 10px;">
+              <label>Display brand list on site?</label>
+              <div class="toggle-group" data-toggle="op_shirt_display">
+                <button type="button" aria-pressed="false" data-val="yes">Yes</button>
+                <button type="button" aria-pressed="false" data-val="no">No</button>
+              </div>
+            </div>
+
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Brand →</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="brand">
+          <div class="card">
+            <h2>Brand &amp; Story</h2>
+            <p class="card-subtitle">The voice of the shop — how it talks, how fast it ships.</p>
+
+            <div class="field">
+              <label>Your story (2-3 sentences)</label>
+              <textarea name="brand_story" maxlength="1000" placeholder="How H&amp;M DTF started and what makes you different. Don't overthink it — talk how you talk."></textarea>
+              <div class="char-counter" aria-live="polite" data-counter-for="brand_story">0 / 1000</div>
+            </div>
+
+            <div class="field-row two">
+              <div class="field">
+                <label>Founded year</label>
+                <input type="text" name="brand_founded" maxlength="4" inputmode="numeric" placeholder="2024">
+              </div>
+              <div class="field">
+                <label>Business hours</label>
+                <input type="text" name="brand_hours" maxlength="100" placeholder="Mon-Fri 9-5 ET">
+              </div>
+            </div>
+
+            <h3 style="margin-top: 18px;">Turnaround</h3>
+            <div class="field-row two">
+              <div class="field">
+                <label>In-stock TAT</label>
+                <input type="text" name="brand_tat_stock" maxlength="100" placeholder="24–48 hours">
+              </div>
+              <div class="field">
+                <label>Custom gang sheet TAT</label>
+                <input type="text" name="brand_tat_custom" maxlength="100" placeholder="48–72 hours">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Same-day pickup cutoff?</label>
+              <div class="toggle-group" data-toggle="brand_sameday">
+                <button type="button" aria-pressed="false" data-val="yes">Yes — cutoff at:</button>
+                <button type="button" aria-pressed="false" data-val="no">No</button>
+              </div>
+            </div>
+            <div class="field reveal" data-reveal-for="brand_sameday" data-reveal-on="yes">
+              <label>Same-day cutoff time</label>
+              <input type="text" name="brand_sameday_cutoff" maxlength="50" placeholder="3 PM ET">
+            </div>
+
+            <div class="field">
+              <label>Rush/expedited option?</label>
+              <div class="toggle-group" data-toggle="brand_rush">
+                <button type="button" aria-pressed="false" data-val="yes">Yes</button>
+                <button type="button" aria-pressed="false" data-val="no">No</button>
+              </div>
+            </div>
+            <div class="field reveal" data-reveal-for="brand_rush" data-reveal-on="yes">
+              <label>Rush upcharge</label>
+              <input type="text" name="brand_rush_upcharge" maxlength="100" placeholder="$25 flat, or 20% of order total">
+            </div>
+
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Assets →</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="assets">
+          <div class="card">
+            <h2>Brand Assets</h2>
+            <p class="card-subtitle">Drop links to Dropbox/Drive folders. We'll grab what we need.</p>
+
+            <div class="field">
+              <label>Logo file URL <span class="tip" data-tip="Dropbox, Google Drive, or any shareable URL. SVG or hi-res PNG works best." tabindex="0">?</span></label>
+              <input type="url" name="asset_logo" maxlength="500" placeholder="https://dropbox.com/.../logo.svg">
+              <div class="help">Current working logo is on the live site — link us to the file if you have a hi-res version.</div>
+            </div>
+
+            <div class="field">
+              <label>Product photos folder URL</label>
+              <input type="url" name="asset_photos" maxlength="500" placeholder="https://drive.google.com/...">
+              <div class="help">Real shop photos beat AI-generated. Link any folder you have.</div>
+            </div>
+
+            <div class="field">
+              <label>Preferred T-shirt colors for product photos</label>
+              <div class="chips" role="group" aria-label="T-shirt colors" data-chip-group="asset_shirt_colors">
+                <button type="button" class="chip" aria-pressed="false" data-val="black">Black</button>
+                <button type="button" class="chip" aria-pressed="false" data-val="white">White</button>
+                <button type="button" class="chip" aria-pressed="false" data-val="heather_gray">Heather Gray</button>
+                <button type="button" class="chip" aria-pressed="false" data-val="navy">Navy</button>
+                <button type="button" class="chip" aria-pressed="false" data-val="red">Red</button>
+                <button type="button" class="chip" aria-pressed="false" data-val="mixed">Mixed</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Brand style guide URL (optional)</label>
+              <input type="url" name="asset_brand_guide" maxlength="500" placeholder="https://...">
+            </div>
+
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Social →</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="social">
+          <div class="card">
+            <h2>Social &amp; Contact Preferences</h2>
+            <p class="card-subtitle">All optional. Skip anything you don't have.</p>
+
+            <div class="field-row two">
+              <div class="field">
+                <label>Instagram handle</label>
+                <input type="text" name="social_instagram" maxlength="100" placeholder="@hatfieldmccoydtf">
+              </div>
+              <div class="field">
+                <label>Facebook page URL</label>
+                <input type="url" name="social_facebook" maxlength="200" placeholder="https://facebook.com/...">
+              </div>
+            </div>
+            <div class="field-row two">
+              <div class="field">
+                <label>TikTok handle</label>
+                <input type="text" name="social_tiktok" maxlength="100" placeholder="@hatfieldmccoydtf">
+              </div>
+              <div class="field">
+                <label>YouTube channel</label>
+                <input type="url" name="social_youtube" maxlength="200" placeholder="https://youtube.com/@...">
+              </div>
+            </div>
+            <div class="field-row two">
+              <div class="field">
+                <label>Customer phone number</label>
+                <input type="tel" name="social_phone" maxlength="30" placeholder="(304) 555-0100" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label>Customer support email</label>
+                <input type="email" name="social_support_email" maxlength="200" placeholder="Harold@rmmarketing.ca" autocomplete="email">
+                <div class="help">Defaults to Harold@rmmarketing.ca if blank.</div>
+              </div>
+            </div>
+
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Shopify →</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="shopify">
+          <div class="card">
+            <h2>Shopify Access</h2>
+            <p class="card-subtitle">We'll wire products directly via the Shopify Admin API once we have access.</p>
+
+            <div class="field">
+              <label>Is your Shopify store set up?</label>
+              <div class="toggle-group" data-toggle="shopify_status">
+                <button type="button" aria-pressed="false" data-val="ready">Yes — it's ready</button>
+                <button type="button" aria-pressed="false" data-val="needs_setup">No — need help setting it up</button>
+              </div>
+            </div>
+            <div class="field reveal" data-reveal-for="shopify_status" data-reveal-on="ready">
+              <label>Your Shopify store URL</label>
+              <input type="text" name="shopify_url" maxlength="200" placeholder="hatfieldmccoydtf.myshopify.com">
+              <div class="help">
+                Next step: add <strong style="color: var(--cyan);">Harold@rmmarketing.ca</strong> as a Collaborator
+                in Settings → Users and permissions.
+              </div>
+            </div>
+            <div class="reveal" data-reveal-for="shopify_status" data-reveal-on="needs_setup">
+              <p>No problem — we'll set one up together. We'll send a scheduling link after you submit this form.</p>
+            </div>
+
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-nav-next>Next: Review &amp; Submit →</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" data-section="review">
+          <div class="card">
+            <h2>Review &amp; Send</h2>
+            <p class="card-subtitle">One last look before we wire everything up.</p>
+
+            <div id="review-summary"></div>
+
+            <h3 style="margin-top: 18px;">Your Contact Info</h3>
+            <div class="field-row two">
+              <div class="field">
+                <label>Your name</label>
+                <input type="text" name="contact_name" required autocomplete="name" maxlength="100" placeholder="Nicole">
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input type="email" name="contact_email" required autocomplete="email" maxlength="200" placeholder="you@hatfieldmccoydtf.com">
+              </div>
+            </div>
+            <div class="field">
+              <label>Phone (optional)</label>
+              <input type="tel" name="contact_phone" maxlength="30" autocomplete="tel" placeholder="(304) 555-0100">
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Send Catalog</button>
+            <div class="cooldown-note" id="cooldownNote" aria-live="polite"></div>
+            <p style="color: var(--muted); font-size: 0.82rem; text-align: center; margin-top: 14px;">Your answers go directly to the Hatfield &amp; McCoy DTF build team.</p>
+
+            <div class="section-nav">
+              <button type="button" class="btn btn-ghost" data-nav-prev>← Back</button>
+              <span></span>
+            </div>
+          </div>
+        </section>
+      </form>
+    </main>
+
+    <aside class="sidebar" aria-label="Progress summary">
+      <h3>Your Catalog So Far</h3>
+      <div class="sidebar-row"><span class="label">Collections confirmed</span><span class="value" id="sb-confirmed">0 / 7</span></div>
+      <div class="sidebar-row"><span class="label">Collections edited</span><span class="value" id="sb-edited">0</span></div>
+      <div class="sidebar-row"><span class="label">Collections removed</span><span class="value" id="sb-removed">0</span></div>
+      <div class="sidebar-row"><span class="label">New services added</span><span class="value" id="sb-services">0</span></div>
+      <div class="sidebar-row"><span class="label">SKU rows entered</span><span class="value" id="sb-rows">0</span></div>
+      <div class="sidebar-row"><span class="label">Time spent</span><span class="value" id="sb-time">0 min</span></div>
+      <div class="save-indicator" id="sb-save">Not yet saved</div>
+    </aside>
+  </div>
+
+  <div class="thanks" id="thanks" aria-live="polite">
     <div class="check">✓</div>
     <h1 id="thanksHeading">Got it, friend.</h1>
-    <p>Your answers landed in our inbox. We'll pick this up and have the next draft of your store ready within a few days.</p>
-    <p style="margin-top: 20px;"><a href="/" style="color: var(--cyan);">← Back to the store preview</a></p>
+    <p>Your catalog landed in our inbox. We'll wire your Shopify store and have the next draft ready within 24 hours.</p>
+    <div class="tracker" aria-label="Progress tracker">
+      <div class="tracker-step done"><span class="icon">✓</span> Got your catalog</div>
+      <div class="tracker-step current"><span class="icon">⏳</span> Building product pages (next 24 hours)</div>
+      <div class="tracker-step future"><span class="icon">3</span> Boss review</div>
+      <div class="tracker-step future"><span class="icon">4</span> Your store goes live</div>
+    </div>
+    <p style="margin-top: 24px;"><a href="/" style="color: var(--cyan);">← Back to the store preview</a></p>
   </div>
-</main>
+</div>
 
 <script>
-  // ============================================================
-  // Hatfield & McCoy DTF — Catalog Intake Form
-  // Hardened by Stream C (elegant-spinning-bear plan)
-  // ============================================================
+(function () {
+  'use strict';
 
-  // T-C01: webhook is server-side — form posts to a proxy that forwards to Discord.
-  // Note: depends on /api/intake deploy (T-D02). Local runs without the endpoint will 404 — acceptable during dev.
-  const WEBHOOK_URL = '/api/intake';
-  const STORAGE_KEY = 'hm_intake_v1';
-  const COOLDOWN_KEY = 'hmdtf_intake_last_submit';
+  var STORAGE_KEY = 'hm_intake_v2';
+  var STORAGE_KEY_V1 = 'hm_intake_v1';
+  var WEBHOOK_URL = '/api/intake';
+  var TIMEOUT_MS = 15000;
+  var COOLDOWN_SEC = 15;
+  var FORM_START = Date.now();
 
-  // TODO-STREAM-B-INTEGRATION: Swap these defaults to values loaded from data/config.json and data/content.json.
-  let CONFIG = {
-    webhook_endpoint: WEBHOOK_URL,
-    timeout_ms: 15000,
-    cooldown_seconds: 15,
-    brand_email: 'Harold@rmmarketing.ca',
-    min_answers: 4
+  var SECTIONS = ['welcome', 'catalog', 'services', 'operations', 'brand', 'assets', 'social', 'shopify', 'review'];
+  var SECTION_LABELS = {
+    welcome: 'Welcome', catalog: 'Your Catalog', services: 'Additional Services',
+    operations: 'Operations', brand: 'Brand', assets: 'Assets', social: 'Social',
+    shopify: 'Shopify', review: 'Review & Submit'
   };
 
-  // TODO-STREAM-B-INTEGRATION: load from data/content.json -> form_errors
-  let ERROR_COPY = {
-    timeout: {
-      title: 'Your answers are saved, but sending timed out.',
-      body: 'Check your connection and try again. Your draft is safe in this browser.'
-    },
-    network: {
-      title: 'Something went wrong sending your answers.',
-      body: 'Try again in a moment. If it keeps failing, email us directly at '
-    },
-    validation_email: 'Please enter a valid email address so we can reply to you.',
-    validation_contact: 'Name and email are required before we can send this.',
-    validation_min_answers: 'Answer at least 4 of the 11 questions above before submitting.',
-    cooldown: 'Please wait {seconds} seconds before submitting again.'
+  var ADDITIONAL_SERVICES = [
+    { slug: 'reflective_dtf',  name: 'Reflective DTF',   row_hint: 'Size / Color / Price' },
+    { slug: 'uv_dtf',          name: 'UV DTF',           row_hint: 'Size / Price' },
+    { slug: 'embroidery',      name: 'Embroidery',       row_hint: 'Stitch tier / Price (e.g. "Up to 5k stitches / $8")' },
+    { slug: 'laser_engraving', name: 'Laser Engraving',  row_hint: 'Item type / Price (e.g. "Leather patch 3in / $6")' },
+    { slug: 'sample_packs',    name: 'DTF Sample Packs', row_hint: 'Pack name / Price' },
+    { slug: 'spangle',         name: 'Spangle / Sequin Transfers', row_hint: 'Size / Price' },
+    { slug: 'puff_3d',         name: '3D Puff Transfers',row_hint: 'Size / Price' },
+    { slug: 'gold_foil_uv',    name: 'Gold Foil UV',     row_hint: 'Size / Price' },
+    { slug: 'tpu_patches',     name: 'TPU Patches',      row_hint: 'Size / Price' },
+    { slug: 'banners',         name: 'Banners',          row_hint: 'Size or sq ft / Price' },
+    { slug: 'die_cut_stickers',name: 'Die Cut Stickers', row_hint: 'Pack size / Price' },
+    { slug: 'wrapping_paper',  name: 'Wrapping Paper',   row_hint: 'Size / Price' },
+    { slug: 'personalized',    name: 'Personalized (tumblers, pens, golf balls, etc.)', row_hint: 'Item / Price' }
+  ];
+
+  var COVER_MAP = {
+    'dtf-22': 'dtf.png',
+    'dtf-46': 'dtf.png',
+    'glitter-22': 'glitter.png',
+    'glow-22': 'glow.png',
+    'sublimation-24': 'sublimation.png',
+    'gang-sheet': 'gang-sheets.png',
+    '3d-print': 'reflective.png' // placeholder thumbnail
   };
 
-  // TODO-STREAM-B-INTEGRATION: load from data/chip-labels.json (Stream B creates this).
-  // Until then, we inline the code→label mapping so the form always sends human-readable values to Discord.
-  const CHIP_LABELS = {
-    // Q4: gaps
-    dtf46: '46″ DTF: 88, 92',
-    dtf22: '22″ DTF: 204–288',
-    sub24: 'Sublim 24″: 108–144',
-    none: 'Leave all as-is',
-    // Q5: categories
-    uv_dtf: 'UV DTF',
-    reflective: 'Reflective DTF',
-    embroidery: 'Embroidery',
-    '3d_puff': '3D Puff Transfers',
-    spangle: 'Spangle / Sequin',
-    banners: 'Banners',
-    die_cut: 'Die Cut Stickers',
-    wrapping: 'Wrapping Paper',
-    laser: 'Laser Engraving',
-    personalized: 'Tumblers / Pens / Golf Balls',
-    sample_packs: 'Sample Packs',
-    custom_gang: 'Custom Gang Sheet'
-  };
+  var products = { collections: [] };
+  var content = {};
+  var config = {};
+  var currentSection = 'welcome';
+  var submitted = false;
+  var cooldownUntil = 0;
+  var persistTimer = null;
+  var timeTimer = null;
 
-  // Attempt to fetch external data files in parallel (non-blocking; falls back to inline defaults if missing)
-  (async function loadExternalData() {
-    const [cfgRes, contentRes, labelsRes] = await Promise.all([
-      fetch('data/config.json').catch(() => null),
-      fetch('data/content.json').catch(() => null),
-      fetch('data/chip-labels.json').catch(() => null)
-    ]);
-
-    if (cfgRes && cfgRes.ok) {
-      try {
-        const cfg = await cfgRes.json();
-        if (cfg && typeof cfg === 'object') {
-          CONFIG = {
-            webhook_endpoint: cfg.webhook_endpoint || CONFIG.webhook_endpoint,
-            timeout_ms: cfg.timeout_ms || CONFIG.timeout_ms,
-            cooldown_seconds: cfg.cooldown_seconds || CONFIG.cooldown_seconds,
-            brand_email: cfg.brand_email || CONFIG.brand_email,
-            min_answers: cfg.min_answers || CONFIG.min_answers
-          };
-          document.querySelectorAll('[data-brand-email]').forEach(el => {
-            el.textContent = CONFIG.brand_email;
-          });
-        }
-      } catch (e) { /* fallback to defaults */ }
-    }
-
-    if (contentRes && contentRes.ok) {
-      try {
-        const content = await contentRes.json();
-        if (content && content.form_errors) {
-          ERROR_COPY = Object.assign(ERROR_COPY, content.form_errors);
-        }
-      } catch (e) { /* fallback to defaults */ }
-    }
-
-    if (labelsRes && labelsRes.ok) {
-      try {
-        const labels = await labelsRes.json();
-        if (labels && typeof labels === 'object') Object.assign(CHIP_LABELS, labels);
-      } catch (e) { /* fallback to defaults */ }
-    }
-  })();
-
-  // ————— state —————
-  const state = {
-    units: null, units_other: '',
-    glow_price: null,
-    threeD: null,
-    gaps: [],
-    categories: [], category_pricing: '',
-    silver: null,
-    turnaround: '',
-    pickup: null, pickup_address: '',
-    story: '',
-    shopify: null, shopify_url: '',
-    notes: '',
-    name: '', email: ''
-  };
-
-  // ————— restore draft —————
-  function restoreFromStorage() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        Object.assign(state, JSON.parse(saved));
-        applyStateToDOM();
-      }
-    } catch (e) {}
-  }
-
-  function applyStateToDOM() {
-    document.querySelectorAll('.yn').forEach(group => {
-      const name = group.dataset.name;
-      group.querySelectorAll('button').forEach(b => {
-        const isOn = state[name] === b.dataset.val;
-        b.classList.toggle('on', isOn);
-        b.setAttribute('aria-checked', isOn ? 'true' : 'false');
+  function el(tag, attrs, children) {
+    var n = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) {
+        if (k === 'class') n.className = attrs[k];
+        else if (k === 'text') n.textContent = attrs[k];
+        else if (k === 'dataset') {
+          Object.keys(attrs[k]).forEach(function (d) { n.dataset[d] = attrs[k][d]; });
+        } else if (k.indexOf('on') === 0 && typeof attrs[k] === 'function') {
+          n.addEventListener(k.slice(2).toLowerCase(), attrs[k]);
+        } else if (attrs[k] === true) { n.setAttribute(k, ''); }
+        else if (attrs[k] !== false && attrs[k] !== null && attrs[k] !== undefined) { n.setAttribute(k, attrs[k]); }
       });
-      const card = group.closest('.card');
-      const reveal = card.querySelector('.reveal');
-      if (state[name]) {
-        card.classList.add('answered');
-        if (reveal && shouldReveal(name, state[name])) reveal.classList.add('show');
-        else if (reveal) reveal.classList.remove('show');
-      }
-    });
-    document.querySelectorAll('.chips').forEach(group => {
-      const name = group.dataset.name;
-      const card = group.closest('.card');
-      const reveal = card.querySelector('.reveal');
-      if (Array.isArray(state[name])) {
-        group.querySelectorAll('.chip').forEach(chip => {
-          const isOn = state[name].includes(chip.dataset.val);
-          chip.classList.toggle('on', isOn);
-          chip.setAttribute('aria-pressed', isOn ? 'true' : 'false');
-        });
-        card.classList.toggle('answered', state[name].length > 0);
-        if (reveal) reveal.classList.toggle('show', state[name].length > 0);
-      }
-    });
-    document.querySelectorAll('input, textarea').forEach(input => {
-      if (input.name && state[input.name] !== undefined && typeof state[input.name] === 'string') {
-        input.value = state[input.name];
-        const counter = document.querySelector(`[data-counter-for="${input.name}"]`);
-        if (counter && input.maxLength > 0) updateCounter(input, counter);
-        const card = input.closest('.card');
-        if (card && !card.classList.contains('submit-card')) {
-          card.classList.toggle('answered', !!input.value.trim());
-        }
-      }
-    });
-    // T-C03: recalculate Q12 answered status based on contact fields
-    updateContactCard();
-    updateProgress();
+    }
+    if (children) children.forEach(function (c) { if (c) n.appendChild(c); });
+    return n;
   }
+  function qs(s, root) { return (root || document).querySelector(s); }
+  function qsa(s, root) { return Array.prototype.slice.call((root || document).querySelectorAll(s)); }
 
-  restoreFromStorage();
-
-  // ————— yes/no buttons —————
-  document.querySelectorAll('.yn').forEach(group => {
-    const name = group.dataset.name;
-    const card = group.closest('.card');
-    const reveal = card.querySelector('.reveal');
-
-    group.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        group.querySelectorAll('button').forEach(b => {
-          b.classList.remove('on');
-          b.setAttribute('aria-checked', 'false');
-        });
-        btn.classList.add('on');
-        btn.setAttribute('aria-checked', 'true');
-        state[name] = btn.dataset.val;
-        card.classList.add('answered');
-        if (reveal) {
-          if (shouldReveal(name, btn.dataset.val)) {
-            reveal.classList.add('show');
-          } else {
-            reveal.classList.remove('show');
-            // T-C03 / D-074: clear stale reveal-input data when state flips away
-            const hiddenInputs = reveal.querySelectorAll('input, textarea');
-            hiddenInputs.forEach(inp => {
-              if (inp.name && state[inp.name] !== undefined && typeof state[inp.name] === 'string' && state[inp.name]) {
-                state[inp.name] = '';
-                inp.value = '';
-              }
-            });
-          }
-        }
-        persist(); updateProgress();
-      });
-    });
-  });
-
-  function shouldReveal(name, val) {
-    if (name === 'units') return val === 'no';
-    if (name === 'pickup') return val === 'yes';
-    if (name === 'shopify') return val === 'yes';
-    return false;
-  }
-
-  // ————— chips —————
-  document.querySelectorAll('.chips').forEach(group => {
-    const name = group.dataset.name;
-    const card = group.closest('.card');
-    const reveal = card.querySelector('.reveal');
-
-    group.querySelectorAll('.chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const v = chip.dataset.val;
-
-        if (name === 'gaps' && v === 'none') {
-          group.querySelectorAll('.chip').forEach(c => {
-            c.classList.remove('on');
-            c.setAttribute('aria-pressed', 'false');
-          });
-          chip.classList.add('on');
-          chip.setAttribute('aria-pressed', 'true');
-          state[name] = ['none'];
-        } else {
-          if (name === 'gaps') {
-            const noneChip = group.querySelector('.chip[data-val="none"]');
-            if (noneChip) {
-              noneChip.classList.remove('on');
-              noneChip.setAttribute('aria-pressed', 'false');
-            }
-          }
-          chip.classList.toggle('on');
-          chip.setAttribute('aria-pressed', chip.classList.contains('on') ? 'true' : 'false');
-          state[name] = Array.from(group.querySelectorAll('.chip.on')).map(c => c.dataset.val);
-          if (name !== 'gaps') {
-            state[name] = state[name].filter(x => x !== 'none');
-          }
-        }
-        card.classList.toggle('answered', state[name].length > 0);
-        if (reveal) {
-          if (state[name].length) reveal.classList.add('show');
-          else reveal.classList.remove('show');
-        }
-        persist(); updateProgress();
-      });
-    });
-  });
-
-  // ————— text inputs + T-C07 character counter —————
-  function updateCounter(input, counter) {
-    const len = input.value.length;
-    const max = input.maxLength;
-    counter.textContent = `${len} / ${max}`;
-    counter.classList.toggle('near-limit', len >= max * 0.9);
-  }
-
-  document.querySelectorAll('input, textarea').forEach(input => {
-    if (!input.name || input.name === 'url_referrer') return;
-
-    const counter = document.querySelector(`[data-counter-for="${input.name}"]`);
-    if (counter && input.maxLength > 0) updateCounter(input, counter);
-
-    input.addEventListener('input', () => {
-      state[input.name] = input.value;
-      if (counter && input.maxLength > 0) updateCounter(input, counter);
-
-      const card = input.closest('.card');
-      if (card) {
-        if (card.classList.contains('submit-card')) {
-          // T-C03: Q12 counts as answered when BOTH name and email have values
-          updateContactCard();
-        } else {
-          card.classList.toggle('answered', !!input.value.trim());
-        }
-      }
-      persist(); updateProgress();
-    });
-  });
-
-  function updateContactCard() {
-    const card = document.querySelector('.submit-card');
-    if (!card) return;
-    const hasName = !!(state.name && state.name.trim());
-    const hasEmail = !!(state.email && state.email.trim());
-    card.classList.toggle('answered', hasName && hasEmail);
-  }
-
-  // ————— progress —————
-  const totalQuestions = 12;
-  function updateProgress() {
-    const answered = document.querySelectorAll('.card.answered').length;
-    const pct = Math.round((answered / totalQuestions) * 100);
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = `${answered} of ${totalQuestions} answered`;
-  }
-
-  // ————— T-C13: persist (debounced 250ms) —————
-  let persistTimer = null;
   function persist() {
     if (persistTimer) clearTimeout(persistTimer);
-    persistTimer = setTimeout(() => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    persistTimer = setTimeout(function () {
+      try {
+        var snapshot = collectState();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+        var ind = qs('#save-indicator'); if (ind) { ind.textContent = 'Saved ✓'; ind.classList.add('saved'); }
+        var sbSave = qs('#sb-save'); if (sbSave) { sbSave.textContent = 'Saved ✓ just now'; sbSave.classList.add('saved'); }
+      } catch (e) { /* quota */ }
     }, 250);
   }
 
-  updateProgress();
-
-  // ————— T-C16: cross-tab sync via storage events —————
-  window.addEventListener('storage', (e) => {
-    if (e.key === STORAGE_KEY && e.newValue) {
-      try {
-        const incoming = JSON.parse(e.newValue);
-        Object.assign(state, incoming);
-        applyStateToDOM();
-      } catch (err) {}
-    }
-  });
-
-  // ————— submit handler —————
-  const form = document.getElementById('intakeForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const errorBanner = document.getElementById('errorBanner');
-  const thanks = document.getElementById('thanks');
-  const cooldownNote = document.getElementById('cooldownNote');
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  let cooldownTimer = null;
-
-  // Build submit button content using safe DOM methods (no innerHTML)
-  function renderSubmitButton(label, withSpinner) {
-    while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
-    if (withSpinner) {
-      const spin = document.createElement('span');
-      spin.className = 'spinner';
-      spin.setAttribute('aria-hidden', 'true');
-      submitBtn.appendChild(spin);
-    }
-    submitBtn.appendChild(document.createTextNode(label));
-  }
-
-  function showError(title, body) {
-    while (errorBanner.firstChild) errorBanner.removeChild(errorBanner.firstChild);
-    if (title) {
-      const strong = document.createElement('strong');
-      strong.textContent = title;
-      errorBanner.appendChild(strong);
-    }
-    if (body) {
-      errorBanner.appendChild(document.createTextNode(body));
-    }
-    errorBanner.classList.add('show');
-    errorBanner.hidden = false;
-  }
-
-  function showErrorWithRetry(title, body, onRetry) {
-    showError(title, body);
-    const retryBtn = document.createElement('button');
-    retryBtn.type = 'button';
-    retryBtn.className = 'btn-retry';
-    retryBtn.textContent = 'Try again';
-    retryBtn.addEventListener('click', () => {
-      hideError();
-      onRetry();
-    });
-    errorBanner.appendChild(document.createElement('br'));
-    errorBanner.appendChild(retryBtn);
-  }
-
-  function hideError() {
-    errorBanner.classList.remove('show');
-    errorBanner.hidden = true;
-    while (errorBanner.firstChild) errorBanner.removeChild(errorBanner.firstChild);
-  }
-
-  function countAnsweredNonContact() {
-    let count = 0;
-    document.querySelectorAll('.card.answered').forEach(c => {
-      if (!c.classList.contains('submit-card')) count++;
-    });
-    return count;
-  }
-
-  function startCooldownCountdown(remaining) {
-    if (cooldownTimer) clearInterval(cooldownTimer);
-    cooldownNote.classList.add('show');
-    cooldownNote.textContent = ERROR_COPY.cooldown.replace('{seconds}', String(remaining));
-    cooldownTimer = setInterval(() => {
-      remaining--;
-      if (remaining <= 0) {
-        clearInterval(cooldownTimer);
-        cooldownNote.classList.remove('show');
-        cooldownNote.textContent = '';
-        submitBtn.disabled = false;
-      } else {
-        cooldownNote.textContent = ERROR_COPY.cooldown.replace('{seconds}', String(remaining));
-      }
-    }, 1000);
-  }
-
-  // Check cooldown on page load (persist across refresh)
-  (function checkInitialCooldown() {
-    const last = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
-    const elapsed = Date.now() - last;
-    const cooldownMs = CONFIG.cooldown_seconds * 1000;
-    if (elapsed < cooldownMs) {
-      const remaining = Math.ceil((cooldownMs - elapsed) / 1000);
-      submitBtn.disabled = true;
-      startCooldownCountdown(remaining);
-    }
-  })();
-
-  async function sendForm() {
-    submitBtn.disabled = true;
-    renderSubmitButton('Sending...', true);
-
-    const payload = buildDiscordPayload(state);
-
-    // T-C02: fetch timeout via AbortController
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeout_ms);
-
+  function loadDraft() {
+    try { if (localStorage.getItem(STORAGE_KEY_V1)) localStorage.removeItem(STORAGE_KEY_V1); } catch (e) {}
     try {
-      const res = await fetch(CONFIG.webhook_endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-
-      if (!res.ok) throw new Error('HTTP_' + res.status);
-
-      localStorage.setItem(COOLDOWN_KEY, String(Date.now()));
-      localStorage.removeItem(STORAGE_KEY);
-
-      // T-C20: mark navigation state so back/refresh doesn't show a re-submit form
-      try { history.replaceState({ submitted: true, name: state.name }, '', location.pathname); } catch (e) {}
-
-      showThanks(state.name || 'friend');
-    } catch (err) {
-      clearTimeout(timeoutId);
-      if (err.name === 'AbortError') {
-        showErrorWithRetry(ERROR_COPY.timeout.title, ERROR_COPY.timeout.body, sendForm);
-      } else {
-        const bodyText = ERROR_COPY.network.body + CONFIG.brand_email + '.';
-        showErrorWithRetry(ERROR_COPY.network.title, bodyText, sendForm);
-      }
-      submitBtn.disabled = false;
-      renderSubmitButton('Send It →', false);
-    }
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      return (parsed && parsed._v === 2) ? parsed : null;
+    } catch (e) { return null; }
   }
 
-  function showThanks(name) {
-    form.style.display = 'none';
-    document.querySelector('.progress').style.display = 'none';
-    document.querySelector('.header').style.display = 'none';
-    // T-C19: interpolate the name on the thanks screen
-    document.getElementById('thanksHeading').textContent = `Got it, ${name}.`;
-    thanks.classList.add('show');
+  function loadData() {
+    return Promise.all([
+      fetch('data/products.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('data/content.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('data/config.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    ]).then(function (results) {
+      products = results[0] || { collections: [] };
+      content = results[1] || {};
+      config = results[2] || {};
+    });
+  }
+
+  function getPriceRange(col) {
+    var ps = (col.products || []).map(function (p) { return Number(p.price); }).filter(function (x) { return !isNaN(x) && x > 0; });
+    if (ps.length === 0) return '';
+    var mn = Math.min.apply(null, ps), mx = Math.max.apply(null, ps);
+    var f = function (n) { return '$' + (n >= 100 ? Math.round(n) : n.toFixed(2)); };
+    return mn === mx ? f(mn) : f(mn) + '–' + f(mx);
+  }
+
+  function renderCollections() {
+    var host = qs('#collections-list');
+    while (host.firstChild) host.removeChild(host.firstChild);
+
+    products.collections.forEach(function (col) {
+      var card = el('div', { class: 'collection-card', dataset: { slug: col.slug, kind: 'collection' } });
+
+      var head = el('div', { class: 'collection-head' });
+      var thumb = el('div', { class: 'collection-thumb' });
+      var coverFile = COVER_MAP[col.slug] || 'dtf.png';
+      var img = el('img', { src: 'assets/images/covers/' + coverFile, alt: col.name, loading: 'lazy' });
+      img.onerror = function () { this.style.display = 'none'; };
+      thumb.appendChild(img);
+      head.appendChild(thumb);
+
+      var meta = el('div', { class: 'collection-meta' });
+      meta.appendChild(el('h3', { text: col.name }));
+      var sizeCount = (col.products || []).length;
+      var priceRange = getPriceRange(col);
+      meta.appendChild(el('div', { class: 'summary', text: sizeCount + ' size' + (sizeCount === 1 ? '' : 's') + (priceRange ? ' · ' + priceRange : '') }));
+      head.appendChild(meta);
+      card.appendChild(head);
+
+      var tg = el('div', { class: 'toggle-group', role: 'radiogroup', dataset: { toggle: 'collection_' + col.slug } });
+      [
+        { v: 'confirm_as_is', l: 'Confirm as-is' },
+        { v: 'edited', l: 'Edit rows' },
+        { v: 'coming_soon', l: 'Coming soon' },
+        { v: 'remove', l: 'Remove' }
+      ].forEach(function (opt) {
+        var b = el('button', { type: 'button', 'aria-pressed': 'false', dataset: { val: opt.v } });
+        b.textContent = opt.l;
+        tg.appendChild(b);
+      });
+      card.appendChild(tg);
+
+      var reveal = el('div', { class: 'reveal', dataset: { revealFor: 'collection_' + col.slug, revealOn: 'edited' } });
+
+      if (col.slug === 'glow-22') {
+        reveal.appendChild(el('div', { class: 'inline-warn', text: 'Heads up: the Glow 22×300 row shows $153, but the ladder suggests ~$225 — we flagged it as a possible typo. Edit the row below to fix.' }));
+      }
+
+      var table = el('div', { class: 'rows-table' });
+      var header = el('div', { class: 'rows-header' });
+      ['Size', 'Price', 'SKU', 'Keep', ''].forEach(function (h) {
+        header.appendChild(el('span', { text: h }));
+      });
+      table.appendChild(header);
+
+      (col.products || []).forEach(function (p, idx) {
+        var row = el('div', { class: 'row-item', dataset: { slug: col.slug, idx: String(idx) } });
+        row.appendChild(el('input', { type: 'text', value: p.size || '', placeholder: 'Size', dataset: { field: 'size' } }));
+        row.appendChild(el('input', { type: 'number', step: '0.01', min: '0', inputmode: 'decimal', value: String(p.price || ''), placeholder: 'Price', dataset: { field: 'price' } }));
+        row.appendChild(el('input', { type: 'text', value: p.sku || '', placeholder: 'SKU', dataset: { field: 'sku' } }));
+        var keep = el('input', { type: 'checkbox', dataset: { field: 'keep' }, 'aria-label': 'Keep this row' });
+        keep.checked = true;
+        row.appendChild(keep);
+        row.appendChild(el('button', { type: 'button', class: 'row-remove', text: '×', 'aria-label': 'Remove row' }));
+        table.appendChild(row);
+      });
+      reveal.appendChild(table);
+      reveal.appendChild(el('button', { type: 'button', class: 'row-add', text: '+ Add size', dataset: { addRow: col.slug } }));
+
+      card.appendChild(reveal);
+      host.appendChild(card);
+    });
+
+    var countEl = qs('#preset-count');
+    if (countEl) countEl.textContent = products.collections.length + ' collections';
+  }
+
+  function renderServices() {
+    var host = qs('#services-list');
+    while (host.firstChild) host.removeChild(host.firstChild);
+
+    ADDITIONAL_SERVICES.forEach(function (svc) {
+      var card = el('div', { class: 'collection-card', dataset: { slug: svc.slug, kind: 'service' } });
+      card.appendChild(el('h3', { text: svc.name }));
+
+      var tg = el('div', { class: 'toggle-group', role: 'radiogroup', dataset: { toggle: 'service_' + svc.slug } });
+      [
+        { v: 'offered', l: 'Yes — list it' },
+        { v: 'not_offered', l: 'No' },
+        { v: 'coming_soon', l: 'Coming soon' }
+      ].forEach(function (opt) {
+        var b = el('button', { type: 'button', 'aria-pressed': 'false', dataset: { val: opt.v } });
+        b.textContent = opt.l;
+        tg.appendChild(b);
+      });
+      card.appendChild(tg);
+
+      var reveal = el('div', { class: 'reveal', dataset: { revealFor: 'service_' + svc.slug, revealOn: 'offered' } });
+      reveal.appendChild(el('div', { class: 'row-note-label', text: svc.row_hint }));
+
+      var table = el('div', { class: 'rows-table' });
+      reveal.appendChild(table);
+      reveal.appendChild(el('button', { type: 'button', class: 'row-add', text: '+ Add a price/size', dataset: { addServiceRow: svc.slug } }));
+
+      var notesField = el('div', { class: 'field', style: 'margin-top: 14px;' });
+      notesField.appendChild(el('label', { text: 'Notes (optional)' }));
+      notesField.appendChild(el('textarea', { name: 'svc_notes_' + svc.slug, maxlength: '500', placeholder: 'Any quirks, setup fees, minimums, etc.' }));
+      reveal.appendChild(notesField);
+
+      card.appendChild(reveal);
+      host.appendChild(card);
+    });
+  }
+
+  function addServiceRow(slug) {
+    var card = qs('.collection-card[data-slug="' + slug + '"][data-kind="service"]');
+    if (!card) return;
+    var table = qs('.rows-table', card);
+    var row = el('div', { class: 'row-item', dataset: { slug: slug, added: 'true' } });
+    row.appendChild(el('input', { type: 'text', value: '', placeholder: 'Size / item', dataset: { field: 'size' } }));
+    row.appendChild(el('input', { type: 'number', step: '0.01', min: '0', inputmode: 'decimal', value: '', placeholder: 'Price', dataset: { field: 'price' } }));
+    row.appendChild(el('input', { type: 'text', value: '', placeholder: 'SKU (opt)', dataset: { field: 'sku' } }));
+    row.appendChild(el('span'));
+    row.appendChild(el('button', { type: 'button', class: 'row-remove', text: '×', 'aria-label': 'Remove row' }));
+    table.appendChild(row);
+  }
+
+  function addCollectionRow(slug) {
+    var card = qs('.collection-card[data-slug="' + slug + '"][data-kind="collection"]');
+    if (!card) return;
+    var table = qs('.rows-table', card);
+    var nextIdx = qsa('.row-item', table).length;
+    var row = el('div', { class: 'row-item', dataset: { slug: slug, idx: String(nextIdx), added: 'true' } });
+    row.appendChild(el('input', { type: 'text', value: '', placeholder: 'New size', dataset: { field: 'size' } }));
+    row.appendChild(el('input', { type: 'number', step: '0.01', min: '0', inputmode: 'decimal', value: '', placeholder: 'Price', dataset: { field: 'price' } }));
+    row.appendChild(el('input', { type: 'text', value: '', placeholder: 'SKU', dataset: { field: 'sku' } }));
+    var k = el('input', { type: 'checkbox', dataset: { field: 'keep' } });
+    k.checked = true;
+    row.appendChild(k);
+    row.appendChild(el('button', { type: 'button', class: 'row-remove', text: '×', 'aria-label': 'Remove row' }));
+    table.appendChild(row);
+  }
+
+  function renderSectionNav() {
+    var host = qs('#sections-nav');
+    while (host.firstChild) host.removeChild(host.firstChild);
+    SECTIONS.forEach(function (s, idx) {
+      var b = el('button', { type: 'button', role: 'tab', 'aria-selected': s === currentSection ? 'true' : 'false', dataset: { goSection: s } });
+      b.textContent = (idx + 1) + '. ' + SECTION_LABELS[s];
+      if (s === currentSection) b.classList.add('current');
+      host.appendChild(b);
+    });
+  }
+
+  function goSection(name) {
+    if (SECTIONS.indexOf(name) < 0) return;
+    currentSection = name;
+    qsa('.section').forEach(function (s) {
+      s.classList.toggle('active', s.dataset.section === name);
+    });
+    qs('#section-label').textContent = SECTION_LABELS[name];
+    renderSectionNav();
+    updateProgress();
+    updateSidebar();
+    if (name === 'review') renderReviewSummary();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // T-C20: if user navigated back to an already-submitted state, show the thanks directly
-  if (history.state && history.state.submitted) {
-    showThanks(history.state.name || state.name || 'friend');
+  function updateProgress() {
+    var idx = SECTIONS.indexOf(currentSection);
+    var pct = idx / (SECTIONS.length - 1) * 100;
+    qs('#progress-fill').style.width = pct + '%';
   }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    hideError();
+  function updateSidebar() {
+    var c = countCatalog();
+    var sb1 = qs('#sb-confirmed'); if (sb1) sb1.textContent = c.confirmed + ' / ' + products.collections.length;
+    var sb2 = qs('#sb-edited'); if (sb2) sb2.textContent = c.edited;
+    var sb3 = qs('#sb-removed'); if (sb3) sb3.textContent = c.removed;
+    var sb4 = qs('#sb-services'); if (sb4) sb4.textContent = c.services;
+    var sb5 = qs('#sb-rows'); if (sb5) sb5.textContent = c.rows;
+    var mins = Math.floor((Date.now() - FORM_START) / 60000);
+    var sb6 = qs('#sb-time'); if (sb6) sb6.textContent = mins + ' min';
+  }
 
-    // T-C14: Honeypot (renamed to url_referrer)
-    if (form.url_referrer && form.url_referrer.value) {
-      showError('', ERROR_COPY.validation_contact);
-      return;
-    }
+  function countCatalog() {
+    var c = { confirmed: 0, edited: 0, removed: 0, services: 0, rows: 0 };
+    qsa('.collection-card[data-kind="collection"]').forEach(function (card) {
+      var pressed = qs('button[aria-pressed="true"]', qs('.toggle-group', card));
+      if (!pressed) return;
+      var val = pressed.dataset.val;
+      if (val === 'confirm_as_is') c.confirmed++;
+      else if (val === 'edited') c.edited++;
+      else if (val === 'remove') c.removed++;
+      qsa('.row-item', card).forEach(function (row) {
+        var size = qs('input[data-field="size"]', row);
+        var price = qs('input[data-field="price"]', row);
+        if ((size && size.value.trim()) || (price && price.value.trim())) c.rows++;
+      });
+    });
+    qsa('.collection-card[data-kind="service"]').forEach(function (card) {
+      var pressed = qs('button[aria-pressed="true"]', qs('.toggle-group', card));
+      if (pressed && pressed.dataset.val === 'offered') c.services++;
+      qsa('.row-item', card).forEach(function (row) {
+        var size = qs('input[data-field="size"]', row);
+        var price = qs('input[data-field="price"]', row);
+        if ((size && size.value.trim()) || (price && price.value.trim())) c.rows++;
+      });
+    });
+    return c;
+  }
 
-    // T-C15: Cooldown check (15s, not 60s)
-    const last = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
-    const elapsed = Date.now() - last;
-    const cooldownMs = CONFIG.cooldown_seconds * 1000;
-    if (elapsed < cooldownMs) {
-      const remaining = Math.ceil((cooldownMs - elapsed) / 1000);
-      showError('', ERROR_COPY.cooldown.replace('{seconds}', String(remaining)));
-      startCooldownCountdown(remaining);
-      return;
-    }
+  function renderReviewSummary() {
+    var host = qs('#review-summary');
+    while (host.firstChild) host.removeChild(host.firstChild);
 
-    // T-C06: contact validation
-    if (!state.name || !state.name.trim() || !state.email || !state.email.trim()) {
-      showError('', ERROR_COPY.validation_contact);
-      return;
-    }
-    if (!EMAIL_RE.test(state.email.trim())) {
-      showError('', ERROR_COPY.validation_email);
-      const emailInput = form.querySelector('input[name="email"]');
-      if (emailInput) emailInput.focus();
-      return;
-    }
-
-    // T-C06: minimum-answer gate (at least 4 of the 11 non-contact questions)
-    const answeredCount = countAnsweredNonContact();
-    if (answeredCount < CONFIG.min_answers) {
-      showError('', ERROR_COPY.validation_min_answers);
-      return;
-    }
-
-    sendForm();
-  });
-
-  // ————— payload builder —————
-  function buildDiscordPayload(s) {
-    const TRUNC_MARK = '… [truncated — see full draft in intake tool]';
-
-    // T-C17: slice-and-mark helper — appends truncation marker when it cuts
-    const slice = (str, limit) => {
-      if (!str) return '—';
-      if (str.length <= limit) return str;
-      return str.slice(0, limit - TRUNC_MARK.length) + TRUNC_MARK;
-    };
-
-    // T-C04: map chip codes to human-readable labels
-    const chipsToLabels = (arr) => {
-      if (!Array.isArray(arr) || !arr.length) return '—';
-      return arr.map(v => CHIP_LABELS[v] || v).join(', ');
-    };
-
-    const ynFmt = (v) => v === null || v === undefined ? '—' : (v === 'yes' ? 'Yes' : (v === 'no' ? 'No' : String(v)));
-
-    // T-C05: reorder fields to match visible question order (Q1 → Q11; Q12 contact is in header)
-    const fields = [
-      { name: 'Q1 · Units in inches?', value: ynFmt(s.units) + (s.units === 'no' && s.units_other ? ` (${s.units_other})` : ''), inline: true },
-      { name: 'Q2 · Glow $225 fix?', value: ynFmt(s.glow_price), inline: true },
-      { name: 'Q3 · 3D printing?', value: ynFmt(s.threeD), inline: true },
-      { name: 'Q4 · Fill size gaps', value: chipsToLabels(s.gaps), inline: false },
-      { name: 'Q5 · Services offered', value: chipsToLabels(s.categories), inline: false },
-      { name: 'Q5b · Category pricing notes', value: slice(s.category_pricing, 1000), inline: false },
-      { name: 'Q6 · Silver typo fix?', value: ynFmt(s.silver), inline: true },
-      { name: 'Q7 · Turnaround', value: slice(s.turnaround, 500), inline: false },
-      { name: 'Q8 · Local pickup?', value: ynFmt(s.pickup) + (s.pickup === 'yes' && s.pickup_address ? ` — ${s.pickup_address}` : ''), inline: true },
-      { name: 'Q9 · Brand story', value: slice(s.story, 1000), inline: false },
-      { name: 'Q10 · Shopify ready?', value: ynFmt(s.shopify) + (s.shopify === 'yes' && s.shopify_url ? ` — ${s.shopify_url}` : ''), inline: true },
-      { name: 'Q11 · Extra notes', value: slice(s.notes, 1000), inline: false }
+    var c = countCatalog();
+    var summary = [
+      { heading: 'Catalog', edit: 'catalog', rows: [
+        { k: 'Collections confirmed', v: c.confirmed + ' of ' + products.collections.length },
+        { k: 'Collections with edits', v: String(c.edited) },
+        { k: 'Collections removed', v: String(c.removed) },
+        { k: 'Total SKU rows entered', v: String(c.rows) }
+      ]},
+      { heading: 'Additional Services', edit: 'services', rows: [
+        { k: 'Services added', v: String(c.services) }
+      ]},
+      { heading: 'Operations', edit: 'operations', rows: [
+        { k: 'Shipping (flat)', v: '$' + (readField('op_ship_flat') || '—') },
+        { k: 'Overnight', v: fmtToggle('op_ship_overnight') },
+        { k: 'Local pickup', v: fmtToggle('op_pickup') },
+        { k: 'Kicksy', v: fmtToggle('op_kicksy') },
+        { k: 'Shirt brands', v: readChips('op_shirt_brands').length + ' selected' }
+      ]},
+      { heading: 'Brand', edit: 'brand', rows: [
+        { k: 'Story length', v: (readField('brand_story') || '').length + ' chars' },
+        { k: 'Founded', v: readField('brand_founded') || '—' },
+        { k: 'In-stock TAT', v: readField('brand_tat_stock') || '—' }
+      ]},
+      { heading: 'Assets', edit: 'assets', rows: [
+        { k: 'Logo URL', v: readField('asset_logo') ? 'Provided ✓' : '—' },
+        { k: 'Photos URL', v: readField('asset_photos') ? 'Provided ✓' : '—' },
+        { k: 'Shirt colors selected', v: String(readChips('asset_shirt_colors').length) }
+      ]},
+      { heading: 'Shopify', edit: 'shopify', rows: [
+        { k: 'Status', v: fmtToggle('shopify_status') }
+      ]}
     ];
 
-    // T-C18: forensics footer for spam investigation (UA, ISO timestamp, locale)
-    const forensics = `${navigator.userAgent} | ${new Date().toISOString()} | ${navigator.language || '—'}`;
+    summary.forEach(function (sec) {
+      var sectionDiv = el('div', { class: 'summary-section' });
+      var h = el('h3');
+      h.appendChild(document.createTextNode(sec.heading + ' '));
+      var editLink = el('a', { href: '#', text: 'Edit →' });
+      editLink.addEventListener('click', function (ev) { ev.preventDefault(); goSection(sec.edit); });
+      h.appendChild(editLink);
+      sectionDiv.appendChild(h);
+      sec.rows.forEach(function (r) {
+        var row = el('div', { class: 'summary-row' });
+        row.appendChild(el('span', { class: 'summary-label', text: r.k }));
+        row.appendChild(el('span', { class: 'summary-value', text: String(r.v) }));
+        sectionDiv.appendChild(row);
+      });
+      host.appendChild(sectionDiv);
+    });
+  }
+
+  function readField(name) {
+    var i = qs('[name="' + name + '"]');
+    return i ? i.value.trim() : '';
+  }
+  function fmtToggle(group) {
+    var pressed = qs('.toggle-group[data-toggle="' + group + '"] button[aria-pressed="true"]');
+    if (!pressed) return '—';
+    return pressed.textContent.trim();
+  }
+  function readChips(group) {
+    return qsa('.chips[data-chip-group="' + group + '"] button[aria-pressed="true"]').map(function (b) { return b.dataset.val; });
+  }
+
+  function collectState() {
+    var state = { _v: 2, currentSection: currentSection };
+    // Text/textarea inputs
+    qsa('input[name], textarea[name]').forEach(function (i) {
+      if (i.type === 'checkbox') { state[i.name || i.dataset.field + i.dataset.idx] = i.checked; }
+      else { state[i.name] = i.value; }
+    });
+    // Toggles
+    qsa('.toggle-group[data-toggle]').forEach(function (tg) {
+      var pressed = qs('button[aria-pressed="true"]', tg);
+      state['toggle_' + tg.dataset.toggle] = pressed ? pressed.dataset.val : null;
+    });
+    // Chips
+    qsa('.chips[data-chip-group]').forEach(function (ch) {
+      state['chips_' + ch.dataset.chipGroup] = readChips(ch.dataset.chipGroup);
+    });
+    return state;
+  }
+
+  function restoreFromState(state) {
+    if (!state) return;
+    Object.keys(state).forEach(function (k) {
+      if (k.indexOf('toggle_') === 0) {
+        var tgName = k.substring(7);
+        var val = state[k];
+        if (!val) return;
+        var btn = qs('.toggle-group[data-toggle="' + tgName + '"] button[data-val="' + val + '"]');
+        if (btn) {
+          qsa('button', btn.closest('.toggle-group')).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+          btn.setAttribute('aria-pressed', 'true');
+          qsa('[data-reveal-for="' + tgName + '"]').forEach(function (rv) {
+            rv.classList.toggle('open', rv.dataset.revealOn === val);
+          });
+        }
+      } else if (k.indexOf('chips_') === 0) {
+        var chName = k.substring(6);
+        var vals = state[k] || [];
+        vals.forEach(function (v) {
+          var b = qs('.chips[data-chip-group="' + chName + '"] button[data-val="' + v + '"]');
+          if (b) b.setAttribute('aria-pressed', 'true');
+        });
+      } else if (k !== '_v' && k !== 'currentSection') {
+        var i = qs('[name="' + k + '"]');
+        if (i) {
+          if (i.type === 'checkbox') i.checked = !!state[k];
+          else i.value = state[k] || '';
+        }
+      }
+    });
+    if (state.currentSection && SECTIONS.indexOf(state.currentSection) >= 0) {
+      currentSection = state.currentSection;
+    }
+  }
+
+  function numOrNull(v) {
+    if (!v) return null;
+    var n = Number(v);
+    return isNaN(n) ? null : n;
+  }
+
+  function buildPayload() {
+    var collections = [];
+    qsa('.collection-card[data-kind="collection"]').forEach(function (card) {
+      var slug = card.dataset.slug;
+      var pressed = qs('button[aria-pressed="true"]', qs('.toggle-group', card));
+      var status = pressed ? pressed.dataset.val : 'confirm_as_is';
+      var edits = [];
+      qsa('.row-item', card).forEach(function (row) {
+        var size = qs('input[data-field="size"]', row).value.trim();
+        var price = qs('input[data-field="price"]', row).value.trim();
+        var sku = qs('input[data-field="sku"]', row).value.trim();
+        var keep = qs('input[data-field="keep"]', row);
+        if (size || price) {
+          edits.push({
+            size: size,
+            price: price ? Number(price) : null,
+            sku: sku,
+            keep: keep ? keep.checked : true,
+            added: row.dataset.added === 'true'
+          });
+        }
+      });
+      collections.push({ slug: slug, status: status, edits: edits });
+    });
+
+    var services = [];
+    qsa('.collection-card[data-kind="service"]').forEach(function (card) {
+      var slug = card.dataset.slug;
+      var pressed = qs('button[aria-pressed="true"]', qs('.toggle-group', card));
+      var status = pressed ? pressed.dataset.val : 'not_offered';
+      var rows = [];
+      if (status === 'offered') {
+        qsa('.row-item', card).forEach(function (row) {
+          var size = qs('input[data-field="size"]', row).value.trim();
+          var price = qs('input[data-field="price"]', row).value.trim();
+          var sku = qs('input[data-field="sku"]', row).value.trim();
+          if (size || price) rows.push({ size: size, price: price ? Number(price) : null, sku: sku });
+        });
+      }
+      var notesEl = qs('textarea[name="svc_notes_' + slug + '"]', card);
+      services.push({
+        slug: slug,
+        name: (ADDITIONAL_SERVICES.filter(function (s) { return s.slug === slug; })[0] || {}).name || slug,
+        status: status, rows: rows,
+        notes: notesEl ? notesEl.value.trim() : ''
+      });
+    });
+
+    var operations = {
+      shipping: {
+        domestic_flat: numOrNull(readField('op_ship_flat')),
+        overnight: fmtToggle('op_ship_overnight'),
+        overnight_price: numOrNull(readField('op_ship_overnight_price')),
+        free_threshold: fmtToggle('op_ship_free'),
+        free_min: numOrNull(readField('op_ship_free_min')),
+        international: fmtToggle('op_ship_intl'),
+        local_pickup: fmtToggle('op_pickup'),
+        pickup_address: readField('op_pickup_address'),
+        pickup_hours: readField('op_pickup_hours'),
+        pickup_cutoff: readField('op_pickup_cutoff'),
+        shipping_tool: fmtToggle('op_ship_tool'),
+        shipping_tool_other: readField('op_ship_tool_other')
+      },
+      kicksy: { status: fmtToggle('op_kicksy'), url: readField('op_kicksy_url') },
+      tshirt_brands: readChips('op_shirt_brands'),
+      display_brand_list: fmtToggle('op_shirt_display')
+    };
+
+    var brand = {
+      story: readField('brand_story'),
+      founded_year: readField('brand_founded'),
+      business_hours: readField('brand_hours'),
+      tat_in_stock: readField('brand_tat_stock'),
+      tat_custom: readField('brand_tat_custom'),
+      sameday_pickup: fmtToggle('brand_sameday'),
+      sameday_cutoff: readField('brand_sameday_cutoff'),
+      rush_available: fmtToggle('brand_rush'),
+      rush_upcharge: readField('brand_rush_upcharge')
+    };
+
+    var assets = {
+      logo_url: readField('asset_logo'),
+      photos_url: readField('asset_photos'),
+      shirt_colors_preferred: readChips('asset_shirt_colors'),
+      brand_guide_url: readField('asset_brand_guide')
+    };
+
+    var socials = {
+      instagram: readField('social_instagram'),
+      facebook: readField('social_facebook'),
+      tiktok: readField('social_tiktok'),
+      youtube: readField('social_youtube'),
+      phone: readField('social_phone'),
+      support_email: readField('social_support_email') || 'Harold@rmmarketing.ca'
+    };
+
+    var shopify = {
+      status: fmtToggle('shopify_status'),
+      store_url: readField('shopify_url')
+    };
+
+    var contact = {
+      name: readField('contact_name'),
+      email: readField('contact_email'),
+      phone: readField('contact_phone')
+    };
+
+    var intake = {
+      form_version: '2.0',
+      submitted_at: new Date().toISOString(),
+      submitter: contact,
+      catalog: { collections: collections, new_services: services },
+      operations: operations, brand: brand, assets: assets,
+      socials: socials, shopify: shopify,
+      meta: {
+        user_agent: navigator.userAgent,
+        locale: navigator.language,
+        duration_seconds: Math.floor((Date.now() - FORM_START) / 1000)
+      }
+    };
+
+    var discordEmbed = buildDiscordEmbed({
+      contact: contact, catalog: collections, services: services,
+      operations: operations, brand: brand, assets: assets,
+      socials: socials, shopify: shopify
+    });
+
+    // Structured JSON compact form (for Harold's app to parse from Discord)
+    var compact = JSON.stringify(intake);
+    // Cap compact at ~3500 chars inside embed; if over, split.
+    var compactField = compact.length > 3500 ? compact.slice(0, 3500) + '... [truncated; see webhook body for full]' : compact;
+    discordEmbed.fields.push({ name: 'Structured payload (JSON)', value: '```json\n' + compactField + '\n```' });
 
     return {
-      content: `**📋 New catalog intake from ${s.name}** (${s.email})`,
-      embeds: [{
-        title: 'Hatfield & McCoy DTF — Catalog Intake',
-        color: 0xE91E8C,
-        fields: fields,
-        footer: { text: `H&M DTF · Submitted via hatfield-mccoy-dtf.futrbusiness.com/catalog-intake · ${forensics}` },
-        timestamp: new Date().toISOString()
-      }]
+      content: '📋 New intake v2 from **' + contact.name + '** (' + contact.email + ')',
+      embeds: [discordEmbed]
     };
   }
+
+  function buildDiscordEmbed(d) {
+    var fields = [];
+    var confirmed = d.catalog.filter(function (c) { return c.status === 'confirm_as_is'; }).length;
+    var edited = d.catalog.filter(function (c) { return c.status === 'edited'; }).length;
+    var removed = d.catalog.filter(function (c) { return c.status === 'remove'; }).length;
+    fields.push({ name: 'Catalog', value: confirmed + ' confirmed, ' + edited + ' edited, ' + removed + ' removed', inline: true });
+    var offered = d.services.filter(function (s) { return s.status === 'offered'; });
+    fields.push({ name: 'New services', value: offered.length > 0 ? offered.map(function (s) { return s.name; }).join(', ') : '—', inline: true });
+    fields.push({ name: 'Shipping', value: '$' + (d.operations.shipping.domestic_flat == null ? '—' : d.operations.shipping.domestic_flat) + ' flat · pickup: ' + d.operations.shipping.local_pickup, inline: true });
+    fields.push({ name: 'Kicksy', value: d.operations.kicksy.status + (d.operations.kicksy.url ? ' (URL set)' : ''), inline: true });
+    fields.push({ name: 'Shirt brands', value: d.operations.tshirt_brands.length > 0 ? d.operations.tshirt_brands.join(', ') : '—', inline: false });
+    if (d.brand.story) fields.push({ name: 'Story', value: d.brand.story.slice(0, 900) + (d.brand.story.length > 900 ? '…' : ''), inline: false });
+    fields.push({ name: 'TAT (stock / custom)', value: (d.brand.tat_in_stock || '—') + ' / ' + (d.brand.tat_custom || '—'), inline: true });
+    fields.push({ name: 'Founded / Hours', value: (d.brand.founded_year || '—') + ' · ' + (d.brand.business_hours || '—'), inline: true });
+    fields.push({ name: 'Assets', value: 'Logo: ' + (d.assets.logo_url || '—') + '\nPhotos: ' + (d.assets.photos_url || '—'), inline: false });
+    var socStr = ['instagram','facebook','tiktok','youtube'].map(function (k) {
+      return d.socials[k] ? k + ': ' + d.socials[k] : null;
+    }).filter(Boolean).join(' · ') || '—';
+    fields.push({ name: 'Social', value: socStr, inline: false });
+    fields.push({ name: 'Shopify', value: d.shopify.status + (d.shopify.store_url ? ' (' + d.shopify.store_url + ')' : ''), inline: true });
+
+    return {
+      title: 'Hatfield & McCoy DTF — Intake v2',
+      color: 0xE91E8C,
+      fields: fields,
+      footer: { text: 'Form v2.0 · Duration ' + Math.floor((Date.now() - FORM_START) / 1000) + 's · ' + navigator.language },
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  function showError(msg, retryFn) {
+    var b = qs('#errorBanner');
+    while (b.firstChild) b.removeChild(b.firstChild);
+    b.appendChild(document.createTextNode(msg + ' '));
+    if (retryFn) {
+      var btn = el('button', { type: 'button', class: 'btn-retry', text: 'Try again' });
+      btn.addEventListener('click', function () { hideError(); retryFn(); });
+      b.appendChild(btn);
+    }
+    b.hidden = false;
+  }
+  function hideError() { qs('#errorBanner').hidden = true; }
+
+  function submitForm() {
+    hideError();
+
+    var hp = qs('input[name="url_referrer"]');
+    if (hp && hp.value) return; // silent drop
+
+    if (Date.now() < cooldownUntil) {
+      var sec = Math.ceil((cooldownUntil - Date.now()) / 1000);
+      showError('Please wait ' + sec + ' seconds before trying again.');
+      return;
+    }
+
+    var name = readField('contact_name');
+    var email = readField('contact_email');
+    if (!name || !email) {
+      showError('Please fill in your name and email.');
+      goSection('review');
+      return;
+    }
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!EMAIL_RE.test(email)) {
+      showError('Please enter a valid email address.');
+      return;
+    }
+
+    var payload = buildPayload();
+    var body = JSON.stringify(payload);
+
+    var submitBtn = qs('#submitBtn');
+    submitBtn.disabled = true;
+    while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
+    submitBtn.appendChild(el('span', { class: 'spinner', 'aria-hidden': 'true' }));
+    submitBtn.appendChild(document.createTextNode('Sending…'));
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function () { controller.abort(); }, TIMEOUT_MS);
+
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: body,
+      signal: controller.signal
+    })
+      .then(function (res) {
+        clearTimeout(timeoutId);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res;
+      })
+      .then(function () {
+        submitted = true;
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        cooldownUntil = Date.now() + COOLDOWN_SEC * 1000;
+        qs('#intakeForm').style.display = 'none';
+        qs('.sections-nav').style.display = 'none';
+        var aside = qs('.sidebar'); if (aside) aside.style.display = 'none';
+        qs('.progress-top').style.display = 'none';
+        qs('#thanksHeading').textContent = 'Got it, ' + name + '.';
+        qs('#thanks').classList.add('active');
+        try { history.replaceState({ submitted: true, name: name }, '', location.pathname); } catch (e) {}
+      })
+      .catch(function (err) {
+        clearTimeout(timeoutId);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Catalog';
+        var msg = err.name === 'AbortError'
+          ? 'Took too long to send. Your answers are saved — try again.'
+          : "Couldn't send to the server. Your answers are saved — try again.";
+        showError(msg, function () { submitForm(); });
+      });
+  }
+
+  function bindEvents() {
+    var form = qs('#intakeForm');
+
+    document.addEventListener('click', function (e) {
+      var go = e.target.closest('[data-go-section]');
+      if (go) { e.preventDefault(); goSection(go.dataset.goSection); return; }
+
+      var next = e.target.closest('[data-nav-next]');
+      if (next) {
+        var ci = SECTIONS.indexOf(currentSection);
+        if (ci < SECTIONS.length - 1) goSection(SECTIONS[ci + 1]);
+        return;
+      }
+      var prev = e.target.closest('[data-nav-prev]');
+      if (prev) {
+        var pi = SECTIONS.indexOf(currentSection);
+        if (pi > 0) goSection(SECTIONS[pi - 1]);
+        return;
+      }
+
+      var toggleBtn = e.target.closest('.toggle-group button');
+      if (toggleBtn) {
+        var tg = toggleBtn.closest('.toggle-group');
+        qsa('button', tg).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        toggleBtn.setAttribute('aria-pressed', 'true');
+        var toggleName = tg.dataset.toggle;
+        var val = toggleBtn.dataset.val;
+        qsa('[data-reveal-for="' + toggleName + '"]').forEach(function (rv) {
+          rv.classList.toggle('open', rv.dataset.revealOn === val);
+        });
+        persist();
+        updateSidebar();
+        return;
+      }
+
+      var chipBtn = e.target.closest('.chips button');
+      if (chipBtn) {
+        var on = chipBtn.getAttribute('aria-pressed') === 'true';
+        chipBtn.setAttribute('aria-pressed', on ? 'false' : 'true');
+        persist();
+        return;
+      }
+
+      var rowAdd = e.target.closest('[data-add-row]');
+      if (rowAdd) { addCollectionRow(rowAdd.dataset.addRow); persist(); updateSidebar(); return; }
+
+      var serviceRowAdd = e.target.closest('[data-add-service-row]');
+      if (serviceRowAdd) { addServiceRow(serviceRowAdd.dataset.addServiceRow); persist(); updateSidebar(); return; }
+
+      var rowRemove = e.target.closest('.row-remove');
+      if (rowRemove) {
+        var row = rowRemove.closest('.row-item');
+        if (row) { row.parentNode.removeChild(row); persist(); updateSidebar(); }
+        return;
+      }
+    });
+
+    form.addEventListener('input', function (e) {
+      var target = e.target;
+      var counterFor = target.name;
+      var counter = qs('[data-counter-for="' + counterFor + '"]');
+      if (counter) {
+        var len = target.value.length;
+        var max = parseInt(target.getAttribute('maxlength'), 10) || 1000;
+        counter.textContent = len + ' / ' + max;
+        counter.classList.toggle('near-limit', len / max >= 0.9);
+        counter.classList.toggle('over', len > max);
+      }
+      persist();
+      updateSidebar();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      submitForm();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        var active = document.activeElement;
+        var row = active && active.closest && active.closest('.row-item');
+        if (row && row.dataset.added === 'true') {
+          row.parentNode.removeChild(row);
+          persist();
+          updateSidebar();
+        }
+      } else if (e.key === 'Enter' && (e.target.matches && e.target.matches('.row-item input'))) {
+        e.preventDefault();
+        var nextInput = e.target.closest('.row-item').querySelector('input:focus')
+          ? (function () {
+              var inputs = Array.prototype.slice.call(e.target.closest('.row-item').querySelectorAll('input'));
+              var idx = inputs.indexOf(e.target);
+              return inputs[idx + 1] || null;
+            })()
+          : null;
+        if (nextInput) nextInput.focus();
+        else e.target.blur();
+      }
+    });
+
+    window.addEventListener('storage', function (e) {
+      if (e.key === STORAGE_KEY && !submitted) {
+        restoreFromState(loadDraft());
+        updateSidebar();
+      }
+    });
+  }
+
+  function init() {
+    loadData().then(function () {
+      renderCollections();
+      renderServices();
+      var draft = loadDraft();
+      if (draft) {
+        restoreFromState(draft);
+      }
+      renderSectionNav();
+      goSection(currentSection);
+      updateProgress();
+      updateSidebar();
+      bindEvents();
+      if (history.state && history.state.submitted) {
+        qs('#intakeForm').style.display = 'none';
+        qs('.sections-nav').style.display = 'none';
+        var aside = qs('.sidebar'); if (aside) aside.style.display = 'none';
+        qs('.progress-top').style.display = 'none';
+        qs('#thanksHeading').textContent = 'Got it, ' + (history.state.name || 'friend') + '.';
+        qs('#thanks').classList.add('active');
+      }
+      if (timeTimer) clearInterval(timeTimer);
+      timeTimer = setInterval(updateSidebar, 30000);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body>
 </html>
