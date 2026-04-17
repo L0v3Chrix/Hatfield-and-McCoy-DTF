@@ -582,19 +582,41 @@
       pdp.appendChild(el('p', { class: 'desc', text: col.description }));
     }
 
-    // Color chooser (if color_options present)
+    // Color chooser (if color_options present).
+    // Accepts either ["Silver","Gold",...] or [{name,sku_suffix}, ...] (backwards-compatible).
     if (Array.isArray(col.color_options) && col.color_options.length > 1) {
       pdp.appendChild(el('div', { class: 'variant-label', text: 'Color' }));
       const colorRow = el('div', { class: 'variant-row color-row', role: 'radiogroup', 'aria-label': 'Color' });
+      // Track whether any color lacks a sku_suffix — triggers a console warn for glitter
+      // (the only collection that needs compound SKUs today).
+      var missingSkuSuffixForColors = [];
       col.color_options.forEach((c, i) => {
-        const btn = el('button', {
+        var name;
+        if (typeof c === 'string') {
+          name = c;
+        } else if (c && typeof c.name === 'string' && c.name.trim()) {
+          name = c.name;
+        } else {
+          // Invalid entry — skip rendering the button. Don't silently label it "null".
+          if (typeof console !== 'undefined' && console.warn) {
+            console.warn('[content] Skipping invalid color_options entry at index ' + i + ' for collection ' + col.slug, c);
+          }
+          return;
+        }
+        var suffix = (typeof c === 'object' && c && c.sku_suffix) ? c.sku_suffix : '';
+        if (!suffix && col.slug === 'glitter-22') {
+          missingSkuSuffixForColors.push(name);
+        }
+        const btnAttrs = {
           type: 'button',
           class: 'variant' + (i === 0 ? ' selected' : ''),
           role: 'radio',
           'aria-checked': i === 0 ? 'true' : 'false',
-          'data-color': c
-        });
-        btn.appendChild(el('span', { class: 'size', text: c }));
+          'data-color': name
+        };
+        if (suffix) btnAttrs['data-sku-suffix'] = suffix;
+        const btn = el('button', btnAttrs);
+        btn.appendChild(el('span', { class: 'size', text: name }));
         btn.addEventListener('click', () => {
           colorRow.querySelectorAll('.variant').forEach(v => {
             v.classList.remove('selected');
@@ -602,9 +624,21 @@
           });
           btn.classList.add('selected');
           btn.setAttribute('aria-checked', 'true');
+          // Keep PDP price + add-to-cart label in sync with the currently selected size
+          // (color doesn't change price today, but re-select to refresh compound SKU context)
+          const sizeRow = document.querySelector('.variant-row.size-row');
+          const selected = sizeRow && sizeRow.querySelector('.variant.selected');
+          if (selected) selectVariant(selected);
         });
         colorRow.appendChild(btn);
       });
+      if (missingSkuSuffixForColors.length && typeof console !== 'undefined' && console.warn) {
+        console.warn(
+          '[content] glitter-22 color_options missing sku_suffix for: ' +
+          missingSkuSuffixForColors.join(', ') +
+          '. Cart SKUs will not match Shopify variants (GLT-22-{L}-{SIL|GLD|MLT}).'
+        );
+      }
       pdp.appendChild(colorRow);
     }
 
@@ -784,16 +818,19 @@
     const row = document.querySelector('.variant-row.size-row') || document.querySelector('.variant-row');
     const selected = row && row.querySelector('.variant.selected');
     if (!selected) return;
-    const sku = selected.dataset.sku || col.slug;
+    const baseSku = selected.dataset.sku || col.slug;
     const size = selected.dataset.size || '';
     const price = Number(selected.dataset.price) || 0;
     const qtyInput = document.getElementById('pdp-qty');
     const qty = Math.max(1, parseInt(qtyInput && qtyInput.value, 10) || 1);
 
-    // Get color if separate
+    // Get color if separate. If the color button exposes a data-sku-suffix, we append it
+    // to the base SKU to form the compound Shopify SKU (e.g. GLT-22-24 + SIL → GLT-22-24-SIL).
     const colorRow = document.querySelector('.variant-row.color-row');
     const colorBtn = colorRow && colorRow.querySelector('.variant.selected');
     const color = colorBtn && colorBtn.dataset.color;
+    const skuSuffix = colorBtn && colorBtn.dataset.skuSuffix;
+    const sku = skuSuffix ? (baseSku + '-' + skuSuffix) : baseSku;
 
     const variant = color ? (size + ' · ' + color) : size;
 
